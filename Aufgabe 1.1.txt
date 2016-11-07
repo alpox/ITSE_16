@@ -1,0 +1,1 @@
+Aufgabe 1.1Es sollen die zentralen Bestandteile der App implementiert werden. Dazu zählen: * tabellarische Ansicht* Sortiermöglichkeit nach Kolonne in der Tabelle* Ein erstes GUI und eine Weltkarte * Daten des neusten Datums auf der Karte anzeigen* Zeitstrahl auf der Map sichtbar machen* Navigation zwischen Tabellen- und Kartenansicht
