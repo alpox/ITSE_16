@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class SEApp implements EntryPoint {
 	
-	private final CountryService countryService = GWT.create(CountryService.class);
+	private CountryServiceAsync countryService = GWT.create(CountryService.class);
 	
 	private void setVisualization(Widget wdg) {
 		RootPanel visContainer = RootPanel.get("visualizationContainer");

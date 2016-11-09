@@ -7,12 +7,12 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>countryServlet</servlet-name>
+    <servlet-name>countryServiceImpl</servlet-name>
     <servlet-class>com.g3.seapp.server.CountryServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>countryServlet</servlet-name>
+    <servlet-name>countryServiceImpl</servlet-name>
     <url-pattern>/seapp/countries</url-pattern>
   </servlet-mapping>
   
