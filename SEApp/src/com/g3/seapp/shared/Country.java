@@ -1,12 +1,15 @@
 package com.g3.seapp.shared;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Country {
+public class Country implements Serializable {
 	private String name;
-	private List<Measurement> measurements;
+	private ArrayList<Measurement> measurements;
 	
-	public Country(String name, List<Measurement> measurements) {
+	public Country() {}
+	
+	public Country(String name, ArrayList<Measurement> measurements) {
 		this.name = name;
 		this.measurements = measurements;
 	}
@@ -15,7 +18,7 @@ public class Country {
 		return name;
 	}
 	
-	public List<Measurement> getMeasurements() {
+	public ArrayList<Measurement> getMeasurements() {
 		return measurements;
 	}
 }

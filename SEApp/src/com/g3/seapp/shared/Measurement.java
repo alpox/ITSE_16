@@ -1,14 +1,18 @@
 package com.g3.seapp.shared;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Measurement {
+
+public class Measurement implements Serializable {
 	private String city;
 	private float avg;
 	private float error;
 	private Coordinate coord;
 	private Date date;
+	
+	public Measurement() {}
 	
 	public Measurement(String city, float avg, float err, Coordinate coord, Date date) {
 		this.city = city;
@@ -22,19 +26,19 @@ public class Measurement {
 		return city;
 	}
 	
-	private float getAvg() {
+	public float getAvg() {
 		return avg;
 	}
 	
-	private float getError() {
+	public float getError() {
 		return error;
 	}
 	
-	private Coordinate getCoords() {
+	public Coordinate getCoords() {
 		return coord;
 	}
 	
-	private Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 }

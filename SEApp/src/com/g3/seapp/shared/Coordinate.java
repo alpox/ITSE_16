@@ -1,8 +1,12 @@
 package com.g3.seapp.shared;
 
-public class Coordinate {
+import java.io.Serializable;
+
+public class Coordinate implements Serializable {
 	private float lat;
 	private float lon;
+	
+	public Coordinate() {}
 	
 	public Coordinate(float lat, float lon) {
 		this.lat = lat;

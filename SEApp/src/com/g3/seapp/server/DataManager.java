@@ -20,7 +20,9 @@ public class DataManager {
 	private static CountryCollection dataCache;
 	
 	public static final CountryCollection getData() {
-		String csvFile = "war/GlobalLandTemperaturesByMajorCity_v1.csv";
+		if(dataCache != null) return dataCache;
+		
+		String csvFile = "GlobalLandTemperaturesByMajorCity_v1.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -31,12 +33,13 @@ public class DataManager {
         try {
         	String country = "";
         	String city = "";
-        	List<Measurement> measurements = new ArrayList<Measurement>();
+        	ArrayList<Measurement> measurements = new ArrayList<Measurement>();
         	
             br = new BufferedReader(new FileReader(csvFile));
             br.readLine();
             while ((line = br.readLine()) != null) {
             	lineNumber++;
+            	if(line.trim().isEmpty()) continue;
 
                 // use comma as separator
                 String[] measurement = line.split(cvsSplitBy);
@@ -48,18 +51,21 @@ public class DataManager {
 	                float error = Float.parseFloat(measurement[2]);
 	                String cityName = measurement[3];
 	                String countryName = measurement[4];
-	                float lat = Float.parseFloat(measurement[5].substring(0, measurement[5].length()-2));
-	                float lon = Float.parseFloat(measurement[6].substring(0, measurement[6].length()-2));
+	                float lat = Float.parseFloat(measurement[5].substring(0, measurement[5].length()-1));
+	                float lon = Float.parseFloat(measurement[6].substring(0, measurement[6].length()-1));
 	                
-	                if(countryName != country) {
-	                	Country countryInstance = new Country(country, measurements);
-	                	countries.add(countryInstance);
+	                if(!countryName.equals(country)) {
+	                	if(measurements.size() > 0) { // Don't add first
+		                	Country countryInstance = new Country(country, measurements);
+		                	countries.add(countryInstance);
+	                	}
+	                	measurements = new ArrayList<Measurement>();
 
 	                	country = countryName;
 	                	city = cityName;
 	                }
 	                
-	                Measurement newMeasurement = new Measurement(city, avg, error, new Coordinate(lat, lon), date);
+	                Measurement newMeasurement = new Measurement(cityName, avg, error, new Coordinate(lat, lon), date);
 	                measurements.add(newMeasurement);
                 }
                 catch(Exception ex) {
