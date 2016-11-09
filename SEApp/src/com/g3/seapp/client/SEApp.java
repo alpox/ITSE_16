@@ -1,5 +1,8 @@
 package com.g3.seapp.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.g3.seapp.server.CountryServiceImpl;
 import com.g3.seapp.shared.CountryCollection;
 import com.google.gwt.core.client.EntryPoint;
@@ -8,6 +11,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -18,31 +22,26 @@ public class SEApp implements EntryPoint {
 	
 	private CountryServiceAsync countryService = GWT.create(CountryService.class);
 	
-	private void setVisualization(Widget wdg) {
-		RootPanel visContainer = RootPanel.get("visualizationContainer");
-		visContainer.clear();
-		visContainer.add(wdg);
-	}
-	
-	private void showTable() {
-		Widget wdg = new HTML("<span>Table</span>");
-		setVisualization(wdg);
-	}
-	
-	private void showMap() {
-		Widget wdg = new HTML("<span>Map</span>");
-		setVisualization(wdg);
+	private Panel getEmptyRootPanel() {
+		Panel panel = RootPanel.get("visualizationContainer");
+		panel.clear();
+		return panel;
 	}
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		final ArrayList<IVisualization> visualizations = new ArrayList<IVisualization>() {{
+			add(new MapVisualization());
+			add(new TableVisualization());
+		}};
 		
 		ListBox dropDown = new ListBox();
 		dropDown.getElement().setId("chooseVisDropDown");
-		dropDown.addItem("World map");
-		dropDown.addItem("Table");
+		
+		for(IVisualization vis : visualizations)
+			dropDown.addItem(vis.getName());
 		
 		dropDown.addChangeHandler(new ChangeHandler() {
 
@@ -51,15 +50,12 @@ public class SEApp implements EntryPoint {
 				// TODO Auto-generated method stub
 				ListBox listBoxFromEvent = (ListBox)event.getSource();
 				int selected = listBoxFromEvent.getSelectedIndex();
-				switch(selected) {
-				case 1: showTable(); break;
-				default: showMap(); break;
-				}
+				visualizations.get(selected).drawVisualization(getEmptyRootPanel());
 			}
 			
 		});
 		
-		showMap();
+		visualizations.get(0).drawVisualization(getEmptyRootPanel());
 		
 		RootPanel.get("mainContainer").insert(dropDown, 0);
 	}
