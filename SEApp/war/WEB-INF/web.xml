@@ -7,13 +7,13 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.g3.seapp.server.GreetingServiceImpl</servlet-class>
+    <servlet-name>countryServlet</servlet-name>
+    <servlet-class>com.g3.seapp.server.CountryServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/seapp/greet</url-pattern>
+    <servlet-name>countryServlet</servlet-name>
+    <url-pattern>/seapp/countries</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

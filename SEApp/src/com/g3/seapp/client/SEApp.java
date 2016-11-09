@@ -1,6 +1,9 @@
 package com.g3.seapp.client;
 
+import com.g3.seapp.server.CountryServiceImpl;
+import com.g3.seapp.shared.CountryCollection;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.HTML;
@@ -12,6 +15,8 @@ import com.google.gwt.user.client.ui.Widget;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class SEApp implements EntryPoint {
+	
+	private final CountryService countryService = GWT.create(CountryService.class);
 	
 	private void setVisualization(Widget wdg) {
 		RootPanel visContainer = RootPanel.get("visualizationContainer");
