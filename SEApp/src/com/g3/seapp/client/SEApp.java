@@ -32,7 +32,7 @@ public class SEApp implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final ArrayList<IVisualization> visualizations = new ArrayList<IVisualization>() {{
+		final List<IVisualization> visualizations = new ArrayList<IVisualization>() {{
 			add(new MapVisualization());
 			add(new TableVisualization());
 		}};
