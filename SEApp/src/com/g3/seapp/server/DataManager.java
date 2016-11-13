@@ -65,7 +65,7 @@ public class DataManager {
 	                	city = cityName;
 	                }
 	                
-	                Measurement newMeasurement = new Measurement(countryName, cityName, avg, error, new Coordinate(lat, lon), date);
+	                Measurement newMeasurement = new Measurement(cityName, avg, error, new Coordinate(lat, lon), date);
 	                measurements.add(newMeasurement);
                 }
                 catch(Exception ex) {

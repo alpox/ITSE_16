@@ -6,7 +6,6 @@ import java.util.List;
 
 
 public class Measurement implements Serializable {
-	private String country;
 	private String city;
 	private float avg;
 	private float error;
@@ -15,17 +14,12 @@ public class Measurement implements Serializable {
 	
 	public Measurement() {}
 	
-	public Measurement(String country, String city, float avg, float err, Coordinate coord, Date date) {
-		this.country = country;
+	public Measurement(String city, float avg, float err, Coordinate coord, Date date) {
 		this.city = city;
 		this.avg = avg;
 		this.error = err;
 		this.coord = coord;
 		this.date = date;
-	}
-
-	public String getCountry() {
-		return country;
 	}
 	
 	public String getCity() {
