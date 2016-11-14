@@ -16,18 +16,36 @@ import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
 
+/**
+ * A DataManager for reading the weatherdata from
+ * a csv.
+ * 
+ * @author Elias Bernhaut
+ * @version 0.0.1
+ * @responsibilities 
+ * 	Reads, caches and returns weatherdata from a
+ *  csv.
+ */
 public class DataManager {
 	private static CountryCollection dataCache;
 	
+	/**
+	 * Gets the data from the csv
+	 * @pre csv file GlobalLandTemperaturesByMajorCity_v1.csv exists in directory war/
+	 * @post File reader is released
+	 * @return A collection of countries which hold measurement data
+	 */
 	public static final CountryCollection getData() {
 		if(dataCache != null) return dataCache;
 		
+		// Set name of csv
 		String csvFile = "GlobalLandTemperaturesByMajorCity_v1.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
         int lineNumber = 1;
         
+        // Define a collection to collect the countries.
         CountryCollection countries = new CountryCollection();
 
         try {
@@ -46,6 +64,7 @@ public class DataManager {
                 SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
                 
                 try {
+                	// Read the data
 	                Date date = dateParser.parse(measurement[0]);
 	                float avg = Float.parseFloat(measurement[1]);
 	                float error = Float.parseFloat(measurement[2]);

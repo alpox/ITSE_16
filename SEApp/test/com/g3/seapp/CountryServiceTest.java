@@ -2,11 +2,14 @@ package com.g3.seapp;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.g3.seapp.client.CountryService;
 import com.g3.seapp.server.CountryServiceImpl;
 import com.g3.seapp.shared.CountryCollection;
+import com.g3.seapp.shared.Measurement;
 import com.google.gwt.core.shared.GWT;
 import com.ibm.icu.impl.Assert;
 
@@ -16,7 +19,7 @@ public class CountryServiceTest {
 
 	@Test
 	public void testGetsDataFromService() {
-		CountryCollection countries = countryService.getCountries();
+		List<Measurement> countries = countryService.getMeasurements(0, 20, "", true);
 		Assert.assrt("Result is not null", countries != null);
 		Assert.assrt("Result is not empty", countries.size() > 0);
 	}

@@ -27,6 +27,15 @@ import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
 
+/**
+ * Represents a visualization of weatherdata
+ * as a scrollable table.
+ * 
+ * @author Elias Bernhaut
+ * @version 0.0.1
+ * @responsibilities Shows a table of weatherdata 
+ *
+ */
 public class TableVisualization implements IVisualization, IExportable {
 	// Well... we can do that because our data amount never changes :-)
 	private static final int MEASUREMENTCOUNT = 223977;
@@ -43,11 +52,21 @@ public class TableVisualization implements IVisualization, IExportable {
 	
 	private List<Measurement> measurements;
 	
+	/**
+	 * Constructor of TableVisualization
+	 * We setup the shape of the table in here
+	 */
 	public TableVisualization() {
 		SetupColumns();
 		measurementTable.setWidth("100%", true);
 	}
 	
+	/**
+	 * Setup of the columns for the table. Called on initialization.
+	 * @pre nothing
+	 * @post measurementTable.getColumnCount() > 0
+	 * @return nothing
+	 */
 	private void SetupColumns() {
 		countryColumn = new TextColumn<Measurement>() {
 		      @Override
@@ -121,6 +140,12 @@ public class TableVisualization implements IVisualization, IExportable {
 	    columnNames.add("lon");
 	}
 	
+	/**
+	 * Sets up the data provider for the measurementTable
+	 * @pre nothing
+	 * @post measurementTable has a dataprovider
+	 * @return nothing
+	 */
 	private void SetupDataProvider() {
 		AsyncDataProvider<Measurement> dataProvider = new AsyncDataProvider<Measurement>() {
 		      @Override
@@ -170,18 +195,34 @@ public class TableVisualization implements IVisualization, IExportable {
 		measurementTable.getColumnSortList().push(countryColumn);
 	}
 
+	/**
+	 * Exports the table data as csv.
+	 * @pre nothing
+	 * @post nothing
+	 * @return nothing
+	 */
 	@Override
 	public void export() {
-		// TODO Auto-generated method stub
-		
+		// TODO Implement
 	}
 
+	/**
+	 * Gets the name of the visualization
+	 * @pre nothing
+	 * @post nothing
+	 * @return The name of the visualization
+	 */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Table Visualization";
 	}
 
+	/**
+	 * Draws the visualization
+	 * @pre nothing
+	 * @post container holds table and pager
+	 * @return nothing
+	 */
 	@Override
 	public void drawVisualization(final Panel container) {
 		
@@ -200,6 +241,12 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(pager);
 	}
 
+	/**
+	 * Updates the visualization
+	 * @pre nothing
+	 * @post nothing
+	 * @return nothing
+	 */
 	@Override
 	public void updateVisualization(Panel container) {
 

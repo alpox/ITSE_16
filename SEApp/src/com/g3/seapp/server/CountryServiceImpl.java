@@ -14,18 +14,27 @@ import com.g3.seapp.shared.Measurement;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
- * The server-side implementation of the RPC service.
+ * The implementation of the CountryService.
+ * 
+ * @author Elias Bernhaut
+ * @version 0.0.1
+ * @responsibilities 
+ * 	Defines an endpoint for weatherdata.
  */
 @SuppressWarnings("serial")
 public class CountryServiceImpl extends RemoteServiceServlet implements CountryService {
-	@Override
-	public CountryCollection getCountries() {
-		// TODO Send data which is needed
-		ArrayList<Country> countries = new ArrayList<Country>();
-		countries.add(DataManager.getData().get(0));
-		return new CountryCollection(countries);
-	}
 	
+	/**
+	 * Sorts the given measurements list
+	 * 
+	 * @param measurements The measurements list to sort
+	 * @param col The column description to sort for
+	 * @param asc Is ascending sort (false = descending)
+	 * @pre measurements != null
+	 * @post measurements is sorted for the given column
+	 * 
+	 * @return nothing
+	 */
 	private void sortMeasurements(ArrayList<Measurement> measurements, String col, final boolean asc) {
 		switch(col.toLowerCase()) {
 		case "country": 
@@ -84,6 +93,19 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		}
 	}
 
+	/**
+	 * Returns all the measurements from start to end,
+	 * sorted for sortCol.
+	 * 
+	 * @param start Start of the measurement data range
+	 * @param end End of the measurement data range
+	 * @param sortCol The column descriptor for which the data should be sorted for
+	 * @param asc Boolean - True if sort should be ascending, false otherwise
+	 * @pre end > start
+	 * @post DataManager.getData() is sorted for sortCol
+	 * 
+	 * @return An array of measurements
+	 */
 	@Override
 	public ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc) {//, ArrayList<String> sortColumns, ArrayList<Boolean> ascList) {
 		// Create flat measurement list
