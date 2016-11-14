@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
@@ -26,60 +25,57 @@ public class MapVisualization implements IVisualization, IExportable {
 		
 	}
 
-	@Override
+	/**
+	Returns the name respectively type of the visualization as String
+	@pre-
+	@post-
+	@return Returns the name of the visualization
+	 **/
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Map Visualization";
 	}
 
-	@Override
+	/**
+	Draws the initial visualization of the map
+	@pre-
+	@post-
+	@param  container A Panel which contains the whole visualization
+	 **/
 	public void drawVisualization(final Panel container) {
-		// TODO Auto-generated method stub
 		
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
 		chartLoader.loadApi(new Runnable() {
 
-			@Override
+
 			public void run() {
-				// Create and attach the chart
+				// Create and attach the chart to the panel
 				geoChart = new GeoChart();
 				container.add(geoChart);
 				updateVisualization(container);
 			}
 		});
-		
+		//Set size constraints
 		container.setHeight("70vh");
 		container.setWidth("70vw");
-		container.add(new HTML("<span>This is the world map</span>"));
 	}
 
-	@Override
+	/**
+	Updates the visualization and displays the map and the requested data
+	@pre-
+	@post-
+	@param  container A Panel which contains the whole visualization
+	 **/
 	public void updateVisualization(Panel container) {
-		// TODO Auto-generated method stub
-		// Prepare the data
+
+		// Prepare the datatable
 		DataTable dataTable = DataTable.create();
-		dataTable.addColumn(ColumnType.STRING, "Country");
-		dataTable.addColumn(ColumnType.NUMBER, "Popularity");
-		dataTable.addRows(6);
-		dataTable.setValue(0, 0, "Germany");
-		dataTable.setValue(0, 1, 200);
-		dataTable.setValue(1, 0, "United States");
-		dataTable.setValue(1, 1, 300);
-		dataTable.setValue(2, 0, "Brazil");
-		dataTable.setValue(2, 1, 400);
-		dataTable.setValue(3, 0, "Canada");
-		dataTable.setValue(3, 1, 500);
-		dataTable.setValue(4, 0, "France");
-		dataTable.setValue(4, 1, 600);
-		dataTable.setValue(5, 0, "RU");
-		dataTable.setValue(5, 1, 700);
+		
+		dataTable.addColumn(ColumnType.STRING, "Test");
+		dataTable.addColumn(ColumnType.NUMBER, "Test");
 
 		// Set options
 		GeoChartOptions options = GeoChartOptions.create();
-		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
-		geoChartColorAxis.setColors("green", "yellow", "red");
-		options.setColorAxis(geoChartColorAxis);
-		options.setDatalessRegionColor("gray");
+		options.setDatalessRegionColor("OliveDrab");
 
 		// Draw the chart
 		geoChart.draw(dataTable, options);
