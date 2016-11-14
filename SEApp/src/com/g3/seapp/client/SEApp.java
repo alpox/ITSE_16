@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Elias Bernhaut
  * @version 0.0.1
+ * @history 14.11.2016 Version 1
  * @responsibilities Shows the whole app.
  */
 public class SEApp implements EntryPoint {

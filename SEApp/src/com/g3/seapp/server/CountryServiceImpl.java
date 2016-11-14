@@ -18,6 +18,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * 
  * @author Elias Bernhaut
  * @version 0.0.1
+ * @history 14.11.2016 Version 1
  * @responsibilities 
  * 	Defines an endpoint for weatherdata.
  */

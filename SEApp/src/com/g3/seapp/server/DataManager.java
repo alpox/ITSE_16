@@ -22,6 +22,7 @@ import com.g3.seapp.shared.Measurement;
  * 
  * @author Elias Bernhaut
  * @version 0.0.1
+ * @history 14.11.2016 Version 1
  * @responsibilities 
  * 	Reads, caches and returns weatherdata from a
  *  csv.

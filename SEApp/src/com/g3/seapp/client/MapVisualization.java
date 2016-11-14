@@ -35,8 +35,8 @@ public class MapVisualization implements IVisualization, IExportable {
 
 	/**
 	Returns the name respectively type of the visualization as String
-	@pre-
-	@post-
+	@pre nothing
+	@post nothing
 	@return Returns the name of the visualization
 	 **/
 	public String getName() {
@@ -45,8 +45,8 @@ public class MapVisualization implements IVisualization, IExportable {
 
 	/**
 	Draws the initial visualization of the map
-	@pre-
-	@post-
+	@pre nothing
+	@post nothing
 	@param  container A Panel which contains the whole visualization
 	 **/
 	public void drawVisualization(final Panel container) {
@@ -69,8 +69,8 @@ public class MapVisualization implements IVisualization, IExportable {
 
 	/**
 	Updates the visualization and displays the map and the requested data
-	@pre-
-	@post-
+	@pre nothing
+	@post nothing
 	@param  container A Panel which contains the whole visualization
 	 **/
 	public void updateVisualization(Panel container) {

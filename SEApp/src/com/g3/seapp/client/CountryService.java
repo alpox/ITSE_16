@@ -13,6 +13,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * 
  * @author Elias Bernhaut
  * @version 0.0.1
+ * @history 14.11.2016 Version 1
  * @responsibilities 
  * 	Defines an interface for gathering the weatherdata.
  */
