@@ -1,0 +1,1 @@
+Task 1.1The central functions of the app will be implemented. This are:* Table view* Sorting function in the table by column* First GUI and Map* Data of the newest date shown on the map* Visualize timeline on the map* Navigate between Table- and Mapview
