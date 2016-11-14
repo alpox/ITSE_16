@@ -1,5 +1,7 @@
 package com.g3.seapp.client;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +14,7 @@ import com.g3.seapp.shared.Measurement;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.AsyncHandler;
@@ -27,28 +30,51 @@ import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
 
+/**
+ * Represents a visualization of weatherdata
+ * as a scrollable table.
+ * 
+ * @author Elias Bernhaut
+ * @version 0.0.1
+ * @responsibilities Shows a table of weatherdata 
+ *
+ */
 public class TableVisualization implements IVisualization, IExportable {
 	// Well... we can do that because our data amount never changes :-)
-	private static final int MEASUREMENTCOUNT = 223977;
+	private static final int MEASUREMENTCOUNT = 228175;
 	
 	private CellTable<Measurement> measurementTable = new CellTable<Measurement>();
 	private List<String> columnNames = new ArrayList<String>();
 	private TextColumn<Measurement> countryColumn;
 	private TextColumn<Measurement> cityColumn;
+	private TextColumn<Measurement> dateColumn;
 	private TextColumn<Measurement> avgColumn;
 	private TextColumn<Measurement> errorColumn;
 	private TextColumn<Measurement> latColumn;
 	private TextColumn<Measurement> lonColumn;
 	private CountryServiceAsync countryService = GWT.create(CountryService.class);
 	
+	private final DateTimeFormat dateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
+	
 	private List<Measurement> measurements;
 	
+	/**
+	 * Constructor of TableVisualization
+	 * We setup the shape of the table in here
+	 */
 	public TableVisualization() {
 		SetupColumns();
 		measurementTable.setWidth("100%", true);
 	}
 	
+	/**
+	 * Setup of the columns for the table. Called on initialization.
+	 * @pre nothing
+	 * @post measurementTable.getColumnCount() > 0
+	 * @return nothing
+	 */
 	private void SetupColumns() {
+    	
 		countryColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
@@ -60,6 +86,13 @@ public class TableVisualization implements IVisualization, IExportable {
 		      @Override
 		      public String getValue(Measurement measurement) {
 		        return measurement.getCity();
+		      }
+	    };
+	    
+	    dateColumn = new TextColumn<Measurement>() {
+		      @Override
+		      public String getValue(Measurement measurement) {
+		        return dateFormat.format(measurement.getDate());
 		      }
 	    };
 	    
@@ -94,6 +127,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	    // Set the width of each column.
 	    measurementTable.setColumnWidth(countryColumn, 15.0, Unit.PCT);
 	    measurementTable.setColumnWidth(cityColumn, 15.0, Unit.PCT);
+	    measurementTable.setColumnWidth(dateColumn, 15.0, Unit.PCT);
 	    measurementTable.setColumnWidth(avgColumn, 20.0, Unit.PCT);
 	    measurementTable.setColumnWidth(errorColumn, 20.0, Unit.PCT);
 	    measurementTable.setColumnWidth(latColumn, 20.0, Unit.PCT);
@@ -101,6 +135,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	    
 	    countryColumn.setSortable(true);
 	    cityColumn.setSortable(true);
+	    dateColumn.setSortable(true);
 	    avgColumn.setSortable(true);
 	    errorColumn.setSortable(true);
 	    latColumn.setSortable(true);
@@ -108,6 +143,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	   
 	    measurementTable.addColumn(countryColumn, "Country");
 	    measurementTable.addColumn(cityColumn, "City");
+	    measurementTable.addColumn(dateColumn, "Date");
 	    measurementTable.addColumn(avgColumn, "Average");
 	    measurementTable.addColumn(errorColumn, "Error");
 	    measurementTable.addColumn(latColumn, "Latitude");
@@ -115,12 +151,19 @@ public class TableVisualization implements IVisualization, IExportable {
 	    
 	    columnNames.add("country");
 	    columnNames.add("city");
+	    columnNames.add("Date");
 	    columnNames.add("avg");
 	    columnNames.add("error");
 	    columnNames.add("lat");
 	    columnNames.add("lon");
 	}
 	
+	/**
+	 * Sets up the data provider for the measurementTable
+	 * @pre nothing
+	 * @post measurementTable has a dataprovider
+	 * @return nothing
+	 */
 	private void SetupDataProvider() {
 		AsyncDataProvider<Measurement> dataProvider = new AsyncDataProvider<Measurement>() {
 		      @Override
@@ -158,7 +201,7 @@ public class TableVisualization implements IVisualization, IExportable {
 					asc = sortList.get(0).isAscending();
 				}
 	            
-				countryService.getMeasurements(start, end, sortCol, asc, callback);
+				countryService.getMeasurements(start, end, sortCol, !asc, callback);
 			}
 		};
 		
@@ -170,18 +213,34 @@ public class TableVisualization implements IVisualization, IExportable {
 		measurementTable.getColumnSortList().push(countryColumn);
 	}
 
+	/**
+	 * Exports the table data as csv.
+	 * @pre nothing
+	 * @post nothing
+	 * @return nothing
+	 */
 	@Override
 	public void export() {
-		// TODO Auto-generated method stub
-		
+		// TODO Implement
 	}
 
+	/**
+	 * Gets the name of the visualization
+	 * @pre nothing
+	 * @post nothing
+	 * @return The name of the visualization
+	 */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Table Visualization";
 	}
 
+	/**
+	 * Draws the visualization
+	 * @pre nothing
+	 * @post container holds table and pager
+	 * @return nothing
+	 */
 	@Override
 	public void drawVisualization(final Panel container) {
 		
@@ -200,6 +259,12 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(pager);
 	}
 
+	/**
+	 * Updates the visualization
+	 * @pre nothing
+	 * @post nothing
+	 * @return nothing
+	 */
 	@Override
 	public void updateVisualization(Panel container) {
 
