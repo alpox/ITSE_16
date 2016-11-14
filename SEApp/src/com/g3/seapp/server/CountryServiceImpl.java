@@ -29,19 +29,27 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 * 
 	 * @param measurements The measurements list to sort
 	 * @param col The column description to sort for
-	 * @param asc Is ascending sort (false = descending)
+	 * @param desc Is descending sort (false = ascending)
 	 * @pre measurements != null
 	 * @post measurements is sorted for the given column
 	 * 
 	 * @return nothing
 	 */
-	private void sortMeasurements(ArrayList<Measurement> measurements, String col, final boolean asc) {
+	private void sortMeasurements(ArrayList<Measurement> measurements, String col, final boolean desc) {
 		switch(col.toLowerCase()) {
+		case "date":
+			Collections.sort(measurements, new Comparator<Measurement>() {
+			    public int compare(Measurement s1, Measurement s2) {
+			        int comp = s1.getDate().compareTo(s2.getDate());
+			        return !desc ? comp : comp * -1;
+			    }
+			});
+			break;
 		case "country": 
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			        int comp = s1.getCountry().compareTo(s2.getCountry());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -49,7 +57,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = s1.getCity().compareTo(s2.getCity());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -58,7 +66,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getAvg(), s2.getAvg());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -67,7 +75,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getError(), s2.getError());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -76,7 +84,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getCoords().getLat(), s2.getCoords().getLat());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -86,7 +94,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getCoords().getLon(), s2.getCoords().getLon());
-			        return !asc ? comp : comp * -1;
+			        return !desc ? comp : comp * -1;
 			    }
 			});
 			break;
@@ -100,7 +108,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 * @param start Start of the measurement data range
 	 * @param end End of the measurement data range
 	 * @param sortCol The column descriptor for which the data should be sorted for
-	 * @param asc Boolean - True if sort should be ascending, false otherwise
+	 * @param desc Boolean - True if sort should be descending, false otherwise
 	 * @pre end > start
 	 * @post DataManager.getData() is sorted for sortCol
 	 * 

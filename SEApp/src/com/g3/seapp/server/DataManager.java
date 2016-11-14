@@ -91,6 +91,9 @@ public class DataManager {
                 	Log.warn("Was not able to parse line " + lineNumber + ": " + line + "\n Error: " + ex.getMessage());
                 }
             }
+            
+            Country countryInstance = new Country(country, measurements);
+        	countries.add(countryInstance);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

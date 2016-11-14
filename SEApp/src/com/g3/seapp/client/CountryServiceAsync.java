@@ -24,7 +24,7 @@ public interface CountryServiceAsync {
 	 * @param start Start of the measurement data range
 	 * @param end End of the measurement data range
 	 * @param sortCol The column descriptor for which the data should be sorted for
-	 * @param asc Boolean - True if sort should be ascending, false otherwise
+	 * @param desc Boolean - True if sort should be descending, false otherwise
 	 * @param callback The callback which should be called with the return value
 	 * 
 	 * @pre end > start
@@ -32,6 +32,6 @@ public interface CountryServiceAsync {
 	 * 
 	 * @return An array of measurements
 	 */
-	void getMeasurements(int start, int end, String sortColumn, boolean asc,
+	void getMeasurements(int start, int end, String sortColumn, boolean desc,
 			AsyncCallback<ArrayList<Measurement>> callback);
 }
