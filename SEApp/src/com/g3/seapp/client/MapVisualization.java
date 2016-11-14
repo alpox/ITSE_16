@@ -14,7 +14,15 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
-
+/**
+ * This class represents a visualization of a Worldmap including
+ * data displayed onto the different countries.
+ * 
+ * @author Thomas Huber
+ * @version 0.0.1
+ * @history 14.11.2016 Version 1
+ * @responsibilities Shows a map visualization of the data.
+ */
 public class MapVisualization implements IVisualization, IExportable {
 	
 	private GeoChart geoChart;
