@@ -1,2 +1,0 @@
-serviceClass: com.g3.seapp.client.CountryService
-path: 432380F6F6DADE7108DC49F7895AE617.gwt.rpc
