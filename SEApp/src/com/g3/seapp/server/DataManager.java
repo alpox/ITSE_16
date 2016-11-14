@@ -73,6 +73,14 @@ public class DataManager {
 	                float lat = Float.parseFloat(measurement[5].substring(0, measurement[5].length()-1));
 	                float lon = Float.parseFloat(measurement[6].substring(0, measurement[6].length()-1));
 	                
+	                // If we get south, we change to minus
+	                if(measurement[5].charAt(measurement[5].length() - 1) == 'S')
+	                	lat = lat * -1;
+	                
+	                // If we get west, we change to minus
+	                if(measurement[6].charAt(measurement[6].length() - 1) == 'W')
+	                	lon = lon * -1;
+	                
 	                if(!countryName.equals(country)) {
 	                	if(measurements.size() > 0) { // Don't add first
 		                	Country countryInstance = new Country(country, measurements);
