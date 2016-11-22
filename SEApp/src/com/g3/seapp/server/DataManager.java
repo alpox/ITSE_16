@@ -28,11 +28,11 @@ import com.g3.seapp.shared.Measurement;
  *  csv.
  */
 public class DataManager {
-	private static CountryCollection dataCache;
+	private static CountryCollection countryCollection;
 	private static ArrayList<Measurement> measurements;
 	
 	public static CountryCollection getCountryCollection() {
-		return dataCache;
+		return countryCollection;
 	}
 	
 	public static ArrayList<Measurement> getMeasurements() {
@@ -128,7 +128,7 @@ public class DataManager {
             }
         }
         
-        DataManager.dataCache = countries;
+        DataManager.countryCollection = countries;
         DataManager.measurements = allMeasurements;
 	}
 }

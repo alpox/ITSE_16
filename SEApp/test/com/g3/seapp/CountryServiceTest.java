@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,7 +17,6 @@ import com.g3.seapp.server.CountryServiceImpl;
 import com.g3.seapp.server.DataManager;
 import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
-import com.google.gwt.core.shared.GWT;
 import com.ibm.icu.impl.Assert;
 
 public class CountryServiceTest {
@@ -30,21 +30,21 @@ public class CountryServiceTest {
 
 	@Test
 	public void testGetsDataFromService() {
-		List<Measurement> countries = countryService.getMeasurements(0, 20, "", true);
+		List<Measurement> countries = countryService.getMeasurements(0, 20, "", true, null);
 		Assert.assrt("Result is not null", countries != null);
 		Assert.assrt("Result is not empty", countries.size() > 0);
 	}
 	
 	@Test
 	public void testGetsRangeFromService() {
-		List<Measurement> measurementRange = countryService.getMeasurements(10, 20, "", true);
+		List<Measurement> measurementRange = countryService.getMeasurements(10, 20, "", true, null);
 		Assert.assrt("Result is not null", measurementRange != null);
 		Assert.assrt("Result has right amount", measurementRange.size() == 10);
 	}
 
 	@Test
 	public void testCanSortStringAscending() {
-		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, "country", false);
+		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, "country", false, null);
 		
 		for(Measurement measurement : measurementRange) {
 			// In our dataset the uppermost for ascending sort is Afghanistan.
@@ -54,7 +54,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortStringDescending() {
-		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, "country", true);
+		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, "country", true, null);
 		
 		for(Measurement measurement : measurementRange) {
 			// In our dataset the uppermost for descending sort is Zimbabwe.
@@ -64,8 +64,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortFloatAscending() {
-		List<Measurement> first = countryService.getMeasurements(0, 1, "avg", false);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, "avg", false);
+		List<Measurement> first = countryService.getMeasurements(0, 1, "avg", false, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, "avg", false, null);
 
 		Assert.assrt(first.get(0).getAvg() == -26.772f);
 		Assert.assrt(last.get(0).getAvg() == 38.283f);
@@ -73,8 +73,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortFloatDescending() {
-		List<Measurement> first = countryService.getMeasurements(0, 1, "avg", true);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, "avg", true);
+		List<Measurement> first = countryService.getMeasurements(0, 1, "avg", true, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, "avg", true, null);
 
 		Assert.assrt(first.get(0).getAvg() == 38.283f);
 		Assert.assrt(last.get(0).getAvg() == -26.772f);
@@ -82,8 +82,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortDateAscending() throws ParseException {
-		List<Measurement> first = countryService.getMeasurements(0, 1, "date", false);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, "date", false);
+		List<Measurement> first = countryService.getMeasurements(0, 1, "date", false, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, "date", false, null);
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Date firstRightDate = dateParser.parse("1743-11-01");
@@ -95,8 +95,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortDateDescending() throws ParseException {
-		List<Measurement> first = countryService.getMeasurements(0, 1, "date", true);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, "date", true);
+		List<Measurement> first = countryService.getMeasurements(0, 1, "date", true, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, "date", true, null);
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Date firstRightDate = dateParser.parse("2013-09-01");

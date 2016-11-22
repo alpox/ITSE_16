@@ -5,15 +5,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.HashMap;
 
 import org.mortbay.log.Log;
 
 import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
-
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
@@ -26,6 +33,7 @@ import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
@@ -45,6 +53,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	private static final int MEASUREMENTCOUNT = 228175;
 	
 	private CellTable<Measurement> measurementTable = new CellTable<Measurement>();
+	private AsyncDataProvider<Measurement> dataProvider;
 	private List<String> columnNames = new ArrayList<String>();
 	private TextColumn<Measurement> countryColumn;
 	private TextColumn<Measurement> cityColumn;
@@ -57,7 +66,9 @@ public class TableVisualization implements IVisualization, IExportable {
 	
 	private final DateTimeFormat dateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
 	
-	private List<Measurement> measurements;
+	private ArrayList<Measurement> measurements;
+	
+	private HashMap<String, String> filters = new HashMap<String, String>();
 	
 	/**
 	 * Constructor of TableVisualization
@@ -166,7 +177,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	 * @return nothing
 	 */
 	private void SetupDataProvider() {
-		AsyncDataProvider<Measurement> dataProvider = new AsyncDataProvider<Measurement>() {
+		dataProvider = new AsyncDataProvider<Measurement>() {
 		      @Override
 		      protected void onRangeChanged(HasData<Measurement> display) {
 		        final Range range = display.getVisibleRange();
@@ -202,7 +213,7 @@ public class TableVisualization implements IVisualization, IExportable {
 					asc = sortList.get(0).isAscending();
 				}
 	            
-				countryService.getMeasurements(start, end, sortCol, !asc, callback);
+				countryService.getMeasurements(start, end, sortCol, !asc, filters, callback);
 			}
 		};
 		
@@ -258,6 +269,17 @@ public class TableVisualization implements IVisualization, IExportable {
 	    
 		container.add(measurementTable);
 		container.add(pager);
+		
+		final TextBox countryFilterBox = new TextBox();
+		countryFilterBox.addValueChangeHandler(new ValueChangeHandler<String>() {
+
+			@Override
+			public void onValueChange(final ValueChangeEvent<String> event) {
+				filters.put("country", event.getValue());
+				measurementTable.setVisibleRangeAndClearData(measurementTable.getVisibleRange(), true);
+			}
+		});
+		container.add(countryFilterBox);
 	}
 
 	/**

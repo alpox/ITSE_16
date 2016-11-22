@@ -1,9 +1,11 @@
 package com.g3.seapp.server;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.HashMap;
 
 import org.eclipse.jetty.util.log.Log;
 
@@ -101,6 +103,56 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			break;
 		}
 	}
+	
+	private void filterMeasurements(ArrayList<Measurement> measurements, HashMap<String, String> filters) {
+		ArrayList<Integer> toDelete = new ArrayList<Integer>();
+		
+		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(int i = 0; i < measurements.size(); i++)
+		for(String filter : filters.keySet())
+			try {
+			switch(filter) {
+			case "date":
+				if(measurements.get(i).getDate().compareTo(dateParser.parse(filters.get(filter))) != 0)
+					toDelete.add(i);
+				break;
+			case "country": 
+				if(!measurements.get(i).getCountry().toLowerCase().contains(filters.get(filter).toLowerCase()))
+					toDelete.add(i);
+				break;
+			case "city":
+				if(!measurements.get(i).getCity().toLowerCase().contains(filters.get(filter).toLowerCase()))
+					toDelete.add(i);
+				break;
+			case "avg":
+			case "average":
+				if(Float.compare(measurements.get(i).getAvg(), Float.parseFloat(filters.get(filter))) != 0)
+					toDelete.add(i);
+				break;
+			case "err":
+			case "error":
+				if(Float.compare(measurements.get(i).getError(), Float.parseFloat(filters.get(filter))) != 0)
+					toDelete.add(i);
+				break;
+			case "lat":
+			case "latitude":
+				if(Float.compare(measurements.get(i).getCoords().getLat(), Float.parseFloat(filters.get(filter))) != 0)
+					toDelete.add(i);
+				break;
+			case "lon":
+			case "longitude":
+				if(Float.compare(measurements.get(i).getCoords().getLon(), Float.parseFloat(filters.get(filter))) != 0)
+					toDelete.add(i);
+				break;
+			}
+			} catch(Exception ex) {
+				System.out.println("Was not able to parse input: '" + filters.get(filter) + "'.");
+			}
+		
+		for(Integer idx : toDelete)
+			measurements.remove(idx);
+	}
 
 	/**
 	 * Returns all the measurements from start to end,
@@ -116,14 +168,16 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 * @return An array of measurements
 	 */
 	@Override
-	public ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc) {//, ArrayList<String> sortColumns, ArrayList<Boolean> ascList) {
-		// Create flat measurement list
+	public ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc, HashMap<String, String> filters) {
 		ArrayList<Measurement> measurements = DataManager.getMeasurements();
 		
 		if(measurements == null) return new ArrayList<Measurement>();
 		
 		if(sortCol != null && !sortCol.isEmpty())
 			sortMeasurements(measurements, sortCol, asc);
+		
+		if(filters != null && !filters.isEmpty())
+			filterMeasurements(measurements, filters);
 
 		return new ArrayList<Measurement>(measurements.subList(start, end));
 	}
