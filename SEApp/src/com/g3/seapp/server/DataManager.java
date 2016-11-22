@@ -29,6 +29,15 @@ import com.g3.seapp.shared.Measurement;
  */
 public class DataManager {
 	private static CountryCollection dataCache;
+	private static ArrayList<Measurement> measurements;
+	
+	public static CountryCollection getCountryCollection() {
+		return dataCache;
+	}
+	
+	public static ArrayList<Measurement> getMeasurements() {
+		return measurements;
+	}
 	
 	/**
 	 * Gets the data from the csv
@@ -36,8 +45,7 @@ public class DataManager {
 	 * @post File reader is released
 	 * @return A collection of countries which hold measurement data
 	 */
-	public static final CountryCollection getData() {
-		if(dataCache != null) return dataCache;
+	public static final void loadData() {
 		
 		// Set name of csv
 		String csvFile = "GlobalLandTemperaturesByMajorCity_v1.csv";
@@ -48,6 +56,7 @@ public class DataManager {
         
         // Define a collection to collect the countries.
         CountryCollection countries = new CountryCollection();
+    	ArrayList<Measurement> allMeasurements = new ArrayList<Measurement>();
 
         try {
         	String country = "";
@@ -95,6 +104,7 @@ public class DataManager {
 	                
 	                Measurement newMeasurement = new Measurement(countryName, cityName, avg, error, new Coordinate(lat, lon), date);
 	                measurements.add(newMeasurement);
+	                allMeasurements.add(newMeasurement);
                 }
                 catch(Exception ex) {
                 	Log.warn("Was not able to parse line " + lineNumber + ": " + line + "\n Error: " + ex.getMessage());
@@ -119,6 +129,6 @@ public class DataManager {
         }
         
         DataManager.dataCache = countries;
-        return countries;
+        DataManager.measurements = allMeasurements;
 	}
 }

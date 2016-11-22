@@ -11,6 +11,12 @@
     <servlet-class>com.g3.seapp.server.CountryServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+	  <servlet-name>dataLoaderServlet</servlet-name>
+	  <servlet-class>com.g3.seapp.server.DataLoaderServlet</servlet-class>
+	  <load-on-startup>1</load-on-startup>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>countryServiceImpl</servlet-name>
     <url-pattern>/seapp/countries</url-pattern>
