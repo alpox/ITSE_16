@@ -7,10 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.g3.seapp.client.CountryService;
 import com.g3.seapp.server.CountryServiceImpl;
+import com.g3.seapp.server.DataManager;
 import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.core.shared.GWT;
@@ -19,6 +22,11 @@ import com.ibm.icu.impl.Assert;
 public class CountryServiceTest {
 	
 	private final CountryService countryService = new CountryServiceImpl();
+	
+	@BeforeClass
+	public static void initialize() {
+		DataManager.loadData();
+	}
 
 	@Test
 	public void testGetsDataFromService() {
