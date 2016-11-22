@@ -118,15 +118,13 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	@Override
 	public ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc) {//, ArrayList<String> sortColumns, ArrayList<Boolean> ascList) {
 		// Create flat measurement list
-		ArrayList<Measurement> range = new ArrayList<Measurement>();
 		ArrayList<Measurement> measurements = DataManager.getMeasurements();
+		
+		if(measurements == null) return new ArrayList<Measurement>();
 		
 		if(sortCol != null && !sortCol.isEmpty())
 			sortMeasurements(measurements, sortCol, asc);
-		
-		for(int i = start; i < end; i++)
-			range.add(measurements.get(i));
-		
-		return range;
+
+		return new ArrayList<Measurement>(measurements.subList(start, end));
 	}
 }
