@@ -1,12 +1,11 @@
 package com.g3.seapp.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The asynchronous interface for the CountryService.

@@ -1,17 +1,15 @@
 package com.g3.seapp.server;
 
+import com.g3.seapp.client.CountryService;
+import com.g3.seapp.shared.Country;
+import com.g3.seapp.shared.Measurement;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.HashMap;
-
-import com.g3.seapp.client.CountryService;
-import com.g3.seapp.shared.Country;
-import com.g3.seapp.shared.CountryCollection;
-import com.g3.seapp.shared.Measurement;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The implementation of the CountryService.

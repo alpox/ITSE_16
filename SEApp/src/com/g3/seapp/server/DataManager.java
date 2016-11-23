@@ -1,5 +1,10 @@
 package com.g3.seapp.server;
 
+import com.g3.seapp.shared.Coordinate;
+import com.g3.seapp.shared.Country;
+import com.g3.seapp.shared.CountryCollection;
+import com.g3.seapp.shared.Measurement;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,12 +12,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import com.g3.seapp.shared.Coordinate;
-import com.g3.seapp.shared.Country;
-import com.g3.seapp.shared.CountryCollection;
-import com.g3.seapp.shared.Measurement;
 
 /**
  * A DataManager for reading the weatherdata from
