@@ -7,8 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.HashMap;
 
-import org.eclipse.jetty.util.log.Log;
-
 import com.g3.seapp.client.CountryService;
 import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.CountryCollection;
@@ -38,9 +36,9 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 * 
 	 * @return nothing
 	 */
-	private void sortMeasurements(ArrayList<Measurement> measurements, String col, final boolean desc) {
-		switch(col.toLowerCase()) {
-		case "date":
+	private void sortMeasurements(ArrayList<Measurement> measurements, Measurement.MeasurementType col, final boolean desc) {
+		switch(col) {
+		case DATE:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			        int comp = s1.getDate().compareTo(s2.getDate());
@@ -48,7 +46,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "country": 
+		case COUNTRY:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			        int comp = s1.getCountry().compareTo(s2.getCountry());
@@ -56,7 +54,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "city":
+		case CITY:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = s1.getCity().compareTo(s2.getCity());
@@ -64,8 +62,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "average":
-		case "avg":
+		case AVG:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getAvg(), s2.getAvg());
@@ -73,8 +70,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "error":
-		case "err":
+		case ERROR:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getError(), s2.getError());
@@ -82,8 +78,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "latitude":
-		case "lat":
+		case LAT:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getCoords().getLat(), s2.getCoords().getLat());
@@ -91,9 +86,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			    }
 			});
 			break;
-		case "longitude":
-		case "long":
-		case "lon":
+		case LON:
 			Collections.sort(measurements, new Comparator<Measurement>() {
 			    public int compare(Measurement s1, Measurement s2) {
 			    	int comp = Float.compare(s1.getCoords().getLon(), s2.getCoords().getLon());
@@ -104,54 +97,54 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		}
 	}
 	
-	private void filterMeasurements(ArrayList<Measurement> measurements, HashMap<String, String> filters) {
-		ArrayList<Integer> toDelete = new ArrayList<Integer>();
+	private ArrayList<Measurement> filterMeasurements(ArrayList<Measurement> measurements, HashMap<Measurement.MeasurementType, String> filters) {
+		ArrayList<Measurement> newMeasurements = new ArrayList<Measurement>();
 		
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 		
-		for(int i = 0; i < measurements.size(); i++)
-		for(String filter : filters.keySet())
-			try {
-			switch(filter) {
-			case "date":
-				if(measurements.get(i).getDate().compareTo(dateParser.parse(filters.get(filter))) != 0)
-					toDelete.add(i);
-				break;
-			case "country": 
-				if(!measurements.get(i).getCountry().toLowerCase().contains(filters.get(filter).toLowerCase()))
-					toDelete.add(i);
-				break;
-			case "city":
-				if(!measurements.get(i).getCity().toLowerCase().contains(filters.get(filter).toLowerCase()))
-					toDelete.add(i);
-				break;
-			case "avg":
-			case "average":
-				if(Float.compare(measurements.get(i).getAvg(), Float.parseFloat(filters.get(filter))) != 0)
-					toDelete.add(i);
-				break;
-			case "err":
-			case "error":
-				if(Float.compare(measurements.get(i).getError(), Float.parseFloat(filters.get(filter))) != 0)
-					toDelete.add(i);
-				break;
-			case "lat":
-			case "latitude":
-				if(Float.compare(measurements.get(i).getCoords().getLat(), Float.parseFloat(filters.get(filter))) != 0)
-					toDelete.add(i);
-				break;
-			case "lon":
-			case "longitude":
-				if(Float.compare(measurements.get(i).getCoords().getLon(), Float.parseFloat(filters.get(filter))) != 0)
-					toDelete.add(i);
-				break;
+		for(int i = 0; i < measurements.size(); i++) {
+			int okCount = 0;
+			for (Measurement.MeasurementType filter : filters.keySet()) {
+				try {
+					switch (filter) {
+						case DATE:
+							if (measurements.get(i).getDate().compareTo(dateParser.parse(filters.get(filter))) == 0)
+								okCount++;
+							break;
+						case COUNTRY:
+							if (measurements.get(i).getCountry().toLowerCase().contains(filters.get(filter).toLowerCase()))
+								okCount++;
+							break;
+						case CITY:
+							if (measurements.get(i).getCity().toLowerCase().contains(filters.get(filter).toLowerCase()))
+								okCount++;
+							break;
+						case AVG:
+							if (Float.compare(measurements.get(i).getAvg(), Float.parseFloat(filters.get(filter))) == 0)
+								okCount++;
+							break;
+						case ERROR:
+							if (Float.compare(measurements.get(i).getError(), Float.parseFloat(filters.get(filter))) == 0)
+								okCount++;
+							break;
+						case LAT:
+							if (Float.compare(measurements.get(i).getCoords().getLat(), Float.parseFloat(filters.get(filter))) == 0)
+								okCount++;
+							break;
+						case LON:
+							if (Float.compare(measurements.get(i).getCoords().getLon(), Float.parseFloat(filters.get(filter))) == 0)
+								okCount++;
+							break;
+					}
+				} catch (Exception ex) {
+					System.out.println("Was not able to parse input: '" + filters.get(filter) + "'.");
+					return new ArrayList<>();
+				}
 			}
-			} catch(Exception ex) {
-				System.out.println("Was not able to parse input: '" + filters.get(filter) + "'.");
-			}
+			if(okCount == filters.keySet().size()) newMeasurements.add(measurements.get(i));
+		}
 		
-		for(Integer idx : toDelete)
-			measurements.remove(idx);
+		return newMeasurements;
 	}
 
 	/**
@@ -168,17 +161,76 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 * @return An array of measurements
 	 */
 	@Override
-	public ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc, HashMap<String, String> filters) {
+	public ArrayList<Measurement> getMeasurements(int start, int end, Measurement.MeasurementType sortCol,
+												  boolean asc, HashMap<Measurement.MeasurementType, String> filters) {
 		ArrayList<Measurement> measurements = DataManager.getMeasurements();
 		
 		if(measurements == null) return new ArrayList<Measurement>();
 		
-		if(sortCol != null && !sortCol.isEmpty())
+		if(sortCol != null)
 			sortMeasurements(measurements, sortCol, asc);
 		
 		if(filters != null && !filters.isEmpty())
-			filterMeasurements(measurements, filters);
+			measurements = filterMeasurements(measurements, filters);
 
-		return new ArrayList<Measurement>(measurements.subList(start, end));
+		if(measurements.size() - 1 < start) return new ArrayList<>();
+		if(measurements.size() - 1 < end) return new ArrayList<>(measurements.subList(start, measurements.size()));
+		return new ArrayList<>(measurements.subList(start, end));
+	}
+
+	@Override
+	public ArrayList<String> getNames(Measurement.MeasurementType type) {
+		ArrayList<String> names = new ArrayList<>();
+		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+
+		switch(type) {
+			case COUNTRY:
+				for(Country country : DataManager.getCountryCollection())
+					names.add(country.getName());
+				break;
+			case CITY:
+				for(Country country : DataManager.getCountryCollection())
+					names.addAll(country.getCityNames());
+				break;
+			case DATE:
+				for(Measurement measurement : DataManager.getMeasurements()) {
+					String dateString = dateParser.format(measurement.getDate());
+					names.add(dateString);
+				}
+				break;
+			case AVG:
+				for(Measurement measurement : DataManager.getMeasurements()) {
+					String avgString = Float.toString(measurement.getAvg());
+					names.add(avgString);
+				}
+				break;
+			case ERROR:
+				for(Measurement measurement : DataManager.getMeasurements()) {
+					String errorString = Float.toString(measurement.getError());
+					names.add(errorString);
+				}
+				break;
+			case LAT:
+				for(Measurement measurement : DataManager.getMeasurements()) {
+					String latString = Float.toString(measurement.getCoords().getLat());
+					names.add(latString);
+				}
+				break;
+			case LON:
+				for(Measurement measurement : DataManager.getMeasurements()) {
+					String lonString = Float.toString(measurement.getCoords().getLon());
+					names.add(lonString);
+				}
+				break;
+		}
+
+		return names;
+	}
+
+	@Override
+	public Integer getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters) {
+		if(filters != null && !filters.isEmpty())
+			return filterMeasurements(DataManager.getMeasurements(), filters).size();
+		return DataManager.getMeasurements().size();
 	}
 }

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.mortbay.log.Log;
-
 import com.g3.seapp.shared.Coordinate;
 import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.CountryCollection;
@@ -107,7 +105,7 @@ public class DataManager {
 	                allMeasurements.add(newMeasurement);
                 }
                 catch(Exception ex) {
-                	Log.warn("Was not able to parse line " + lineNumber + ": " + line + "\n Error: " + ex.getMessage());
+                	System.out.println("Was not able to parse line " + lineNumber + ": " + line + "\n Error: " + ex.getMessage());
                 }
             }
             

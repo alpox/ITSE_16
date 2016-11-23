@@ -7,18 +7,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.HashMap;
 
-import org.mortbay.log.Log;
-
 import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -32,8 +28,7 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
@@ -68,24 +63,26 @@ public class TableVisualization implements IVisualization, IExportable {
 	
 	private ArrayList<Measurement> measurements;
 	
-	private HashMap<String, String> filters = new HashMap<String, String>();
+	private HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
 	
 	/**
 	 * Constructor of TableVisualization
 	 * We setup the shape of the table in here
 	 */
 	public TableVisualization() {
-		SetupColumns();
+		setupColumns();
 		measurementTable.setWidth("100%", true);
+
+		measurementTable.setPageSize(25);
 	}
 	
 	/**
-	 * Setup of the columns for the table. Called on initialization.
+	 * setup of the columns for the table. Called on initialization.
 	 * @pre nothing
 	 * @post measurementTable.getColumnCount() > 0
 	 * @return nothing
 	 */
-	private void SetupColumns() {
+	private void setupColumns() {
     	
 		countryColumn = new TextColumn<Measurement>() {
 		      @Override
@@ -111,28 +108,32 @@ public class TableVisualization implements IVisualization, IExportable {
 	    avgColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		        return Float.toString(measurement.getAvg());
+		      	float avg = Math.round(measurement.getAvg() * 1000f) / 1000f;
+		        return Float.toString(avg);
 		      }
 	    };
 	    
 	    errorColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		        return Float.toString(measurement.getError());
+		      	float err = Math.round(measurement.getError() * 1000f) / 1000f;
+		        return Float.toString(err);
 		      }
 	    };
 	    
 	    latColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		        return Float.toString(measurement.getCoords().getLat());
+		      	float lat = Math.round(measurement.getCoords().getLat() * 1000f) / 1000f;
+		        return Float.toString(lat);
 		      }
 	    };
 	    
 	    lonColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		        return Float.toString(measurement.getCoords().getLon());
+		      	float lon = Math.round(measurement.getCoords().getLon() * 1000f) / 1000f;
+		        return Float.toString(lon);
 		      }
 	    };
 
@@ -176,7 +177,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	 * @post measurementTable has a dataprovider
 	 * @return nothing
 	 */
-	private void SetupDataProvider() {
+	private void setupDataProvider() {
 		dataProvider = new AsyncDataProvider<Measurement>() {
 		      @Override
 		      protected void onRangeChanged(HasData<Measurement> display) {
@@ -188,7 +189,6 @@ public class TableVisualization implements IVisualization, IExportable {
 				final int start = range.getStart();
 	            final int end = start + range.getLength();
 
-				// TODO Auto-generated method stub
 				AsyncCallback<ArrayList<Measurement>> callback = new AsyncCallback<ArrayList<Measurement>>() {
 
 					@Override
@@ -198,18 +198,21 @@ public class TableVisualization implements IVisualization, IExportable {
 
 					@Override
 					public void onSuccess(ArrayList<Measurement> result) {
-						// TODO Auto-generated method stub
 						measurements = result;
 						measurementTable.setRowData(start, measurements);
+						//if(measurements.size() == 0)
+						//	dataProvider.updateRowCount(0, true);
+
+						updateTableRowCount();
 					}
 				};
 
-				String sortCol = "country";
+				Measurement.MeasurementType sortCol = Measurement.MeasurementType.COUNTRY;
 				boolean asc = true;
 				
 				if(sortList.size() > 0) {
 					int colIndex = measurementTable.getColumnIndex((Column<Measurement, ?>)sortList.get(0).getColumn());
-					sortCol = columnNames.get(colIndex);
+					sortCol = Measurement.MeasurementType.valueOf(columnNames.get(colIndex).toUpperCase());
 					asc = sortList.get(0).isAscending();
 				}
 	            
@@ -223,6 +226,70 @@ public class TableVisualization implements IVisualization, IExportable {
 		measurementTable.addColumnSortHandler(columnSortHandler);
 		
 		measurementTable.getColumnSortList().push(countryColumn);
+	}
+
+	private void setupFilter(final Panel container, final Measurement.MeasurementType key) {
+		final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+		final SuggestBox countryFilterBox = new SuggestBox(oracle);
+
+		countryFilterBox.addValueChangeHandler(new ValueChangeHandler<String>() {
+
+			@Override
+			public void onValueChange(final ValueChangeEvent<String> event) {
+				applyFilter(key, event.getValue());
+			}
+		});
+
+		countryFilterBox.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
+			@Override
+			public void onSelection(SelectionEvent<SuggestOracle.Suggestion> event) {
+				applyFilter(key, event.getSelectedItem().getReplacementString());
+			}
+		});
+
+
+		AsyncCallback<ArrayList<String>> callback = new AsyncCallback<ArrayList<String>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onSuccess(ArrayList<String> result) {
+				((MultiWordSuggestOracle)countryFilterBox.getSuggestOracle()).addAll(result);
+			}
+		};
+
+		countryService.getNames(key, callback);
+
+		container.add(countryFilterBox);
+	}
+
+	private void applyFilter(Measurement.MeasurementType key, String filterString) {
+		if(filterString.isEmpty())
+			filters.remove(key);
+		else
+			filters.put(key, filterString);
+
+		measurementTable.setVisibleRangeAndClearData(measurementTable.getVisibleRange(), true);
+	}
+
+	private void updateTableRowCount() {
+		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onSuccess(Integer result) {
+				dataProvider.updateRowCount(result, true);
+			}
+		};
+
+		countryService.getMeasurementEntrySize(filters, callback);
 	}
 
 	/**
@@ -257,29 +324,27 @@ public class TableVisualization implements IVisualization, IExportable {
 	public void drawVisualization(final Panel container) {
 		
 		//countryService.getMeasurements(0, 20, callback);
-		SetupDataProvider();
+		setupDataProvider();
 		
 	    measurementTable.setRowCount(MEASUREMENTCOUNT, true);
 	    
-	    //SimplePager.Resources resources = GWT.create(SimplePager.Resources.class);
-	    SimplePager pager = new SimplePager();
+	    SimplePager.Resources resources = GWT.create(SimplePager.Resources.class);
+	    SimplePager pager = new SimplePager(TextLocation.CENTER, resources,
+				true, 500, true);
 
+	    pager.setPageSize(25);
 	    // Set the cellList as the display.
 	    pager.setDisplay(measurementTable);
-	    
+
+		setupFilter(container, Measurement.MeasurementType.COUNTRY);
+		setupFilter(container, Measurement.MeasurementType.CITY);
+		setupFilter(container, Measurement.MeasurementType.DATE);
+		setupFilter(container, Measurement.MeasurementType.AVG);
+		setupFilter(container, Measurement.MeasurementType.ERROR);
+		setupFilter(container, Measurement.MeasurementType.LAT);
+		setupFilter(container, Measurement.MeasurementType.LON);
 		container.add(measurementTable);
 		container.add(pager);
-		
-		final TextBox countryFilterBox = new TextBox();
-		countryFilterBox.addValueChangeHandler(new ValueChangeHandler<String>() {
-
-			@Override
-			public void onValueChange(final ValueChangeEvent<String> event) {
-				filters.put("country", event.getValue());
-				measurementTable.setVisibleRangeAndClearData(measurementTable.getVisibleRange(), true);
-			}
-		});
-		container.add(countryFilterBox);
 	}
 
 	/**

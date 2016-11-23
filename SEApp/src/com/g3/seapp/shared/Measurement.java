@@ -6,6 +6,16 @@ import java.util.List;
 
 
 public class Measurement implements Serializable {
+	public enum MeasurementType {
+		COUNTRY,
+		CITY,
+		DATE,
+		AVG,
+		ERROR,
+		LAT,
+		LON
+	}
+
 	private String country;
 	private String city;
 	private float avg;

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="SEApp:GWT">
+    <output-path>$PROJECT_DIR$/out/artifacts/SEApp_GWT</output-path>
+    <root id="root">
+      <element id="gwt-compiler-output" facet="SEApp/gwt/GWT" />
+    </root>
+  </artifact>
+</component>

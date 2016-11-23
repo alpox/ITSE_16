@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="1.7" jdk_type="JavaSDK">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="gwt-slider-bar-1.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-slider-bar-1.0.jar!/"/>
+	</lib>
+	<lib name="gwt-charts-0.9.10.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-charts-0.9.10.jar!/"/>
+	</lib>
+	<levels>
+		<level name="gwt-user" value="project"/>
+	</levels>
+</component>

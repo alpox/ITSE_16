@@ -21,6 +21,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("countries")
 public interface CountryService extends RemoteService {
-	ArrayList<Measurement> getMeasurements(int start, int end, String sortCol, boolean asc,
-			HashMap<String, String> filters);
+	ArrayList<Measurement> getMeasurements(int start, int end, Measurement.MeasurementType sortCol, boolean asc,
+										   HashMap<Measurement.MeasurementType, String> filters);
+	ArrayList<String> getNames(Measurement.MeasurementType type);
+	Integer getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters);
 }
