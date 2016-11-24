@@ -25,8 +25,8 @@
       <file leaf-file-name="CountryServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="194" column="8" lean-forward="false" selection-start-line="194" selection-start-column="8" selection-end-line="194" selection-end-column="73" />
+            <state relative-caret-position="565">
+              <caret line="211" column="21" lean-forward="true" selection-start-line="211" selection-start-column="21" selection-end-line="211" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CountryServiceTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CountryServiceTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="400">
+              <caret line="248" column="9" lean-forward="true" selection-start-line="248" selection-start-column="9" selection-end-line="248" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataManagerTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataManagerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,8 +175,8 @@
         <option value="$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java" />
-        <option value="$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java" />
         <option value="$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java" />
+        <option value="$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java" />
       </list>
     </option>
   </component>
@@ -356,7 +356,7 @@
       <recent name="$PROJECT_DIR$/war/WEB-INF/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DataManagerTest.testDataManagerCanLoadData">
+  <component name="RunManager" selected="JUnit.JUnit">
     <configuration default="false" name="CountryServiceTest.testCanFilterForAvg" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -880,7 +880,7 @@
       <updated>1479927222895</updated>
       <workItem from="1479927237418" duration="356000" />
       <workItem from="1479927599263" duration="10230000" />
-      <workItem from="1479975085069" duration="5681000" />
+      <workItem from="1479975085069" duration="5984000" />
     </task>
     <servers />
   </component>
@@ -906,18 +906,18 @@
     <history-entry file="DataManagerTest_testDataManagerCanLoadData - 2016.11.24 at 11h 06m 22s.xml">
       <configuration name="DataManagerTest.testDataManagerCanLoadData" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="JUnit - 2016.11.24 at 10h 50m 48s.xml">
-      <configuration name="JUnit" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="JUnit - 2016.11.24 at 10h 51m 18s.xml">
       <configuration name="JUnit" configurationId="JUnit" />
     </history-entry>
     <history-entry file="JUnit - 2016.11.24 at 11h 03m 58s.xml">
       <configuration name="JUnit" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="JUnit - 2016.11.24 at 11h 14m 36s.xml">
+      <configuration name="JUnit" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16267000" />
+    <option name="totallyTimeSpent" value="16570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1213,26 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="194" column="8" lean-forward="false" selection-start-line="194" selection-start-column="8" selection-end-line="194" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/DataManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
@@ -1251,10 +1231,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="211" column="21" lean-forward="true" selection-start-line="211" selection-start-column="21" selection-end-line="211" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="248" column="9" lean-forward="true" selection-start-line="248" selection-start-column="9" selection-end-line="248" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

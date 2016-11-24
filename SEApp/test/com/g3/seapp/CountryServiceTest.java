@@ -197,4 +197,60 @@ public class CountryServiceTest {
 		for(Measurement measurement : measurements)
 			Assert.assertTrue(measurement.getDate().compareTo(dateParser.parse("1743-11-01")) == 0);
 	}
+
+	@Test
+	public void testCanGetCountryNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.COUNTRY);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetCityNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.CITY);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetAvgNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.AVG);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetErrorNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.ERROR);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetDateNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.DATE);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetLatitudeNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.LAT);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
+
+	@Test
+	public void testCanGetLongitudeNames() {
+		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.LON);
+
+		Assert.assertNotNull(names);
+		Assert.assertTrue(names.size() > 0);
+	}
 }
