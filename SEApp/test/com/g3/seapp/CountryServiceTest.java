@@ -1,23 +1,21 @@
 package com.g3.seapp;
 
-import static org.junit.Assert.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.HashMap;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.g3.seapp.client.CountryService;
 import com.g3.seapp.server.CountryServiceImpl;
 import com.g3.seapp.server.DataManager;
-import com.g3.seapp.shared.CountryCollection;
 import com.g3.seapp.shared.Measurement;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.g3.seapp.shared.Measurement.MeasurementType.*;
 
 public class CountryServiceTest {
 	
@@ -44,7 +42,7 @@ public class CountryServiceTest {
 
 	@Test
 	public void testCanSortStringAscending() {
-		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, Measurement.MeasurementType.COUNTRY, false, null);
+		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, COUNTRY, false, null);
 		
 		for(Measurement measurement : measurementRange) {
 			// In our dataset the uppermost for ascending sort is Afghanistan.
@@ -54,7 +52,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortStringDescending() {
-		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, Measurement.MeasurementType.COUNTRY, true, null);
+		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, COUNTRY, true, null);
 		
 		for(Measurement measurement : measurementRange) {
 			// In our dataset the uppermost for descending sort is Zimbabwe.
@@ -64,8 +62,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortFloatAscending() {
-		List<Measurement> first = countryService.getMeasurements(0, 1, Measurement.MeasurementType.AVG, false, null);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, Measurement.MeasurementType.AVG, false, null);
+		List<Measurement> first = countryService.getMeasurements(0, 1, AVG, false, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, AVG, false, null);
 
 		Assert.assertTrue(first.get(0).getAvg() == -26.772f);
 		Assert.assertTrue(last.get(0).getAvg() == 38.283f);
@@ -73,8 +71,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCanSortFloatDescending() {
-		List<Measurement> first = countryService.getMeasurements(0, 1, Measurement.MeasurementType.AVG, true, null);
-		List<Measurement> last = countryService.getMeasurements(228174, 228175, Measurement.MeasurementType.AVG, true, null);
+		List<Measurement> first = countryService.getMeasurements(0, 1, AVG, true, null);
+		List<Measurement> last = countryService.getMeasurements(228174, 228175, AVG, true, null);
 
 		Assert.assertTrue(first.get(0).getAvg() == 38.283f);
 		Assert.assertTrue(last.get(0).getAvg() == -26.772f);
@@ -104,5 +102,99 @@ public class CountryServiceTest {
 
 		Assert.assertTrue(first.get(0).getDate().equals(firstRightDate));
 		Assert.assertTrue(last.get(0).getDate().equals(lastRightDate));
+	}
+
+	@Test
+	public void testCanGetDataSize() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(COUNTRY, "France");
+		int size = countryService.getMeasurementEntrySize(filters);
+
+		Assert.assertEquals(size, 3166);
+	}
+
+	@Test
+	public void testCanFilterForCountry() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(COUNTRY, "France");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertEquals(measurement.getCountry(), "France");
+	}
+
+	@Test
+	public void testCanFilterForCity() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(CITY, "Kabul");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertEquals(measurement.getCity(), "Kabul");
+	}
+
+	@Test
+	public void testCanFilterForAvg() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(AVG, "2.081");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(Float.compare(measurement.getAvg(), 2.081f) == 0);
+	}
+
+	@Test
+	public void testCanFilterForError() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(ERROR, "1.749");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(Float.compare(measurement.getError(), 1.749f) == 0);
+	}
+
+	@Test
+	public void testCanFilterForLatitude() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(LAT, "49.03");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(Float.compare(measurement.getCoords().getLat(), 49.03f) == 0);
+	}
+
+	@Test
+	public void testCanFilterForLongitude() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(LON, "2.45");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(Float.compare(measurement.getCoords().getLon(), 2.45f) == 0);
+	}
+
+	@Test
+	public void testCanFilterForDate() throws ParseException {
+		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(DATE, "1743-11-01");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(measurement.getDate().compareTo(dateParser.parse("1743-11-01")) == 0);
 	}
 }
