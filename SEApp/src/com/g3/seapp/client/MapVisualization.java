@@ -8,6 +8,8 @@ import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
+import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
+
 /**
  * This class represents a visualization of a Worldmap including
  * data displayed onto the different countries.
@@ -59,6 +61,9 @@ public class MapVisualization implements IVisualization, IExportable {
 		//Set size constraints
 		container.setHeight("70vh");
 		container.setWidth("70vw");
+
+		SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20, "200px", true);
+		container.add(slider);
 	}
 
 	/**

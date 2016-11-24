@@ -2,6 +2,8 @@ package com.g3.seapp.client;
 
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.builder.shared.FieldSetBuilder;
+import com.google.gwt.dom.client.FieldSetElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -12,10 +14,7 @@ import com.google.gwt.user.cellview.client.*;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.AsyncHandler;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.SuggestOracle;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
@@ -129,13 +128,13 @@ public class TableVisualization implements IVisualization, IExportable {
 	    };
 
 	    // Set the width of each column.
-	    measurementTable.setColumnWidth(countryColumn, 15.0, Unit.PCT);
-	    measurementTable.setColumnWidth(cityColumn, 15.0, Unit.PCT);
-	    measurementTable.setColumnWidth(dateColumn, 15.0, Unit.PCT);
-	    measurementTable.setColumnWidth(avgColumn, 20.0, Unit.PCT);
-	    measurementTable.setColumnWidth(errorColumn, 20.0, Unit.PCT);
-	    measurementTable.setColumnWidth(latColumn, 20.0, Unit.PCT);
-	    measurementTable.setColumnWidth(lonColumn, 20.0, Unit.PCT);
+	    measurementTable.setColumnWidth(countryColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(cityColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(dateColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(avgColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(errorColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(latColumn, 150, Unit.PX);
+	    measurementTable.setColumnWidth(lonColumn, 150, Unit.PX);
 	    
 	    countryColumn.setSortable(true);
 	    cityColumn.setSortable(true);
@@ -227,6 +226,8 @@ public class TableVisualization implements IVisualization, IExportable {
 		final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 		final SuggestBox countryFilterBox = new SuggestBox(oracle);
 
+		countryFilterBox.setWidth("140px");
+
 		countryFilterBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 
 			@Override
@@ -241,7 +242,6 @@ public class TableVisualization implements IVisualization, IExportable {
 				applyFilter(key, event.getSelectedItem().getReplacementString());
 			}
 		});
-
 
 		AsyncCallback<ArrayList<String>> callback = new AsyncCallback<ArrayList<String>>() {
 
@@ -258,7 +258,18 @@ public class TableVisualization implements IVisualization, IExportable {
 
 		countryService.getNames(key, callback);
 
-		container.add(countryFilterBox);
+		String labelText = key.toString().toLowerCase();
+		labelText = String.valueOf(labelText.charAt(0)).toUpperCase() + labelText.substring(1, labelText.length());
+
+		VerticalPanel panel = new VerticalPanel();
+
+		Label label = new Label();
+		label.setText(labelText);
+		panel.add(label);
+
+		panel.add(countryFilterBox);
+
+		container.add(panel);
 	}
 
 	/**
@@ -335,13 +346,17 @@ public class TableVisualization implements IVisualization, IExportable {
 	    // Set the cellList as the display.
 	    pager.setDisplay(measurementTable);
 
-		setupFilter(container, Measurement.MeasurementType.COUNTRY);
-		setupFilter(container, Measurement.MeasurementType.CITY);
-		setupFilter(container, Measurement.MeasurementType.DATE);
-		setupFilter(container, Measurement.MeasurementType.AVG);
-		setupFilter(container, Measurement.MeasurementType.ERROR);
-		setupFilter(container, Measurement.MeasurementType.LAT);
-		setupFilter(container, Measurement.MeasurementType.LON);
+	    HorizontalPanel horizPanel = new HorizontalPanel();
+
+		setupFilter(horizPanel, Measurement.MeasurementType.COUNTRY);
+		setupFilter(horizPanel, Measurement.MeasurementType.CITY);
+		setupFilter(horizPanel, Measurement.MeasurementType.DATE);
+		setupFilter(horizPanel, Measurement.MeasurementType.AVG);
+		setupFilter(horizPanel, Measurement.MeasurementType.ERROR);
+		setupFilter(horizPanel, Measurement.MeasurementType.LAT);
+		setupFilter(horizPanel, Measurement.MeasurementType.LON);
+
+		container.add(horizPanel);
 
 		container.add(measurementTable);
 		container.add(pager);
