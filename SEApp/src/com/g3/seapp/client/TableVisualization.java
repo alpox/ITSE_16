@@ -164,9 +164,8 @@ public class TableVisualization implements IVisualization, IExportable {
 	
 	/**
 	 * Sets up the data provider for the measurementTable
-	 * @pre nothing
+	 *
 	 * @post measurementTable has a dataprovider
-	 * @return nothing
 	 */
 	private void setupDataProvider() {
 		dataProvider = new AsyncDataProvider<Measurement>() {
@@ -191,8 +190,6 @@ public class TableVisualization implements IVisualization, IExportable {
 					public void onSuccess(ArrayList<Measurement> result) {
 						measurements = result;
 						measurementTable.setRowData(start, measurements);
-						//if(measurements.size() == 0)
-						//	dataProvider.updateRowCount(0, true);
 
 						updateTableRowCount();
 					}
@@ -219,6 +216,13 @@ public class TableVisualization implements IVisualization, IExportable {
 		measurementTable.getColumnSortList().push(countryColumn);
 	}
 
+	/**
+	 * Sets up a filter SuggestBox. Used for filtering
+	 * the measurementTable for a specific column.
+	 *
+	 * @param container The panel in which the TableVisualization gets drawn
+	 * @param key The type of the measurement property to setup the filter for
+	 */
 	private void setupFilter(final Panel container, final Measurement.MeasurementType key) {
 		final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 		final SuggestBox countryFilterBox = new SuggestBox(oracle);
@@ -257,6 +261,12 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(countryFilterBox);
 	}
 
+	/**
+	 * Applies a specific value to filter for
+	 *
+	 * @param key The type of the measurement property to filter for
+	 * @param filterString The specific filter string
+	 */
 	private void applyFilter(Measurement.MeasurementType key, String filterString) {
 		if(filterString.isEmpty())
 			filters.remove(key);
@@ -266,6 +276,9 @@ public class TableVisualization implements IVisualization, IExportable {
 		measurementTable.setVisibleRangeAndClearData(measurementTable.getVisibleRange(), true);
 	}
 
+	/**
+	 * Updates the number of rows in the table
+	 */
 	private void updateTableRowCount() {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 
@@ -285,9 +298,6 @@ public class TableVisualization implements IVisualization, IExportable {
 
 	/**
 	 * Exports the table data as csv.
-	 * @pre nothing
-	 * @post nothing
-	 * @return nothing
 	 */
 	@Override
 	public void export() {
@@ -296,8 +306,7 @@ public class TableVisualization implements IVisualization, IExportable {
 
 	/**
 	 * Gets the name of the visualization
-	 * @pre nothing
-	 * @post nothing
+	 *
 	 * @return The name of the visualization
 	 */
 	@Override
@@ -307,9 +316,8 @@ public class TableVisualization implements IVisualization, IExportable {
 
 	/**
 	 * Draws the visualization
-	 * @pre nothing
-	 * @post container holds table and pager
-	 * @return nothing
+	 *
+	 * @param container The panel in which the TableVisualization gets drawn
 	 */
 	@Override
 	public void drawVisualization(final Panel container) {
@@ -341,9 +349,9 @@ public class TableVisualization implements IVisualization, IExportable {
 
 	/**
 	 * Updates the visualization
-	 * @pre nothing
-	 * @post nothing
-	 * @return nothing
+	 *
+	 * @param container The panel in which the TableVisualization gets drawn
+	 * @post container holds table and pager
 	 */
 	@Override
 	public void updateVisualization(Panel container) {

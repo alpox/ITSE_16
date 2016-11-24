@@ -94,7 +94,14 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			break;
 		}
 	}
-	
+
+	/**
+	 * Filters the measurement dataset
+	 *
+	 * @param measurements The measurements dataset (ArrayList) to filter
+	 * @param filters A HashMap with the filters
+	 * @return The filtered measurement dataset
+	 */
 	private ArrayList<Measurement> filterMeasurements(ArrayList<Measurement> measurements, HashMap<Measurement.MeasurementType, String> filters) {
 		ArrayList<Measurement> newMeasurements = new ArrayList<Measurement>();
 		
@@ -176,6 +183,12 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		return new ArrayList<>(measurements.subList(start, end));
 	}
 
+	/**
+	 * Gets all possible values for a specific measurement type
+	 *
+	 * @param type The measurement type to get the values for
+	 * @return A list of all possible values for the specified measurement type
+	 */
 	@Override
 	public ArrayList<String> getNames(Measurement.MeasurementType type) {
 		ArrayList<String> names = new ArrayList<>();
@@ -225,6 +238,12 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		return names;
 	}
 
+	/**
+	 * Gets the number of measurement entries after filtering the the dataset
+	 *
+	 * @param filters The filters to apply to the data
+	 * @return The number of measurement entries after filtering the dataset
+	 */
 	@Override
 	public Integer getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters) {
 		if(filters != null && !filters.isEmpty())
