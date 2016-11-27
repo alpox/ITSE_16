@@ -1,5 +1,7 @@
 package com.g3.seapp.client;
 
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
@@ -87,6 +89,12 @@ public class MapVisualization implements IVisualization, IExportable {
 		// Draw the chart
 		geoChart.draw(dataTable, options);
 		
+		//Panel for the visualization of the copyright
+		HorizontalPanel footer = new HorizontalPanel();
+		Label lblFooter = new Label();
+		lblFooter.setText("Copyright Data source K. Meier");
+		footer.add(lblFooter);
+		container.add(footer);
 	}
 
 }
