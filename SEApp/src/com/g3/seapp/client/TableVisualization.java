@@ -361,7 +361,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(measurementTable);
 		container.add(pager);
 		
-		//Table for the visualization of the copyright
+		//Panel for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
 		lblFooter.setText("Copyright Data source K. Meier");

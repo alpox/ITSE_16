@@ -89,7 +89,7 @@ public class MapVisualization implements IVisualization, IExportable {
 		// Draw the chart
 		geoChart.draw(dataTable, options);
 		
-		//Panel for the visualization of the copyright
+		//Panel  for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
 		lblFooter.setText("Copyright Data source K. Meier");
