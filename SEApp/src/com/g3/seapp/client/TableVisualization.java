@@ -6,8 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.builder.shared.FieldSetBuilder;
 import com.google.gwt.dom.client.FieldSetElement;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -335,12 +334,39 @@ public class TableVisualization implements IVisualization, IExportable {
  	*/
 	private void addFilterDataCheckbox(HorizontalPanel panel){
 		VerticalPanel vpanel = new VerticalPanel();
+		HorizontalPanel hpanel = new HorizontalPanel();
 
 		vpanel.setWidth("140px");
 
-		Label lbl = new Label();
+		final Label lbl = new Label();
 		lbl.getElement().setClassName("center");
 		lbl.setText("Filter errors to < 2.5");
+
+		final TextBox textBox = new TextBox();
+		textBox.setText("2.5");
+		textBox.addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				String input = textBox.getText();
+				String output = "" + input;
+
+				int decimals = 0;
+				for(int i = 0; i < input.length(); i++) {
+					char c = input.charAt(i);
+					if(c == '.') {
+						if(i == 0)  {
+							output = "";
+							continue;
+						}
+						decimals++;
+						if(decimals > 1) output = output.substring(0, output.length()-1);
+					}
+					if((c < '0' || c > '9') && c != '.') output = output.replaceAll(String.valueOf(c), "");
+				}
+				textBox.setText(output);
+				lbl.setText("Filter errors to < " + output);
+			}
+		});
 
 		CheckBox cb = new CheckBox();
 		cb.setValue(false);
@@ -351,9 +377,10 @@ public class TableVisualization implements IVisualization, IExportable {
 			 @Override
 			 public void onValueChange(ValueChangeEvent<Boolean> event) {
 				 boolean checked = ((CheckBox) event.getSource()).getValue();
+				 String txtVal = textBox.getText();
 				 //If it's selected the max. error is determined as 2.5
 				 if(checked){
-					 applyFilter(MeasurementType.ERROR, "<2.5");
+					 applyFilter(MeasurementType.ERROR, "<" + txtVal);
 				 }
 				 //If it's not selected the max. error is not determined.
 				 else{
@@ -362,8 +389,10 @@ public class TableVisualization implements IVisualization, IExportable {
 			 }
 		 });
 
+		hpanel.add(textBox);
+		hpanel.add(cb);
 		vpanel.add(lbl);
-		vpanel.add(cb);
+		vpanel.add(hpanel);
 		panel.add(vpanel);
 	}
 	/**
