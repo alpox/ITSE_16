@@ -15,6 +15,13 @@ public class Measurement implements Serializable {
 		LON
 	}
 
+	public enum AggregationType {
+		MAX,
+		MIN,
+		AVG,
+		MEDIAN
+	}
+
 	private String country;
 	private String city;
 	private float avg;

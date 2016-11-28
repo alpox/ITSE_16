@@ -22,4 +22,5 @@ public interface CountryServiceAsync {
 						 AsyncCallback<ArrayList<Measurement>> callback);
 	void getNames(Measurement.MeasurementType type, AsyncCallback<ArrayList<String>> callback);
 	void getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters, AsyncCallback<Integer> callback);
+    void getAggregation(Measurement.MeasurementType measType, Measurement.AggregationType aggType, AsyncCallback<Float> async);
 }

@@ -33,6 +33,8 @@ public class DataManager {
 	}
 	
 	public static ArrayList<Measurement> getMeasurements() {
+		if(measurements == null)
+			return new ArrayList<Measurement>();
 		return measurements;
 	}
 	

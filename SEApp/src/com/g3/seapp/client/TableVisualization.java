@@ -25,6 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.g3.seapp.shared.Measurement.MeasurementType.AVG;
+import static com.g3.seapp.shared.Measurement.MeasurementType.ERROR;
+import static com.g3.seapp.shared.Measurement.MeasurementType.LAT;
+import static com.g3.seapp.shared.Measurement.MeasurementType.LON;
+
 /**
  * Represents a visualization of weatherdata
  * as a scrollable table.
@@ -38,7 +43,7 @@ import java.util.List;
 public class TableVisualization implements IVisualization, IExportable {
 	// Well... we can do that because our data amount never changes :-)
 	private static final int MEASUREMENTCOUNT = 228175;
-	
+
 	private CellTable<Measurement> measurementTable = new CellTable<Measurement>();
 	private AsyncDataProvider<Measurement> dataProvider;
 	private List<String> columnNames = new ArrayList<String>();
@@ -326,40 +331,76 @@ public class TableVisualization implements IVisualization, IExportable {
 	public String getName() {
 		return "Table Visualization";
 	}
-	
-	public void createDropdown()
+
+	/**
+	 * Draws the panel for the aggregation functions
+	 *
+	 * @param container The panel to add the aggregation functions into
+	 */
+	public void createAggregationPanel(Panel container)
 	{
 		// Make a new dropdown for selecting the datatyp, adding a few items to it.
-				ListBox lb1 = new ListBox();
-				// Set the html id of the dropdown for styling in the css
-				lb1.getElement().setId("dropdownForDataType");
-				lb1.addItem("Date");
-				lb1.addItem("Average");
-				lb1.addItem("Error");
-				lb1.addItem("Latitude");
-				lb1.addItem("Longitude");
-				
-				//New Dropdown for aggregation methods
-				ListBox lb2 = new ListBox();
-				lb2.getElement().setId("aggregationMethods");
-				lb2.addItem("Median");
-				lb2.addItem("Minimum");
-				lb2.addItem("Maximum");
-				lb2.addItem("Standard deviation");
-				
-				// Add the dropdown to the main container
-				RootPanel.get("mainContainer").insert(lb1, 0);
-				RootPanel.get("mainContainer").insert(lb2, 0);
-				
-				//both index are 0 when not changed anything;
-				int index1 = lb1.getSelectedIndex();
-				int index2 = lb2.getSelectedIndex();
-			
-	}
+		final ListBox lb1 = new ListBox();
+		// Set the html id of the dropdown for styling in the css
+		lb1.getElement().setId("dropdownForDataType");
+		lb1.addItem("Average", AVG.name());
+		lb1.addItem("Error", ERROR.name());
+		lb1.addItem("Latitude", LAT.name());
+		lb1.addItem("Longitude", LON.name());
 
-	public String computeMethod(int index, ListBox selectedDropdown)
-	{
-		return selectedDropdown.getName();
+		//New Dropdown for aggregation methods
+		final ListBox lb2 = new ListBox();
+		lb2.getElement().setId("aggregationMethods");
+		lb2.addItem("Average", Measurement.AggregationType.AVG.name());
+		lb2.addItem("Minimum", Measurement.AggregationType.MIN.name());
+		lb2.addItem("Maximum", Measurement.AggregationType.MAX.name());
+		lb2.addItem("Median", Measurement.AggregationType.MEDIAN.name());
+
+		// Add the dropdown to the main container
+		container.add(lb1);
+		container.add(lb2);
+
+		// Create a Label and an HTML widget.
+		final Label lbl = new Label();
+		//set id
+		lbl.getElement().setId("resultLable");
+		//set text
+		lbl.setText("result");
+		//Add  label
+		VerticalPanel panel = new VerticalPanel();
+		panel.add(lbl);
+
+		container.add(panel);
+
+		//both index are 0 when not changed anything;
+		int index1 = lb1.getSelectedIndex();
+		int index2 = lb2.getSelectedIndex();
+
+		ChangeHandler changeHandler = new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				AsyncCallback<Float> callback = new AsyncCallback<Float>() {
+					@Override
+					public void onFailure(Throwable caught) {
+
+					}
+
+					@Override
+					public void onSuccess(Float result) {
+						lbl.setText(Float.toString(result));
+					}
+				};
+
+				String valMeas = lb1.getSelectedValue();
+				String valAgg = lb2.getSelectedValue();
+				Measurement.MeasurementType measType = Measurement.MeasurementType.valueOf(valMeas);
+				Measurement.AggregationType aggType = Measurement.AggregationType.valueOf(valAgg);
+				countryService.getAggregation(measType, aggType, callback);
+			}
+		};
+
+		lb1.addChangeHandler(changeHandler);
+		lb2.addChangeHandler(changeHandler);
 	}
 
 	/**
@@ -391,7 +432,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		setupFilter(horizPanel, Measurement.MeasurementType.AVG);
 		setupFilter(horizPanel, Measurement.MeasurementType.ERROR);
 		setupFilter(horizPanel, Measurement.MeasurementType.LAT);
-		setupFilter(horizPanel, Measurement.MeasurementType.LON);
+		setupFilter(horizPanel, LON);
 
 		container.add(horizPanel);
 
@@ -406,19 +447,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(footer);
 		
 		//creats two dropdowns for choosing datatype and aggreagtion method
-		createDropdown();
-		
-		// Create a Label and an HTML widget.
-	    Label lbl = new Label();
-	    //set id
-	    lbl.getElement().setId("resultLable");
-	    //set text
-	    lbl.setText("result"); 
-	    //Add  label
-		VerticalPanel panel = new VerticalPanel();
-	    panel.add(lbl);
-	    
-	    container.add(panel);
+		createAggregationPanel(container);
 	}
 
 	/**

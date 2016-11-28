@@ -5,6 +5,7 @@ import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -249,5 +250,62 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		if(filters != null && !filters.isEmpty())
 			return filterMeasurements(DataManager.getMeasurements(), filters).size();
 		return DataManager.getMeasurements().size();
+	}
+
+	/**
+	 * Gets an aggregation of the specified Measurement and AggregationType.
+	 *
+	 * @param measType The MeasurementType to specify the type of data to compute
+	 * @param aggType The AggregationType to specify the type of aggregation to compute
+	 * @return The specified aggregation of the specified data
+	 */
+	@Override
+	public Float getAggregation(Measurement.MeasurementType measType, Measurement.AggregationType aggType) {
+		ArrayList<Measurement> measurements = DataManager.getMeasurements();
+		ArrayList<Float> measurementData = new ArrayList<>();
+
+		for(Measurement meas : measurements) {
+			switch(measType) {
+				case AVG: measurementData.add(meas.getAvg()); break;
+				case ERROR: measurementData.add(meas.getError()); break;
+				case LAT: measurementData.add(meas.getCoords().getLat()); break;
+				case LON: measurementData.add(meas.getCoords().getLon()); break;
+				default: return null;
+			}
+		}
+
+		Collections.sort(measurementData, new Comparator<Float>() {
+			public int compare(Float s1, Float s2) {
+				return Float.compare(s1, s2);
+			}
+		});
+
+		float result = 0;
+
+		switch(aggType) {
+			case AVG:
+				for(Float f : measurementData)
+					result += f;
+				return result / measurementData.size();
+			case MAX:
+				result = Float.MIN_VALUE;
+				for(Float f : measurementData)
+					if(result < f)
+						result = f;
+				return result;
+			case MIN:
+				result = Float.MAX_VALUE;
+				for(Float f : measurementData)
+					if(result > f)
+						result = f;
+				return result;
+			case MEDIAN:
+				int idx = measurementData.size() / 2;
+				if(measurementData.size() % 2 == 0)
+					return (measurementData.get(idx) + measurementData.get(idx+1)) / 2;
+				else return measurementData.get(idx);
+			default:
+				return null;
+		}
 	}
 }
