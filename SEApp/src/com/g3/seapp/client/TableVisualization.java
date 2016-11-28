@@ -347,6 +347,10 @@ public class TableVisualization implements IVisualization, IExportable {
 		lbl.getElement().setClassName("center");
 		lbl.setText("Filter errors to < 2.5");
 
+		final CheckBox cb = new CheckBox();
+		cb.setValue(false);
+		cb.getElement().setClassName("center");
+
 		final TextBox textBox = new TextBox();
 		textBox.setText("2.5");
 		textBox.addKeyUpHandler(new KeyUpHandler() {
@@ -370,12 +374,10 @@ public class TableVisualization implements IVisualization, IExportable {
 				}
 				textBox.setText(output);
 				lbl.setText("Filter errors to < " + output);
+
+				if(cb.getValue()) applyFilter(MeasurementType.ERROR, "<" + output);
 			}
 		});
-
-		CheckBox cb = new CheckBox();
-		cb.setValue(false);
-		cb.getElement().setClassName("center");
 		
 		//Hook up a handler to find out when it's clicked.
 		cb.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
@@ -384,13 +386,10 @@ public class TableVisualization implements IVisualization, IExportable {
 				 boolean checked = ((CheckBox) event.getSource()).getValue();
 				 String txtVal = textBox.getText();
 				 //If it's selected the max. error is determined as 2.5
-				 if(checked){
+				 if(checked)
 					 applyFilter(MeasurementType.ERROR, "<" + txtVal);
-				 }
-				 //If it's not selected the max. error is not determined.
-				 else{
-					 applyFilter(MeasurementType.ERROR, "");
-				 }
+				 else //If it's not selected the max. error is not determined.
+				 	filters.remove(MeasurementType.ERROR);
 			 }
 		 });
 
