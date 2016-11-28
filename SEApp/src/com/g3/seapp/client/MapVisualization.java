@@ -1,5 +1,6 @@
 package com.g3.seapp.client;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -8,7 +9,14 @@ import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
+import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.g3.seapp.shared.Measurement;
+import com.google.gwt.core.shared.GWT;
 
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 
@@ -24,6 +32,7 @@ import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHori
 public class MapVisualization implements IVisualization, IExportable {
 	
 	private GeoChart geoChart;
+	private CountryServiceAsync countryService = GWT.create(CountryService.class);
 	
 	@Override
 	public void export() {
@@ -75,16 +84,42 @@ public class MapVisualization implements IVisualization, IExportable {
 	@param  container A Panel which contains the whole visualization
 	 **/
 	public void updateVisualization(Panel container) {
-
+		int year = 1833;
 		// Prepare the datatable
-		DataTable dataTable = DataTable.create();
-		
-		dataTable.addColumn(ColumnType.STRING, "Test");
-		dataTable.addColumn(ColumnType.NUMBER, "Test");
-
+		final DataTable dataTable = DataTable.create();
 		// Set options
-		GeoChartOptions options = GeoChartOptions.create();
-		options.setDatalessRegionColor("OliveDrab");
+		final GeoChartOptions options = GeoChartOptions.create();
+		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
+		geoChartColorAxis.setColors("green", "yellow", "red");
+		options.setColorAxis(geoChartColorAxis);
+		options.setDatalessRegionColor("Grey");
+		
+		AsyncCallback<HashMap<String, Float>> callback = new AsyncCallback<HashMap<String, Float>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onSuccess(HashMap<String, Float> result) {
+				for(String country : result.keySet()){
+					dataTable.addRow();
+					dataTable.setValue(dataTable.getNumberOfRows()-1, 0, country);
+					dataTable.setValue(dataTable.getNumberOfRows()-1, 1, result.get(country));
+				}
+				
+				// Draw the chart
+				geoChart.draw(dataTable, options);
+			}
+		};
+		
+		countryService.getAverageTempOfYear(year, callback);
+		
+		
+		dataTable.addColumn(ColumnType.STRING, "Country");
+		dataTable.addColumn(ColumnType.NUMBER, "Average Temperature");
+		
 
 		// Draw the chart
 		geoChart.draw(dataTable, options);

@@ -184,7 +184,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	}
 
 	/**
-	 * Gets all possible values for a specific measurement type
+	 * Gets all possible values for a specific measurement type (Used for autocompletion)
 	 *
 	 * @param type The measurement type to get the values for
 	 * @return A list of all possible values for the specified measurement type
@@ -249,5 +249,44 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		if(filters != null && !filters.isEmpty())
 			return filterMeasurements(DataManager.getMeasurements(), filters).size();
 		return DataManager.getMeasurements().size();
+	}
+
+	@Override
+	public HashMap<String, Float> getAverageTempOfYear(int year) {
+		
+		HashMap<String, Float> avTemp = new HashMap<>();
+		HashMap<String, Integer> numberOfMeasures = new HashMap<>();
+		
+		for(Measurement meas : DataManager.getMeasurements()){
+			if(meas.getDate().getYear()==year) continue;
+			String country = meas.getCountry();
+			float sum;
+			
+			if(!avTemp.containsKey(country))
+				sum = meas.getAvg();
+			else
+				sum = avTemp.get(country) + meas.getAvg();
+			
+			avTemp.put(country, sum);
+			
+			int nrOfMeasPerCountry;
+			
+			if(!numberOfMeasures.containsKey(country))
+				nrOfMeasPerCountry = 1;
+			else
+				nrOfMeasPerCountry = numberOfMeasures.get(country) + 1;
+			
+			numberOfMeasures.put(country, nrOfMeasPerCountry);
+		}
+		
+		for(String country : avTemp.keySet()){
+			float tempSum = avTemp.get(country);
+			float nrOfMeas = numberOfMeasures.get(country);
+			float averageTemp = tempSum/nrOfMeas;
+			avTemp.put(country, averageTemp);
+		}
+		
+		return avTemp;
+		
 	}
 }

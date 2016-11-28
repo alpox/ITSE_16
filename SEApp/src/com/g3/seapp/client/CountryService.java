@@ -22,4 +22,5 @@ public interface CountryService extends RemoteService {
 										   HashMap<Measurement.MeasurementType, String> filters);
 	ArrayList<String> getNames(Measurement.MeasurementType type);
 	Integer getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters);
+	HashMap<String, Float> getAverageTempOfYear(int year);
 }

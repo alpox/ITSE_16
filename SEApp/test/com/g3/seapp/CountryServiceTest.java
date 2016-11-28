@@ -253,4 +253,12 @@ public class CountryServiceTest {
 		Assert.assertNotNull(names);
 		Assert.assertTrue(names.size() > 0);
 	}
+	
+	@Test
+	public void testCanGetTemperatureAveragePerCountry(){
+		HashMap<String, Float> avTemp = countryService.getAverageTempOfYear(1833);
+		
+		Assert.assertNotNull(avTemp);
+		Assert.assertTrue(!avTemp.keySet().isEmpty());
+	}
 }
