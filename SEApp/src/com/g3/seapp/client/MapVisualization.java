@@ -90,9 +90,9 @@ public class MapVisualization implements IVisualization, IExportable {
 		// Set options
 		final GeoChartOptions options = GeoChartOptions.create();
 		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
-		geoChartColorAxis.setColors("green", "yellow", "red");
+		geoChartColorAxis.setColors("Gold", "red");
 		options.setColorAxis(geoChartColorAxis);
-		options.setDatalessRegionColor("Grey");
+		options.setDatalessRegionColor("Lightgrey");
 		
 		AsyncCallback<HashMap<String, Float>> callback = new AsyncCallback<HashMap<String, Float>>() {
 
