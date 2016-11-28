@@ -1,10 +1,13 @@
 package com.g3.seapp.client;
 
 import com.g3.seapp.shared.Measurement;
+import com.g3.seapp.shared.Measurement.MeasurementType;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.builder.shared.FieldSetBuilder;
 import com.google.gwt.dom.client.FieldSetElement;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -324,7 +327,42 @@ public class TableVisualization implements IVisualization, IExportable {
 	public String getName() {
 		return "Table Visualization";
 	}
-
+	/**
+ 	* Generates the checkbox and handles the event
+ 	* if checkbox is selected of not
+ 	* 
+ 	* @param panel The panel in which the checkbox gets drawn
+ 	*/
+	private void addFilterDataCheckbox(HorizontalPanel panel){
+		VerticalPanel vpanel = new VerticalPanel();
+		
+		Label label = new Label();
+		label.setText("Err < 2.5");
+		vpanel.add(label);
+		CheckBox cb = new CheckBox();
+		cb.setValue(false);
+		
+		//Hook up a handler to find out when it's clicked.
+		cb.addClickHandler(new ClickHandler() {
+			
+			@Override
+			//Checks if the checkbox is selected of not
+			public void onClick(ClickEvent event){
+				boolean checked = ((CheckBox) event.getSource()).getValue();
+				//If it's selected the max. error is determined as 2.5
+				if(checked){
+					applyFilter(MeasurementType.ERROR, "2.5");
+				}
+				//If it's not selected the max. error is not determined.
+				else{
+					applyFilter(MeasurementType.ERROR, "");
+				}
+			}
+		});
+		
+		vpanel.add(cb);
+		panel.add(vpanel);
+	}
 	/**
 	 * Draws the visualization
 	 *
@@ -355,6 +393,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		setupFilter(horizPanel, Measurement.MeasurementType.ERROR);
 		setupFilter(horizPanel, Measurement.MeasurementType.LAT);
 		setupFilter(horizPanel, Measurement.MeasurementType.LON);
+		addFilterDataCheckbox(horizPanel);
 
 		container.add(horizPanel);
 
