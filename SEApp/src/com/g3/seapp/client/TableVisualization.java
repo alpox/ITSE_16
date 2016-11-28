@@ -326,6 +326,31 @@ public class TableVisualization implements IVisualization, IExportable {
 	public String getName() {
 		return "Table Visualization";
 	}
+	
+	public void createDropdown()
+	{
+		// Make a new dropdown for selecting the datatyp, adding a few items to it.
+				ListBox lb1 = new ListBox();
+				// Set the html id of the dropdown for styling in the css
+				lb1.getElement().setId("dropdownForDataType");
+				lb1.addItem("Date");
+				lb1.addItem("Average");
+				lb1.addItem("Error");
+				lb1.addItem("Latitude");
+				lb1.addItem("Longitude");
+				
+				//New Dropdown for aggregation methods
+				ListBox lb2 = new ListBox();
+				lb2.getElement().setId("aggregationMethods");
+				lb2.addItem("Median");
+				lb2.addItem("Minimum");
+				lb2.addItem("Maximum");
+				lb2.addItem("Standard deviation");
+				
+				// Add the dropdown to the main container
+				RootPanel.get("mainContainer").insert(lb1, 0);
+				RootPanel.get("mainContainer").insert(lb2, 0);
+	}
 
 	/**
 	 * Draws the visualization
@@ -370,33 +395,8 @@ public class TableVisualization implements IVisualization, IExportable {
 		footer.add(lblFooter);
 		container.add(footer);
 		
-		// Make a new dropdown for selecting the datatyp, adding a few items to it.
-		ListBox lb1 = new ListBox();
-		// Set the html id of the dropdown for styling in the css
-		lb1.getElement().setId("dropdownForDataType");
-		lb1.addItem("Date");
-		lb1.addItem("Average");
-		lb1.addItem("Error");
-		lb1.addItem("Latitude");
-		lb1.addItem("Longitude");
-		
-	
-
-		// Setting this to 1 makes it a dropdown list.
-		lb1.setVisibleItemCount(1);
-		container.add(lb1);
-		
-		//New Dropdown for aggregation methods
-		ListBox lb2 = new ListBox();
-		lb2.getElement().setId("aggregationMethods");
-		lb2.addItem("Median");
-		lb2.addItem("Minimum");
-		lb2.addItem("Maximum");
-		lb2.addItem("Standard deviation");
-		
-		// Setting this to 1 makes it a dropdown list.
-		lb2.setVisibleItemCount(1);
-		container.add(lb2);
+		//creats two dropdowns for choosing datatype and aggreagtion method
+		createDropdown();
 		
 		// Create a Label and an HTML widget.
 	    Label lbl = new Label();
@@ -407,6 +407,8 @@ public class TableVisualization implements IVisualization, IExportable {
 	    //Add  label
 		VerticalPanel panel = new VerticalPanel();
 	    panel.add(lbl);
+	    
+	    container.add(panel);
 	}
 
 	/**
