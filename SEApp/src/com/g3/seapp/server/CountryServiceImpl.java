@@ -1,15 +1,11 @@
 package com.g3.seapp.server;
 
 import com.g3.seapp.client.CountryService;
-import com.g3.seapp.shared.Country;
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * The implementation of the CountryService.
@@ -129,7 +125,13 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 								okCount++;
 							break;
 						case ERROR:
-							if (Float.compare(measurements.get(i).getError(), Float.parseFloat(filters.get(filter))) == 0)
+							String filterString = filters.get(filter);
+							if(filterString.startsWith("<")) {
+								float floatFilter = Float.parseFloat(filterString.substring(1));
+								if(measurements.get(i).getError() <= floatFilter)
+									okCount++;
+							}
+							else if (Float.compare(measurements.get(i).getError(), Float.parseFloat(filters.get(filter))) == 0)
 								okCount++;
 							break;
 						case LAT:
@@ -148,7 +150,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 			}
 			if(okCount == filters.keySet().size()) newMeasurements.add(measurements.get(i));
 		}
-		
+
 		return newMeasurements;
 	}
 
@@ -180,6 +182,9 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 
 		if(measurements.size() - 1 < start) return new ArrayList<>();
 		if(measurements.size() - 1 < end) return new ArrayList<>(measurements.subList(start, measurements.size()));
+
+		// Gotta get rid of some data structures here
+		//System.gc();
 		return new ArrayList<>(measurements.subList(start, end));
 	}
 
@@ -191,17 +196,17 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 	 */
 	@Override
 	public ArrayList<String> getNames(Measurement.MeasurementType type) {
-		ArrayList<String> names = new ArrayList<>();
+		Set<String> names = new HashSet<>();
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
 
 		switch(type) {
 			case COUNTRY:
-				for(Country country : DataManager.getCountryCollection())
-					names.add(country.getName());
+				for(Measurement country : DataManager.getMeasurements())
+					names.add(country.getCountry());
 				break;
 			case CITY:
-				for(Country country : DataManager.getCountryCollection())
-					names.addAll(country.getCityNames());
+				for(Measurement country : DataManager.getMeasurements())
+					names.add(country.getCity());
 				break;
 			case DATE:
 				for(Measurement measurement : DataManager.getMeasurements()) {
@@ -235,7 +240,7 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 				break;
 		}
 
-		return names;
+		return new ArrayList<>(names);
 	}
 
 	/**

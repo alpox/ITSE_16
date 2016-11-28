@@ -14,7 +14,6 @@ public class DataManagerTest {
         DataManager.loadData();
 
         Assert.assertNotNull(DataManager.getMeasurements());
-        Assert.assertNotNull(DataManager.getCountryCollection());
         Assert.assertEquals(DataManager.getMeasurements().size(), 228175);
     }
 }

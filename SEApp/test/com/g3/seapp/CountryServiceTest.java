@@ -162,6 +162,18 @@ public class CountryServiceTest {
 	}
 
 	@Test
+	public void testCanFilterForSmallerThanError() {
+		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+		filters.put(ERROR, "<2.5");
+
+		int size = countryService.getMeasurementEntrySize(filters);
+		ArrayList<Measurement> measurements = countryService.getMeasurements(0, size-1, null, false, filters);
+
+		for(Measurement measurement : measurements)
+			Assert.assertTrue(measurement.getError() <= 2.5);
+	}
+
+	@Test
 	public void testCanFilterForLatitude() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
 		filters.put(LAT, "49.03");

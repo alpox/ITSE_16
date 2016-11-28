@@ -37,3 +37,10 @@ h1 {
 	position: absolute;
 	right: 8px;
 }
+
+.center {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
