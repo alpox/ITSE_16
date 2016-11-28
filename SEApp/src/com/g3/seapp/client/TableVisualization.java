@@ -407,7 +407,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	 * @param aggBox The ListBox specifying the aggregation type
 	 * @param resultLbl The label used to show the aggregated data
 	 */
-	private void applyAggregation(ListBox measBox, ListBox aggBox, Label resultLbl) {
+	private void applyAggregation(ListBox measBox, ListBox aggBox, final Label resultLbl) {
 		AsyncCallback<Float> callback = new AsyncCallback<Float>() {
 			@Override
 			public void onFailure(Throwable caught) {
