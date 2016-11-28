@@ -26,6 +26,8 @@ public class DataManager {
 	private static ArrayList<Measurement> measurements;
 
 	public static ArrayList<Measurement> getMeasurements() {
+		if(measurements == null)
+			return new ArrayList<Measurement>();
 		return measurements;
 	}
 	

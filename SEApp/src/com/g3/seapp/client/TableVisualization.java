@@ -3,10 +3,10 @@ package com.g3.seapp.client;
 import com.g3.seapp.shared.Measurement;
 import com.g3.seapp.shared.Measurement.MeasurementType;
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.builder.shared.FieldSetBuilder;
-import com.google.gwt.dom.client.FieldSetElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -25,6 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.g3.seapp.shared.Measurement.MeasurementType.AVG;
+import static com.g3.seapp.shared.Measurement.MeasurementType.ERROR;
+import static com.g3.seapp.shared.Measurement.MeasurementType.LAT;
+import static com.g3.seapp.shared.Measurement.MeasurementType.LON;
+
 /**
  * Represents a visualization of weatherdata
  * as a scrollable table.
@@ -38,7 +43,7 @@ import java.util.List;
 public class TableVisualization implements IVisualization, IExportable {
 	// Well... we can do that because our data amount never changes :-)
 	private static final int MEASUREMENTCOUNT = 228175;
-	
+
 	private CellTable<Measurement> measurementTable = new CellTable<Measurement>();
 	private AsyncDataProvider<Measurement> dataProvider;
 	private List<String> columnNames = new ArrayList<String>();
@@ -316,7 +321,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	public void export() {
 		// TODO Implement
 	}
-
+	
 	/**
 	 * Gets the name of the visualization
 	 *
@@ -395,6 +400,102 @@ public class TableVisualization implements IVisualization, IExportable {
 		vpanel.add(hpanel);
 		panel.add(vpanel);
 	}
+
+	/**
+	 * Applies an aggregation through the valuese in the given ListBoxes
+	 *
+	 * @param measBox The ListBox specifying the measurement type
+	 * @param aggBox The ListBox specifying the aggregation type
+	 * @param resultLbl The label used to show the aggregated data
+	 */
+	private void applyAggregation(ListBox measBox, ListBox aggBox, Label resultLbl) {
+		AsyncCallback<Float> callback = new AsyncCallback<Float>() {
+			@Override
+			public void onFailure(Throwable caught) {
+
+			}
+
+			@Override
+			public void onSuccess(Float result) {
+				resultLbl.setText(Float.toString(result));
+			}
+		};
+
+		String valMeas = measBox.getSelectedValue();
+		String valAgg = aggBox.getSelectedValue();
+		Measurement.MeasurementType measType = Measurement.MeasurementType.valueOf(valMeas);
+		Measurement.AggregationType aggType = Measurement.AggregationType.valueOf(valAgg);
+		countryService.getAggregation(measType, aggType, callback);
+	}
+
+	/**
+	 * Draws the panel for the aggregation functions
+	 *
+	 * @param container The panel to add the aggregation functions into
+	 */
+	public void createAggregationPanel(Panel container)
+	{
+		// Make a new dropdown for selecting the datatyp, adding a few items to it.
+		final ListBox lb1 = new ListBox();
+		// Set the html id of the dropdown for styling in the css
+		lb1.getElement().setId("dropdownForDataType");
+		lb1.addItem("Average", AVG.name());
+		lb1.addItem("Error", ERROR.name());
+		lb1.addItem("Latitude", LAT.name());
+		lb1.addItem("Longitude", LON.name());
+
+		//New Dropdown for aggregation methods
+		final ListBox lb2 = new ListBox();
+		lb2.getElement().setId("aggregationMethods");
+		lb2.addItem("Average", Measurement.AggregationType.AVG.name());
+		lb2.addItem("Minimum", Measurement.AggregationType.MIN.name());
+		lb2.addItem("Maximum", Measurement.AggregationType.MAX.name());
+		lb2.addItem("Median", Measurement.AggregationType.MEDIAN.name());
+
+		// Add the dropdown to the main container
+		container.add(lb1);
+		container.add(lb2);
+
+		// Create a Label and an HTML widget.
+		final Label lbl = new Label();
+		//set id
+		lbl.getElement().setId("resultLable");
+		//set text
+		lbl.setText("result");
+		//Add  label
+		VerticalPanel panel = new VerticalPanel();
+		panel.add(lbl);
+
+		container.add(panel);
+		
+		// Create a Label and an HTML widget.
+		final Label heading = new Label();
+		//set id
+		heading.getElement().setId("heading");
+		//set text
+		heading.setText("Aggregation methods with selected data type:");
+		//Add  label
+		VerticalPanel headPanel = new VerticalPanel();
+		headPanel.add(heading);
+		container.add(headPanel);
+
+		//both index are 0 when not changed anything;
+		int index1 = lb1.getSelectedIndex();
+		int index2 = lb2.getSelectedIndex();
+
+		ChangeHandler changeHandler = new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				applyAggregation(lb1, lb2, lbl);
+			}
+		};
+
+		lb1.addChangeHandler(changeHandler);
+		lb2.addChangeHandler(changeHandler);
+
+		applyAggregation(lb1, lb2, lbl);
+	}
+
 	/**
 	 * Draws the visualization
 	 *
@@ -424,7 +525,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		setupFilter(horizPanel, Measurement.MeasurementType.AVG);
 		setupFilter(horizPanel, Measurement.MeasurementType.ERROR);
 		setupFilter(horizPanel, Measurement.MeasurementType.LAT);
-		setupFilter(horizPanel, Measurement.MeasurementType.LON);
+		setupFilter(horizPanel, LON);
 
 		addFilterDataCheckbox(horizPanel);
 
@@ -432,13 +533,16 @@ public class TableVisualization implements IVisualization, IExportable {
 
 		container.add(measurementTable);
 		container.add(pager);
-		
+			
 		//Panel for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
 		lblFooter.setText("Copyright Data source K. Meier");
 		footer.add(lblFooter);
 		container.add(footer);
+		
+		//creats two dropdowns for choosing datatype and aggreagtion method
+		createAggregationPanel(container);
 	}
 
 	/**

@@ -265,12 +265,68 @@ public class CountryServiceTest {
 		Assert.assertNotNull(names);
 		Assert.assertTrue(names.size() > 0);
 	}
-	
+
 	@Test
-	public void testCanGetTemperatureAveragePerCountry(){
+	public void testCanGetTemperatureAveragePerCountry() {
 		HashMap<String, Float> avTemp = countryService.getAverageTempOfYear(1833);
-		
+
 		Assert.assertNotNull(avTemp);
 		Assert.assertTrue(!avTemp.keySet().isEmpty());
+	}
+
+	@Test
+	public void testCanGetAvgAggregation() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.AVG);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 18.126062f) == 0);
+	}
+
+	@Test
+	public void testCanGetMaxAggregation() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MAX);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 38.283f) == 0);
+	}
+
+	@Test
+	public void testCanGetMinAggregation() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MIN);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, -26.772f) == 0);
+	}
+
+	@Test
+	public void testCanGetMedianAggregation() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MEDIAN);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 20.428f) == 0);
+	}
+
+	@Test
+	public void testCanGetAggregationOfError() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.ERROR, Measurement.AggregationType.MAX);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 14.037f) == 0);
+	}
+
+	@Test
+	public void testCanGetAggregationOfLat() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.LAT, Measurement.AggregationType.MAX);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 60.27f) == 0);
+	}
+
+	@Test
+	public void testCanGetAggregationOfLon() {
+		Float agg = countryService.getAggregation(Measurement.MeasurementType.LON, Measurement.AggregationType.MAX);
+
+		Assert.assertNotNull(agg);
+		Assert.assertTrue(Float.compare(agg, 151.78f) == 0);
 	}
 }

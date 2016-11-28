@@ -39,8 +39,37 @@ h1 {
 }
 
 .center {
-  display: inline-block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#chooseVisDropDown {
+	position: absolute;
+	right: 8px;
+}
+
+#dropdownForDataType {
+	position: absolute;
+	top: 80px;
+	right: 280px;
+}
+
+#aggregationMethods {
+	position: absolute;
+	top: 80px;
+	right: 175px;
+}
+
+#resultLable {
+	position: absolute;
+	top: 110px;
+	right: 200px;
+}
+
+#heading {
+	position: absolute;
+	top: 60px;
+	right: 120px;
 }
