@@ -354,17 +354,7 @@ public class TableVisualization implements IVisualization, IExportable {
 				//both index are 0 when not changed anything;
 				int index1 = lb1.getSelectedIndex();
 				int index2 = lb2.getSelectedIndex();
-				
-				lb1.addChangeHandler(new ChangeHandler() {
-				      public void onChange(ChangeEvent event) {
-				    	// Get dropdown
-						ListBox listBoxFromEvent = (ListBox)event.getSource();
-						// Get selected index of dropdown
-						int selected = listBoxFromEvent.getSelectedIndex();
-						//set index new
-						computeMethod(selected, listBoxFromEvent);
-				      }
-				    });
+			
 	}
 
 	public String computeMethod(int index, ListBox selectedDropdown)
