@@ -360,13 +360,36 @@ public class TableVisualization implements IVisualization, IExportable {
 
 		container.add(measurementTable);
 		container.add(pager);
-		
+			
 		//Panel for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
 		lblFooter.setText("Copyright Data source K. Meier");
 		footer.add(lblFooter);
 		container.add(footer);
+		
+		// Make a new dropdown for selecting the datatyp, adding a few items to it.
+		ListBox lb = new ListBox();
+		lb.getElement().setId("dropdownForDataType");
+		lb.addItem("Country");
+		lb.addItem("City");
+		lb.addItem("Date");
+		lb.addItem("Average");
+		lb.addItem("Error");
+		lb.addItem("Latitude");
+		lb.addItem("Longitude");
+
+		// Make enough room for all five items (setting this value to 1 turns it
+		// into a drop-down list).
+		lb.setVisibleItemCount(1);
+		// Set the html id of the dropdown for styling in the css
+		lb.getElement().setId("dropdownForDataType");
+		container.add(lb);
+		
+		//New Dropdown for aggregation methods
+		ListBox lb2 = new ListBox();
+		lb2.getElement().setId("aggregationMethods");
+		
 	}
 
 	/**

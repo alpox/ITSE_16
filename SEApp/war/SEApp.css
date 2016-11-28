@@ -37,3 +37,9 @@ h1 {
 	position: absolute;
 	right: 8px;
 }
+
+#dropdownForDataType {
+	position: relativ;
+	top: 25px;
+	left: 90px;
+}
