@@ -5,6 +5,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.builder.shared.FieldSetBuilder;
 import com.google.gwt.dom.client.FieldSetElement;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -314,7 +316,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	public void export() {
 		// TODO Implement
 	}
-
+	
 	/**
 	 * Gets the name of the visualization
 	 *
@@ -369,27 +371,42 @@ public class TableVisualization implements IVisualization, IExportable {
 		container.add(footer);
 		
 		// Make a new dropdown for selecting the datatyp, adding a few items to it.
-		ListBox lb = new ListBox();
-		lb.getElement().setId("dropdownForDataType");
-		lb.addItem("Country");
-		lb.addItem("City");
-		lb.addItem("Date");
-		lb.addItem("Average");
-		lb.addItem("Error");
-		lb.addItem("Latitude");
-		lb.addItem("Longitude");
-
-		// Make enough room for all five items (setting this value to 1 turns it
-		// into a drop-down list).
-		lb.setVisibleItemCount(1);
+		ListBox lb1 = new ListBox();
 		// Set the html id of the dropdown for styling in the css
-		lb.getElement().setId("dropdownForDataType");
-		container.add(lb);
+		lb1.getElement().setId("dropdownForDataType");
+		lb1.addItem("Date");
+		lb1.addItem("Average");
+		lb1.addItem("Error");
+		lb1.addItem("Latitude");
+		lb1.addItem("Longitude");
+		
+	
+
+		// Setting this to 1 makes it a dropdown list.
+		lb1.setVisibleItemCount(1);
+		container.add(lb1);
 		
 		//New Dropdown for aggregation methods
 		ListBox lb2 = new ListBox();
 		lb2.getElement().setId("aggregationMethods");
+		lb2.addItem("Median");
+		lb2.addItem("Minimum");
+		lb2.addItem("Maximum");
+		lb2.addItem("Standard deviation");
 		
+		// Setting this to 1 makes it a dropdown list.
+		lb2.setVisibleItemCount(1);
+		container.add(lb2);
+		
+		// Create a Label and an HTML widget.
+	    Label lbl = new Label();
+	    //set id
+	    lbl.getElement().setId("resultLable");
+	    //set text
+	    lbl.setText("result"); 
+	    //Add  label
+		VerticalPanel panel = new VerticalPanel();
+	    panel.add(lbl);
 	}
 
 	/**

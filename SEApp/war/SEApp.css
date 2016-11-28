@@ -39,7 +39,19 @@ h1 {
 }
 
 #dropdownForDataType {
-	position: relativ;
-	top: 25px;
-	left: 90px;
+	position: absolute;
+	top: 200px;
+	right: 200px;
+}
+
+#aggregationMethods {
+	position: absolute;
+	top: 200px;
+	right: 80px;
+}
+
+#resultLable {
+	position: absolute;
+	top: 250px;
+	right: 200px;
 }
