@@ -38,20 +38,32 @@ h1 {
 	right: 8px;
 }
 
+
+#chooseVisDropDown {
+	position: absolute;
+	right: 8px;
+}
+
 #dropdownForDataType {
 	position: absolute;
-	top: 200px;
-	right: 230px;
+	top: 80px;
+	right: 280px;
 }
 
 #aggregationMethods {
 	position: absolute;
-	top: 200px;
-	right: 80px;
+	top: 80px;
+	right: 175px;
 }
 
 #resultLable {
 	position: absolute;
-	top: 250px;
+	top: 110px;
 	right: 200px;
+}
+
+#heading {
+	position: absolute;
+	top: 60px;
+	right: 120px;
 }

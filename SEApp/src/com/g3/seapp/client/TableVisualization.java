@@ -371,6 +371,17 @@ public class TableVisualization implements IVisualization, IExportable {
 		panel.add(lbl);
 
 		container.add(panel);
+		
+		// Create a Label and an HTML widget.
+		final Label heading = new Label();
+		//set id
+		heading.getElement().setId("heading");
+		//set text
+		heading.setText("Aggregation methods with selected data type:");
+		//Add  label
+		VerticalPanel headPanel = new VerticalPanel();
+		headPanel.add(heading);
+		container.add(headPanel);
 
 		//both index are 0 when not changed anything;
 		int index1 = lb1.getSelectedIndex();
