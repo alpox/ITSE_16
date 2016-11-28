@@ -350,6 +350,26 @@ public class TableVisualization implements IVisualization, IExportable {
 				// Add the dropdown to the main container
 				RootPanel.get("mainContainer").insert(lb1, 0);
 				RootPanel.get("mainContainer").insert(lb2, 0);
+				
+				//both index are 0 when not changed anything;
+				int index1 = lb1.getSelectedIndex();
+				int index2 = lb2.getSelectedIndex();
+				
+				lb1.addChangeHandler(new ChangeHandler() {
+				      public void onChange(ChangeEvent event) {
+				    	// Get dropdown
+						ListBox listBoxFromEvent = (ListBox)event.getSource();
+						// Get selected index of dropdown
+						int selected = listBoxFromEvent.getSelectedIndex();
+						//set index new
+						computeMethod(selected, listBoxFromEvent);
+				      }
+				    });
+	}
+
+	public String computeMethod(int index, ListBox selectedDropdown)
+	{
+		return selectedDropdown.getName();
 	}
 
 	/**
