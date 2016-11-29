@@ -43,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
@@ -51,6 +51,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".classpath" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.classpath">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,6 +152,7 @@
         <option value="$PROJECT_DIR$/war/SEApp.css" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
+        <option value="$PROJECT_DIR$/.classpath" />
       </list>
     </option>
   </component>
@@ -810,7 +821,7 @@
       <option name="presentableId" value="Default" />
       <updated>1480374912005</updated>
       <workItem from="1480374913826" duration="598000" />
-      <workItem from="1480402157013" duration="10413000" />
+      <workItem from="1480402157013" duration="10551000" />
     </task>
     <servers />
   </component>
@@ -826,7 +837,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13024000" />
+    <option name="totallyTimeSpent" value="13162000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="0" />
@@ -892,44 +903,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="54" lean-forward="false" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1894#1907#0" expanded="false" />
-            <element signature="e#2014#2022#0" expanded="false" />
-            <element signature="e#3082#3249#0" expanded="false" />
-            <element signature="e#3248#3249#0" expanded="false" />
-            <element signature="e#3275#3439#0" expanded="false" />
-            <element signature="e#3438#3439#0" expanded="false" />
-            <element signature="e#3465#3648#0" expanded="false" />
-            <element signature="e#3647#3648#0" expanded="false" />
-            <element signature="e#3673#3906#0" expanded="false" />
-            <element signature="e#3905#3906#0" expanded="false" />
-            <element signature="e#3933#4168#0" expanded="false" />
-            <element signature="e#4167#4168#0" expanded="false" />
-            <element signature="e#4193#4438#0" expanded="false" />
-            <element signature="e#4437#4438#0" expanded="false" />
-            <element signature="e#4463#4708#0" expanded="false" />
-            <element signature="e#4707#4708#0" expanded="false" />
-            <element signature="e#6233#7553#0" expanded="false" />
-            <element signature="e#7552#7553#0" expanded="false" />
-            <element signature="e#8491#8492#0" expanded="false" />
-            <element signature="e#8536#8537#0" expanded="false" />
-            <element signature="e#10309#10310#0" expanded="false" />
-            <element signature="e#10361#10362#0" expanded="false" />
-            <element signature="e#10670#10671#0" expanded="false" />
-            <element signature="e#10705#10706#0" expanded="false" />
-            <element signature="e#13268#13269#0" expanded="false" />
-            <element signature="e#13320#13321#0" expanded="false" />
-            <element signature="e#15543#15544#0" expanded="false" />
-            <element signature="e#15585#15586#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1346,6 +1319,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>
