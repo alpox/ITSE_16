@@ -12,7 +12,14 @@
       </configuration>
     </facet>
     <facet type="google-app-engine" name="Google App Engine">
-      <configuration />
+      <configuration>
+        <sdk-home-path>$USER_HOME$/GWT/appengine-java-sdk-1.9.46</sdk-home-path>
+        <run-enhancer-on-make>true</run-enhancer-on-make>
+        <files-to-enhance>
+          <file path="$MODULE_DIR$/src" />
+          <file path="$MODULE_DIR$/test" />
+        </files-to-enhance>
+      </configuration>
     </facet>
     <facet type="jpa" name="JPA">
       <configuration>

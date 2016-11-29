@@ -1,0 +1,3 @@
+# Module seapp
+# RPC service class, partial path of RPC policy file
+com.g3.seapp.client.CountryService, FD1DB278761253296FCCDF20B441E348.gwt.rpc
