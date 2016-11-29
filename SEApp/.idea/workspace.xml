@@ -126,8 +126,8 @@
       <file leaf-file-name="TableVisualization.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="70" column="41" lean-forward="false" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+            <state relative-caret-position="260">
+              <caret line="390" column="43" lean-forward="true" selection-start-line="390" selection-start-column="43" selection-end-line="390" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -773,7 +773,7 @@
       <updated>1480374912005</updated>
       <workItem from="1480374913826" duration="598000" />
       <workItem from="1480402157013" duration="10607000" />
-      <workItem from="1480420647200" duration="3434000" />
+      <workItem from="1480420647200" duration="4028000" />
     </task>
     <servers />
   </component>
@@ -792,7 +792,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16652000" />
+    <option name="totallyTimeSpent" value="17246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
@@ -1297,8 +1297,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="70" column="41" lean-forward="false" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+        <state relative-caret-position="260">
+          <caret line="390" column="43" lean-forward="true" selection-start-line="390" selection-start-column="43" selection-end-line="390" selection-end-column="43" />
           <folding />
         </state>
       </provider>

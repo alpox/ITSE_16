@@ -386,9 +386,9 @@ public class TableVisualization implements IVisualization, IExportable {
 				 String txtVal = textBox.getText();
 				 //If it's selected the max. error is determined as 2.5
 				 if(checked)
-					 applyFilter(MeasurementType.ERROR, "<" + txtVal);
+					 applyFilter(ERROR, "<" + txtVal);
 				 else //If it's not selected the max. error is not determined.
-				 	filters.remove(MeasurementType.ERROR);
+				 	applyFilter(ERROR, "");
 			 }
 		 });
 
