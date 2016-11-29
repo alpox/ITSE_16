@@ -73,17 +73,42 @@ h1 {
     right: 120px;
 }
 
-.gwt-SliderBar-shell {
-    border: 2px solid #faf9f7;
-    border-right: 2px solid #848280;
-    border-bottom: 2px solid #848280;
-    background-color: #efebe7;
-    height: 34pt;
-    width: calc(100% - 16px) !important;
-    position: fixed !important;
+#geo-chart {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+#slider-panel {
+    width: calc(100% - 16px);
+    height: 50px;
     left: 8px;
     right: 8px;
     bottom: 8px;
+    position: fixed;
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: rgba(200, 200, 200, 0.5);
+}
+
+#slider-box {
+    position: absolute;
+    right: 0px;
+    line-height: 38px;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: darkgrey;
+    text-shadow: 1px 1px gray;
+    text-align: center;
+    width: 100px;
+}
+
+.gwt-SliderBar-shell {
+    top: 5px;
+    width: calc(100% - 108px);
+    outline: none;
 }
 
 .gwt-SliderBar-shell .gwt-SliderBar-line {

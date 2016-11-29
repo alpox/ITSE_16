@@ -26,9 +26,13 @@
       <file leaf-file-name="CountryServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="278" column="35" lean-forward="true" selection-start-line="278" selection-start-column="35" selection-end-line="278" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="4080">
+              <caret line="278" column="35" lean-forward="false" selection-start-line="278" selection-start-column="35" selection-end-line="278" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#10822#10823#0" expanded="false" />
+                <element signature="e#10861#10862#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,16 +42,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="96" column="11" lean-forward="true" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+            <state relative-caret-position="337">
+              <caret line="125" column="50" lean-forward="false" selection-start-line="125" selection-start-column="50" selection-end-line="125" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".classpath" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".classpath" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.classpath">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+            <state relative-caret-position="225">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -68,9 +74,44 @@
       <file leaf-file-name="SliderBar.java" pinned="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-incubator-2.0.1.jar!/com/google/gwt/widgetideas/client/SliderBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="11070">
               <caret line="795" column="38" lean-forward="false" selection-start-line="795" selection-start-column="34" selection-end-line="795" selection-end-column="38" />
-              <folding />
+              <folding>
+                <element signature="e#0#28617#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#7852#7853#0" expanded="false" />
+                <element signature="e#7892#7893#0" expanded="false" />
+                <element signature="e#9975#9976#0" expanded="false" />
+                <element signature="e#10000#10001#0" expanded="false" />
+                <element signature="e#10131#10132#0" expanded="false" />
+                <element signature="e#10162#10163#0" expanded="false" />
+                <element signature="e#10267#10268#0" expanded="false" />
+                <element signature="e#10292#10293#0" expanded="false" />
+                <element signature="e#10405#10406#0" expanded="false" />
+                <element signature="e#10430#10431#0" expanded="false" />
+                <element signature="e#10547#10548#0" expanded="false" />
+                <element signature="e#10573#10574#0" expanded="false" />
+                <element signature="e#10687#10688#0" expanded="false" />
+                <element signature="e#10712#10713#0" expanded="false" />
+                <element signature="e#10817#10818#0" expanded="false" />
+                <element signature="e#10842#10843#0" expanded="false" />
+                <element signature="e#11189#11190#0" expanded="false" />
+                <element signature="e#11213#11214#0" expanded="false" />
+                <element signature="e#16020#16021#0" expanded="false" />
+                <element signature="e#16061#16062#0" expanded="false" />
+                <element signature="e#17583#17584#0" expanded="false" />
+                <element signature="e#17629#17630#0" expanded="false" />
+                <element signature="e#19970#19971#0" expanded="false" />
+                <element signature="e#20036#20037#0" expanded="false" />
+                <element signature="e#20187#20188#0" expanded="false" />
+                <element signature="e#20253#20254#0" expanded="false" />
+                <element signature="e#21610#21611#0" expanded="false" />
+                <element signature="e#21664#21665#0" expanded="false" />
+                <element signature="e#26957#26958#0" expanded="false" />
+                <element signature="e#27001#27002#0" expanded="false" />
+                <element signature="e#28531#28532#0" expanded="false" />
+                <element signature="e#28613#28614#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,8 +126,8 @@
       <file leaf-file-name="TableVisualization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="533" column="29" lean-forward="true" selection-start-line="533" selection-start-column="29" selection-end-line="540" selection-end-column="30" />
+            <state relative-caret-position="1454">
+              <caret line="537" column="38" lean-forward="true" selection-start-line="537" selection-start-column="38" selection-end-line="537" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -96,8 +137,10 @@
         <entry file="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-incubator-2.0.1.jar!/com/google/gwt/widgetideas/client/impl/GlassPanelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="35" column="52" lean-forward="true" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
+              <caret line="35" column="52" lean-forward="false" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
               <folding>
+                <element signature="e#0#1878#0" expanded="false" />
+                <element signature="imports" expanded="false" />
                 <marker date="1381938698000" expanded="true" signature="1006:1100" ph="{...}" />
                 <marker date="1381938698000" expanded="true" signature="1256:1349" ph="{...}" />
                 <marker date="1381938698000" expanded="true" signature="1516:1565" ph="{...}" />
@@ -119,8 +162,8 @@
       <file leaf-file-name="SEApp.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/SEApp.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="86" column="1" lean-forward="true" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
+            <state relative-caret-position="-391">
+              <caret line="77" column="11" lean-forward="false" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -149,10 +192,10 @@
         <option value="$PROJECT_DIR$/war/SEApp.html" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/SEApp.gwt.xml" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java" />
-        <option value="$PROJECT_DIR$/war/SEApp.css" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java" />
-        <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
         <option value="$PROJECT_DIR$/.classpath" />
+        <option value="$PROJECT_DIR$/war/SEApp.css" />
+        <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
       </list>
     </option>
   </component>
@@ -182,7 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -219,42 +261,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -274,50 +280,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="seapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -343,24 +305,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -770,6 +719,7 @@
     <configuration default="false" name="GWT" type="GWT.ConfigurationType" factoryName="GWT Configuration">
       <module name="SEApp" />
       <option name="RUN_PAGE" value="SEApp.html" />
+      <option name="BROWSER" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="USE_SUPER_DEV_MODE" value="true" />
       <option name="ALTERNATIVE_JRE_PATH" value="1.7" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -821,7 +771,8 @@
       <option name="presentableId" value="Default" />
       <updated>1480374912005</updated>
       <workItem from="1480374913826" duration="598000" />
-      <workItem from="1480402157013" duration="10551000" />
+      <workItem from="1480402157013" duration="10607000" />
+      <workItem from="1480420647200" duration="2841000" />
     </task>
     <servers />
   </component>
@@ -835,12 +786,15 @@
     <history-entry file="JUnit - 2016.11.29 at 00h 19m 03s.xml">
       <configuration name="JUnit" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="JUnit - 2016.11.29 at 11h 30m 53s.xml">
+      <configuration name="JUnit" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13162000" />
+    <option name="totallyTimeSpent" value="16059000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="825" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="825" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -855,15 +809,15 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3148148" sideWeight="0.4611111" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3148148" sideWeight="0.4611111" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.44166666" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936507" sideWeight="0.45277777" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.45277777" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3236111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -954,7 +908,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -962,7 +918,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1680">
           <caret line="121" column="41" lean-forward="false" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#10822#10823#0" expanded="false" />
+            <element signature="e#10861#10862#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1008,37 +968,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1894#1907#0" expanded="false" />
-            <element signature="e#2014#2022#0" expanded="false" />
-            <element signature="e#3082#3249#0" expanded="false" />
-            <element signature="e#3248#3249#0" expanded="false" />
-            <element signature="e#3275#3439#0" expanded="false" />
-            <element signature="e#3438#3439#0" expanded="false" />
-            <element signature="e#3465#3648#0" expanded="false" />
-            <element signature="e#3647#3648#0" expanded="false" />
-            <element signature="e#3673#3906#0" expanded="false" />
-            <element signature="e#3905#3906#0" expanded="false" />
-            <element signature="e#3933#4168#0" expanded="false" />
-            <element signature="e#4167#4168#0" expanded="false" />
-            <element signature="e#4193#4438#0" expanded="false" />
-            <element signature="e#4437#4438#0" expanded="false" />
-            <element signature="e#4463#4708#0" expanded="false" />
-            <element signature="e#4707#4708#0" expanded="false" />
-            <element signature="e#6233#7553#0" expanded="false" />
-            <element signature="e#7552#7553#0" expanded="false" />
-            <element signature="e#8491#8492#0" expanded="false" />
-            <element signature="e#8536#8537#0" expanded="false" />
-            <element signature="e#10309#10310#0" expanded="false" />
-            <element signature="e#10361#10362#0" expanded="false" />
-            <element signature="e#10670#10671#0" expanded="false" />
-            <element signature="e#10705#10706#0" expanded="false" />
-            <element signature="e#13268#13269#0" expanded="false" />
-            <element signature="e#13320#13321#0" expanded="false" />
-            <element signature="e#15543#15544#0" expanded="false" />
-            <element signature="e#15585#15586#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,7 +986,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1223,8 +1155,10 @@
     <entry file="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-incubator-2.0.1.jar!/com/google/gwt/widgetideas/client/impl/GlassPanelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="35" column="52" lean-forward="true" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
+          <caret line="35" column="52" lean-forward="false" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
           <folding>
+            <element signature="e#0#1878#0" expanded="false" />
+            <element signature="imports" expanded="false" />
             <marker date="1381938698000" expanded="true" signature="1006:1100" ph="{...}" />
             <marker date="1381938698000" expanded="true" signature="1256:1349" ph="{...}" />
             <marker date="1381938698000" expanded="true" signature="1516:1565" ph="{...}" />
@@ -1252,7 +1186,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,7 +1193,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1268,15 +1200,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="698">
           <caret line="86" column="65" lean-forward="true" selection-start-line="86" selection-start-column="65" selection-end-line="86" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/war/WEB-INF/lib/gwt-incubator-2.0.1.jar!/com/google/gwt/widgetideas/client/SliderBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
+        <state relative-caret-position="11070">
           <caret line="795" column="38" lean-forward="false" selection-start-line="795" selection-start-column="34" selection-end-line="795" selection-end-column="38" />
-          <folding />
+          <folding>
+            <element signature="e#0#28617#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#7852#7853#0" expanded="false" />
+            <element signature="e#7892#7893#0" expanded="false" />
+            <element signature="e#9975#9976#0" expanded="false" />
+            <element signature="e#10000#10001#0" expanded="false" />
+            <element signature="e#10131#10132#0" expanded="false" />
+            <element signature="e#10162#10163#0" expanded="false" />
+            <element signature="e#10267#10268#0" expanded="false" />
+            <element signature="e#10292#10293#0" expanded="false" />
+            <element signature="e#10405#10406#0" expanded="false" />
+            <element signature="e#10430#10431#0" expanded="false" />
+            <element signature="e#10547#10548#0" expanded="false" />
+            <element signature="e#10573#10574#0" expanded="false" />
+            <element signature="e#10687#10688#0" expanded="false" />
+            <element signature="e#10712#10713#0" expanded="false" />
+            <element signature="e#10817#10818#0" expanded="false" />
+            <element signature="e#10842#10843#0" expanded="false" />
+            <element signature="e#11189#11190#0" expanded="false" />
+            <element signature="e#11213#11214#0" expanded="false" />
+            <element signature="e#16020#16021#0" expanded="false" />
+            <element signature="e#16061#16062#0" expanded="false" />
+            <element signature="e#17583#17584#0" expanded="false" />
+            <element signature="e#17629#17630#0" expanded="false" />
+            <element signature="e#19970#19971#0" expanded="false" />
+            <element signature="e#20036#20037#0" expanded="false" />
+            <element signature="e#20187#20188#0" expanded="false" />
+            <element signature="e#20253#20254#0" expanded="false" />
+            <element signature="e#21610#21611#0" expanded="false" />
+            <element signature="e#21664#21665#0" expanded="false" />
+            <element signature="e#26957#26958#0" expanded="false" />
+            <element signature="e#27001#27002#0" expanded="false" />
+            <element signature="e#28531#28532#0" expanded="false" />
+            <element signature="e#28613#28614#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1284,49 +1250,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="278" column="35" lean-forward="true" selection-start-line="278" selection-start-column="35" selection-end-line="278" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/SEApp.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="86" column="1" lean-forward="true" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="533" column="29" lean-forward="true" selection-start-line="533" selection-start-column="29" selection-end-line="540" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="96" column="11" lean-forward="true" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+        <state relative-caret-position="4080">
+          <caret line="278" column="35" lean-forward="false" selection-start-line="278" selection-start-column="35" selection-end-line="278" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#10822#10823#0" expanded="false" />
+            <element signature="e#10861#10862#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/SEApp.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="77" column="11" lean-forward="false" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1454">
+          <caret line="537" column="38" lean-forward="true" selection-start-line="537" selection-start-column="38" selection-end-line="537" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="125" column="50" lean-forward="false" selection-start-line="125" selection-start-column="50" selection-end-line="125" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

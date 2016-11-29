@@ -1,5 +1,9 @@
 package com.g3.seapp.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.widgetideas.client.SliderBar;
@@ -81,10 +85,18 @@ public class MapVisualization implements IVisualization, IExportable {
 	public void SetupSlider(Panel container) {
 		int numYears = MAX_YEAR - MIN_YEAR;
 
+		FlowPanel hpanel = new FlowPanel();
+		hpanel.getElement().setId("slider-panel");
+
+		final TextBox yearTxt = new TextBox();
+		yearTxt.getElement().setId("slider-box");
+		yearTxt.setMaxLength(4);
+		yearTxt.setText(String.valueOf(MIN_YEAR));
+
 		final SliderBar slider = new SliderBar(MIN_YEAR, MAX_YEAR);
 
-		slider.setNumLabels(numYears / 10);
-		slider.setNumTicks(numYears);
+		slider.setNumLabels(numYears / 15);
+		slider.setNumTicks(numYears / 15);
 		slider.setStepSize(1);
 		slider.setCurrentValue(MIN_YEAR);
 
@@ -92,11 +104,36 @@ public class MapVisualization implements IVisualization, IExportable {
 			@Override
 			public void onChange(Widget sender) {
 				int year = (int)slider.getCurrentValue();
+				yearTxt.setText(String.valueOf(year));
 				updateWithYear(year);
 			}
 		});
 
-		container.add(slider);
+		yearTxt.addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				String val = yearTxt.getValue();
+				char last = val.charAt(val.length()-1);
+				if(last < '0' || last > '9')
+					val = val.substring(0, val.length()-1);
+
+				if(val.length() == 4) {
+					double yearVal = Double.valueOf(val);
+
+					if(yearVal > MAX_YEAR) yearVal = MAX_YEAR;
+					else if(yearVal < MIN_YEAR) yearVal = MIN_YEAR;
+
+					val = String.valueOf(yearVal);
+					slider.setCurrentValue(yearVal);
+				}
+
+				yearTxt.setText(val);
+			}
+		});
+
+		hpanel.add(slider);
+		hpanel.add(yearTxt);
+		container.add(hpanel);
 	}
 
 	public void updateWithYear(int year) {
@@ -139,14 +176,15 @@ public class MapVisualization implements IVisualization, IExportable {
 		geoChartColorAxis.setColors("Gold", "red");
 		options.setColorAxis(geoChartColorAxis);
 		options.setDatalessRegionColor("Lightgrey");
-		
-		
+
 		dataTable.addColumn(ColumnType.STRING, "Country");
 		dataTable.addColumn(ColumnType.NUMBER, "Average Temperature");
-		
 
 		// Draw the chart
 		geoChart.draw(dataTable, options);
+		geoChart.getElement().setId("geo-chart");
+		geoChart.setHeight("85vh");
+		geoChart.setWidth("80%");
 
 		updateWithYear(MIN_YEAR);
 
