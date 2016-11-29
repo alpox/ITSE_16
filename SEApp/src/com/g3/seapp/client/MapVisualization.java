@@ -1,9 +1,8 @@
 package com.g3.seapp.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.*;
+import com.google.gwt.widgetideas.client.SliderBar;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
@@ -12,13 +11,9 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.g3.seapp.shared.Measurement;
 import com.google.gwt.core.shared.GWT;
-
-import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 
 /**
  * This class represents a visualization of a Worldmap including
@@ -33,6 +28,12 @@ public class MapVisualization implements IVisualization, IExportable {
 	
 	private GeoChart geoChart;
 	private CountryServiceAsync countryService = GWT.create(CountryService.class);
+
+	private final int MIN_YEAR = 1743;
+	private final int MAX_YEAR = 2013;
+
+	private DataTable dataTable;
+	private GeoChartOptions options;
 	
 	@Override
 	public void export() {
@@ -57,7 +58,6 @@ public class MapVisualization implements IVisualization, IExportable {
 	@param  container A Panel which contains the whole visualization
 	 **/
 	public void drawVisualization(final Panel container) {
-		
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
 		chartLoader.loadApi(new Runnable() {
 
@@ -69,31 +69,37 @@ public class MapVisualization implements IVisualization, IExportable {
 				updateVisualization(container);
 			}
 		});
-		//Set size constraints
-		container.setHeight("70vh");
-		container.setWidth("70vw");
 
-		SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20, "200px", true);
+		//Panel  for the visualization of the copyright
+		HorizontalPanel footer = new HorizontalPanel();
+		Label lblFooter = new Label();
+		lblFooter.setText("Copyright Data source K. Meier");
+		footer.add(lblFooter);
+		container.add(footer);
+	}
+
+	public void SetupSlider(Panel container) {
+		int numYears = MAX_YEAR - MIN_YEAR;
+
+		final SliderBar slider = new SliderBar(MIN_YEAR, MAX_YEAR);
+
+		slider.setNumLabels(numYears / 10);
+		slider.setNumTicks(numYears);
+		slider.setStepSize(1);
+		slider.setCurrentValue(MIN_YEAR);
+
+		slider.addChangeListener(new ChangeListener() {
+			@Override
+			public void onChange(Widget sender) {
+				int year = (int)slider.getCurrentValue();
+				updateWithYear(year);
+			}
+		});
+
 		container.add(slider);
 	}
 
-	/**
-	Updates the visualization and displays the map and the requested data
-	@pre nothing
-	@post nothing
-	@param  container A Panel which contains the whole visualization
-	 **/
-	public void updateVisualization(Panel container) {
-		int year = 1833;
-		// Prepare the datatable
-		final DataTable dataTable = DataTable.create();
-		// Set options
-		final GeoChartOptions options = GeoChartOptions.create();
-		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
-		geoChartColorAxis.setColors("Gold", "red");
-		options.setColorAxis(geoChartColorAxis);
-		options.setDatalessRegionColor("Lightgrey");
-		
+	public void updateWithYear(int year) {
 		AsyncCallback<HashMap<String, Float>> callback = new AsyncCallback<HashMap<String, Float>>() {
 
 			@Override
@@ -103,18 +109,36 @@ public class MapVisualization implements IVisualization, IExportable {
 
 			@Override
 			public void onSuccess(HashMap<String, Float> result) {
+				dataTable.removeRows(0, dataTable.getNumberOfRows());
 				for(String country : result.keySet()){
 					dataTable.addRow();
 					dataTable.setValue(dataTable.getNumberOfRows()-1, 0, country);
 					dataTable.setValue(dataTable.getNumberOfRows()-1, 1, result.get(country));
 				}
-				
+
 				// Draw the chart
-				geoChart.draw(dataTable, options);
+				geoChart.redraw();
 			}
 		};
-		
+
 		countryService.getAverageTempOfYear(year, callback);
+	}
+
+	/**
+	Updates the visualization and displays the map and the requested data
+	@pre nothing
+	@post nothing
+	@param  container A Panel which contains the whole visualization
+	 **/
+	public void updateVisualization(Panel container) {
+		dataTable = DataTable.create();
+		options = GeoChartOptions.create();
+
+		// Set options
+		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
+		geoChartColorAxis.setColors("Gold", "red");
+		options.setColorAxis(geoChartColorAxis);
+		options.setDatalessRegionColor("Lightgrey");
 		
 		
 		dataTable.addColumn(ColumnType.STRING, "Country");
@@ -123,13 +147,10 @@ public class MapVisualization implements IVisualization, IExportable {
 
 		// Draw the chart
 		geoChart.draw(dataTable, options);
-		
-		//Panel  for the visualization of the copyright
-		HorizontalPanel footer = new HorizontalPanel();
-		Label lblFooter = new Label();
-		lblFooter.setText("Copyright Data source K. Meier");
-		footer.add(lblFooter);
-		container.add(footer);
+
+		updateWithYear(MIN_YEAR);
+
+		SetupSlider(container);
 	}
 
 }

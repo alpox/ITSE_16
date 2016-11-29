@@ -2,6 +2,7 @@
 com.g3.seapp.client.CountryService, false, false, false, false, _, 3847211395
 com.g3.seapp.shared.Coordinate, true, true, false, false, com.g3.seapp.shared.Coordinate/2938896331, 2938896331
 com.g3.seapp.shared.Measurement, true, true, false, false, com.g3.seapp.shared.Measurement/1305950571, 1305950571
+com.g3.seapp.shared.Measurement$AggregationType, false, false, true, true, com.g3.seapp.shared.Measurement$AggregationType/538082758, 538082758
 com.g3.seapp.shared.Measurement$MeasurementType, false, false, true, true, com.g3.seapp.shared.Measurement$MeasurementType/837462381, 837462381
 com.google.gwt.i18n.shared.impl.DateRecord, true, true, false, false, com.google.gwt.i18n.shared.impl.DateRecord/3173882066, 3173882066
 com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true, true, true, true, com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533, 3936916533

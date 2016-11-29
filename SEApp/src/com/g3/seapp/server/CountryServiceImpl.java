@@ -259,12 +259,13 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 
 	@Override
 	public HashMap<String, Float> getAverageTempOfYear(int year) {
-
+		Calendar cal = Calendar.getInstance();
 		HashMap<String, Float> avTemp = new HashMap<>();
 		HashMap<String, Integer> numberOfMeasures = new HashMap<>();
 
 		for (Measurement meas : DataManager.getMeasurements()) {
-			if (meas.getDate().getYear() == year) continue;
+			cal.setTime(meas.getDate());
+			if (cal.get(Calendar.YEAR) != year) continue;
 			String country = meas.getCountry();
 			float sum;
 
