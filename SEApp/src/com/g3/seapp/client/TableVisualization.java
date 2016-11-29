@@ -68,8 +68,7 @@ public class TableVisualization implements IVisualization, IExportable {
 	 */
 	public TableVisualization() {
 		setupColumns();
-		measurementTable.setWidth("100%", true);
-
+		measurementTable.setWidth("1050px", true);
 		measurementTable.setPageSize(25);
 	}
 	
