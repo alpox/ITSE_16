@@ -124,6 +124,9 @@ public class MapVisualization implements IVisualization, IExportable {
 		leftBtn = createNextButton(container, "<", "left", clickHandler);
 		rightBtn = createNextButton(container, ">", "right", clickHandler);
 
+		leftBtn.setHTML(leftBtn.getText() + "<span class='next-btn-desc'>Countries</span>");
+		rightBtn.setHTML(rightBtn.getText() + "<span class='next-btn-desc'>Cities</span>");
+
 		leftBtn.setVisible(false);
 
 		container.add(leftBtn);

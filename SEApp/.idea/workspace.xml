@@ -78,21 +78,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="254">
+              <caret line="127" column="81" lean-forward="false" selection-start-line="127" selection-start-column="81" selection-end-line="127" selection-end-column="81" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TableVisualization.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TableVisualization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="106" column="16" lean-forward="false" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="77" />
+            <state relative-caret-position="336">
+              <caret line="125" column="10" lean-forward="true" selection-start-line="125" selection-start-column="10" selection-end-line="125" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -111,8 +113,8 @@
       <file leaf-file-name="SEApp.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/SEApp.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="165" column="16" lean-forward="false" selection-start-line="165" selection-start-column="16" selection-end-line="165" selection-end-column="16" />
+            <state relative-caret-position="236">
+              <caret line="101" column="1" lean-forward="true" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -143,6 +145,7 @@
       <find>geochart</find>
       <find>markerchart</find>
       <find>choose</find>
+      <find>next-button</find>
       <find>dataTable</find>
     </findStrings>
   </component>
@@ -788,7 +791,7 @@
       <workItem from="1480402157013" duration="10607000" />
       <workItem from="1480420647200" duration="4028000" />
       <workItem from="1480543631933" duration="99000" />
-      <workItem from="1480597532947" duration="10397000" />
+      <workItem from="1480597532947" duration="11048000" />
     </task>
     <servers />
   </component>
@@ -807,7 +810,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27742000" />
+    <option name="totallyTimeSpent" value="28393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -898,7 +901,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -978,7 +983,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1259,27 +1266,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="125" column="10" lean-forward="true" selection-start-line="125" selection-start-column="10" selection-end-line="125" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/war/SEApp.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="165" column="16" lean-forward="false" selection-start-line="165" selection-start-column="16" selection-end-line="165" selection-end-column="16" />
+        <state relative-caret-position="236">
+          <caret line="101" column="1" lean-forward="true" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="106" column="16" lean-forward="false" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="77" />
-          <folding />
+        <state relative-caret-position="254">
+          <caret line="127" column="81" lean-forward="false" selection-start-line="127" selection-start-column="81" selection-end-line="127" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

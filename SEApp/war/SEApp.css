@@ -105,6 +105,11 @@ h1 {
     left: 24px;
 }
 
+.next-btn-desc {
+    font-size: 0.3em;
+    display: block;
+}
+
 #country-chart {
     width: 90%;
     height: 80vh;
