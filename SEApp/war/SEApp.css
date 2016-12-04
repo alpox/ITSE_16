@@ -35,6 +35,7 @@ h1 {
 #chooseVisDropDown {
     position: absolute;
     right: 8px;
+    z-index: 100;
 }
 
 .center {
@@ -73,12 +74,109 @@ h1 {
     right: 120px;
 }
 
-#geo-chart {
+.next-button {
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 24px;
+    font-size: 4em;
+    transform: translateY(-50%);
+    top: 50%;
     position: absolute;
-    top: 45%;
+    outline: none;
+    cursor:pointer;
+    color: grey;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+}
+
+.next-button:hover {
+    background: rgba(200, 200, 200, 0.9);
+}
+
+.next-button.right {
+    right: 24px;
+}
+
+.next-button.left {
+    left: 24px;
+}
+
+#country-chart {
+    width: 90%;
+    height: 80vh;
+    float: left;
+    position: relative;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+}
+
+#city-chart {
+    transform: translateX(100%);
+    width: 90%;
+    height: 80vh;
+    left: 150%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+#country-chart.left {
+    transform: translateX(-50%);
+
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
+}
+
+#city-chart.left {
+    left: 150%;
+
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
+}
+
+#country-chart.right {
+    transform: translateX(-160%);
+
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
+}
+
+#city-chart.right {
+    left: 50%;
+
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s;
+    -o-transition: all 1.5s;
+    transition: all 1.5s;
+}
+
+#geo-panel {
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
     z-index: -1;
+}
+
+#geo-panel.animate {
+    width: 100vw;
+
+    -webkit-transition: all 3s;
+    -moz-transition: all 3s;
+    -o-transition: all 3s;
+    transition: all 3s;
+}
+
+#geo-panel td {
+    width: 100vw;
 }
 
 #slider-panel {

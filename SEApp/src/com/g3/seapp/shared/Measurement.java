@@ -51,6 +51,8 @@ public class Measurement implements Serializable {
 	public float getAvg() {
 		return avg;
 	}
+
+	public void setAvg(float avg) { this.avg = avg; }
 	
 	public float getError() {
 		return error;

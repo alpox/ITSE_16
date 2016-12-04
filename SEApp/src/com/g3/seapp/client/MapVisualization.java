@@ -1,16 +1,11 @@
 package com.g3.seapp.client;
 
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.g3.seapp.shared.Measurement;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.widgetideas.client.SliderBar;
-import com.googlecode.gwt.charts.client.ChartLoader;
-import com.googlecode.gwt.charts.client.ChartPackage;
-import com.googlecode.gwt.charts.client.ColumnType;
-import com.googlecode.gwt.charts.client.DataTable;
+import com.googlecode.gwt.charts.client.*;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
@@ -18,6 +13,7 @@ import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 import java.util.HashMap;
 
 import com.google.gwt.core.shared.GWT;
+import com.googlecode.gwt.charts.client.options.DisplayMode;
 
 /**
  * This class represents a visualization of a Worldmap including
@@ -30,14 +26,22 @@ import com.google.gwt.core.shared.GWT;
  */
 public class MapVisualization implements IVisualization, IExportable {
 	
-	private GeoChart geoChart;
+	private GeoChart countryChart;
+	private GeoChart cityChart;
 	private CountryServiceAsync countryService = GWT.create(CountryService.class);
 
 	private final int MIN_YEAR = 1743;
 	private final int MAX_YEAR = 2013;
 
-	private DataTable dataTable;
-	private GeoChartOptions options;
+	private DataTable countryData;
+	private DataTable cityData;
+	private GeoChartOptions countryOptions;
+	private GeoChartOptions cityOptions;
+
+	private Button leftBtn;
+	private Button rightBtn;
+
+	private int currentYear;
 	
 	@Override
 	public void export() {
@@ -62,14 +66,22 @@ public class MapVisualization implements IVisualization, IExportable {
 	@param  container A Panel which contains the whole visualization
 	 **/
 	public void drawVisualization(final Panel container) {
+		final FlowPanel hpanel = new FlowPanel();
+
+		hpanel.getElement().setId("geo-panel");
+
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
 		chartLoader.loadApi(new Runnable() {
 
-
 			public void run() {
+				setupCommonOptions();
+
 				// Create and attach the chart to the panel
-				geoChart = new GeoChart();
-				container.add(geoChart);
+				hpanel.add(createCountryVisualization());
+				hpanel.add(createCityVisualization());
+
+				currentYear = MIN_YEAR;
+
 				updateVisualization(container);
 			}
 		});
@@ -79,9 +91,64 @@ public class MapVisualization implements IVisualization, IExportable {
 		Label lblFooter = new Label();
 		lblFooter.setText("Copyright Data source K. Meier");
 		footer.add(lblFooter);
+
 		container.add(footer);
+		container.add(hpanel);
+
+		SetupSlider(container);
+
+		ClickHandler clickHandler = new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Button source = (Button)event.getSource();
+
+				for (int i = 0; i < hpanel.getWidgetCount(); i++) {
+					Widget w = hpanel.getWidget(i);
+					if (source == leftBtn
+							&& w.getElement().hasClassName("right")) {
+						w.getElement().toggleClassName("left");
+						w.getElement().toggleClassName("right");
+						leftBtn.setVisible(false);
+						rightBtn.setVisible(true);
+					} else if (source == rightBtn
+							&& w.getElement().hasClassName("left")) {
+						w.getElement().toggleClassName("right");
+						w.getElement().toggleClassName("left");
+						leftBtn.setVisible(true);
+						rightBtn.setVisible(false);
+					}
+				}
+			}
+		};
+
+		leftBtn = createNextButton(container, "<", "left", clickHandler);
+		rightBtn = createNextButton(container, ">", "right", clickHandler);
+
+		leftBtn.setVisible(false);
+
+		container.add(leftBtn);
+		container.add(rightBtn);
 	}
 
+	private Button createNextButton(Panel container, String text, String positionClass, ClickHandler handler) {
+		Button nextBtn = new Button();
+		nextBtn.getElement().addClassName("next-button");
+		nextBtn.getElement().addClassName(positionClass);
+		nextBtn.getElement().removeClassName("gwt-Button");
+		nextBtn.getElement().setId("switch-button-" + positionClass);
+		nextBtn.setText(text);
+
+		nextBtn.addClickHandler(handler);
+
+		return nextBtn;
+	}
+
+	/**
+	 * Draws the slider to the page
+	 *
+	 * @post The slider is drawn to page
+	 * @param container The container panel to draw the slider into
+	 */
 	public void SetupSlider(Panel container) {
 		int numYears = MAX_YEAR - MIN_YEAR;
 
@@ -105,7 +172,8 @@ public class MapVisualization implements IVisualization, IExportable {
 			public void onChange(Widget sender) {
 				int year = (int)slider.getCurrentValue();
 				yearTxt.setText(String.valueOf(year));
-				updateWithYear(year);
+				currentYear = year;
+				updateVisualization(null);
 			}
 		});
 
@@ -136,8 +204,14 @@ public class MapVisualization implements IVisualization, IExportable {
 		container.add(hpanel);
 	}
 
-	public void updateWithYear(int year) {
-		AsyncCallback<HashMap<String, Float>> callback = new AsyncCallback<HashMap<String, Float>>() {
+	/**
+	 * Updates the visualization and displays the map and the requested data
+	 *
+	 * @pre countryChart != null && cityChart != null
+	 * @param  container A Panel which contains the whole visualization
+	 */
+	public void updateVisualization(Panel container) {
+		AsyncCallback<HashMap<String, Float>> countryCallback = new AsyncCallback<HashMap<String, Float>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -146,49 +220,123 @@ public class MapVisualization implements IVisualization, IExportable {
 
 			@Override
 			public void onSuccess(HashMap<String, Float> result) {
-				dataTable.removeRows(0, dataTable.getNumberOfRows());
+				countryData.removeRows(0, countryData.getNumberOfRows());
+
 				for(String country : result.keySet()){
-					dataTable.addRow();
-					dataTable.setValue(dataTable.getNumberOfRows()-1, 0, country);
-					dataTable.setValue(dataTable.getNumberOfRows()-1, 1, result.get(country));
+					countryData.addRow();
+					countryData.setValue(countryData.getNumberOfRows()-1, 0, country);
+					countryData.setValue(countryData.getNumberOfRows()-1, 1, result.get(country));
 				}
 
 				// Draw the chart
-				geoChart.redraw();
+				countryChart.redraw();
 			}
 		};
 
-		countryService.getAverageTempOfYear(year, callback);
+		AsyncCallback<HashMap<String, Measurement>> cityCallback = new AsyncCallback<HashMap<String, Measurement>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onSuccess(HashMap<String, Measurement> result) {
+				cityData.removeRows(0, cityData.getNumberOfRows());
+
+				for(String city : result.keySet()){
+					Measurement meas = result.get(city);
+					float avg = Math.round(meas.getAvg() * 1000f) / 1000f;
+					String tooltip = "City: " + city + "\nAverage Temperature: " + avg;
+					cityData.addRow();
+					cityData.setValue(cityData.getNumberOfRows()-1, 0, meas.getCoords().getLat());
+					cityData.setValue(cityData.getNumberOfRows()-1, 1, meas.getCoords().getLon());
+					cityData.setValue(cityData.getNumberOfRows()-1, 2, meas.getAvg());
+					cityData.setValue(cityData.getNumberOfRows()-1, 3, tooltip);
+				}
+
+				// Draw the chart
+				cityChart.redraw();
+			}
+		};
+
+		countryService.getAverageTempOfYear(currentYear, countryCallback);
+		countryService.getAverageTempOfYearPerCity(currentYear, cityCallback);
 	}
 
 	/**
-	Updates the visualization and displays the map and the requested data
-	@pre nothing
-	@post nothing
-	@param  container A Panel which contains the whole visualization
-	 **/
-	public void updateVisualization(Panel container) {
-		dataTable = DataTable.create();
-		options = GeoChartOptions.create();
-
-		// Set options
-		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
-		geoChartColorAxis.setColors("Gold", "red");
-		options.setColorAxis(geoChartColorAxis);
-		options.setDatalessRegionColor("Lightgrey");
-
-		dataTable.addColumn(ColumnType.STRING, "Country");
-		dataTable.addColumn(ColumnType.NUMBER, "Average Temperature");
-
-		// Draw the chart
-		geoChart.draw(dataTable, options);
-		geoChart.getElement().setId("geo-chart");
-		geoChart.setHeight("85vh");
-		geoChart.setWidth("80%");
-
-		updateWithYear(MIN_YEAR);
-
-		SetupSlider(container);
+	 * Creates the map visualization chart for the countries.
+	 *
+	 * @pre Google Charts resources are loaded
+	 * @post this.countryChart != null
+	 * @param container The container to draw the visualization into
+	 * @return The newly created chart
+	 */
+	private GeoChart createCountryVisualization() {
+		countryChart = createVisualization(countryData, countryOptions, "country-chart");
+		return countryChart;
 	}
 
+	/**
+	 * Creates the map visualization chart for the cities.
+	 *
+	 * @pre Google Charts resources are loaded
+	 * @post this.cityChart != null
+	 * @return The newly created chart
+	 */
+	private GeoChart createCityVisualization() {
+		cityChart = createVisualization(cityData, cityOptions, "city-chart");
+		return cityChart;
+	}
+
+	/**
+	 * Creates a geochart with the specified id
+	 *
+	 * @pre Google Charts resources are loaded
+	 * @param id The html id for the geo-chart
+	 * @return The newly created GeoChart
+	 */
+	private GeoChart createVisualization(DataTable data, GeoChartOptions options, String id) {
+		GeoChart chart = new GeoChart();
+
+		// Draw the chart
+		chart.draw(data, options);
+		chart.getElement().setId(id);
+		chart.getElement().setClassName("left");
+		chart.setHeight("80vh");
+
+		return chart;
+	}
+
+	/**
+	 * Creates the options for the map visualizations
+	 */
+	private void setupCommonOptions() {
+		countryData = DataTable.create();
+		cityData = DataTable.create();
+		countryOptions = GeoChartOptions.create();
+		cityOptions = GeoChartOptions.create();
+		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
+
+		// Set options for country
+		geoChartColorAxis.setColors("Gold", "red");
+
+		countryOptions.setColorAxis(geoChartColorAxis);
+		countryOptions.setDatalessRegionColor("Lightgrey");
+
+		cityOptions.setColorAxis(geoChartColorAxis);
+		cityOptions.setDatalessRegionColor("Lightgrey");
+		cityOptions.setDisplayMode(DisplayMode.MARKERS);
+
+		// Set options for city
+
+		countryData.addColumn(ColumnType.STRING, "Country");
+		countryData.addColumn(ColumnType.NUMBER, "Average Temperature");
+
+		cityData.addColumn(ColumnType.NUMBER, "Latitude");
+		cityData.addColumn(ColumnType.NUMBER, "Longitude");
+		cityData.addColumn(ColumnType.NUMBER, "Temperature");
+		DataColumn col = DataColumn.create(ColumnType.STRING, RoleType.TOOLTIP, "City");
+		cityData.addColumn(col);
+	}
 }

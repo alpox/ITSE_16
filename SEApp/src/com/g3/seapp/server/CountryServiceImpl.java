@@ -257,44 +257,70 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		return DataManager.getMeasurements().size();
 	}
 
-	@Override
-	public HashMap<String, Float> getAverageTempOfYear(int year) {
+	private HashMap<String, Measurement> getAverageTemp(int year, boolean city) {
 		Calendar cal = Calendar.getInstance();
-		HashMap<String, Float> avTemp = new HashMap<>();
+		HashMap<String, Measurement> avTemp = new HashMap<>();
 		HashMap<String, Integer> numberOfMeasures = new HashMap<>();
 
 		for (Measurement meas : DataManager.getMeasurements()) {
 			cal.setTime(meas.getDate());
 			if (cal.get(Calendar.YEAR) != year) continue;
-			String country = meas.getCountry();
+			String key;
 			float sum;
+			Measurement storedMeas;
 
-			if (!avTemp.containsKey(country))
-				sum = meas.getAvg();
+			if(!city)
+				key = meas.getCountry();
 			else
-				sum = avTemp.get(country) + meas.getAvg();
+				key = meas.getCity();
 
-			avTemp.put(country, sum);
+			if (!avTemp.containsKey(key)) {
+				sum = meas.getAvg();
+				storedMeas = new Measurement(meas.getCountry(), key, 0.0f, 0.0f, meas.getCoords(), null);
+				avTemp.put(key, storedMeas);
+			}
+			else {
+				sum = avTemp.get(key).getAvg() + meas.getAvg();
+				storedMeas = avTemp.get(key);
+			}
+
+			storedMeas.setAvg(sum);
 
 			int nrOfMeasPerCountry;
 
-			if (!numberOfMeasures.containsKey(country))
+			if (!numberOfMeasures.containsKey(key))
 				nrOfMeasPerCountry = 1;
 			else
-				nrOfMeasPerCountry = numberOfMeasures.get(country) + 1;
+				nrOfMeasPerCountry = numberOfMeasures.get(key) + 1;
 
-			numberOfMeasures.put(country, nrOfMeasPerCountry);
+			numberOfMeasures.put(key, nrOfMeasPerCountry);
 		}
 
-		for (String country : avTemp.keySet()) {
-			float tempSum = avTemp.get(country);
-			float nrOfMeas = numberOfMeasures.get(country);
+		for (String c : avTemp.keySet()) {
+			float tempSum = avTemp.get(c).getAvg();
+			float nrOfMeas = numberOfMeasures.get(c);
 			float averageTemp = tempSum / nrOfMeas;
-			avTemp.put(country, averageTemp);
+			avTemp.get(c).setAvg(averageTemp);
 		}
 
 		return avTemp;
+	}
 
+	@Override
+	public HashMap<String, Float> getAverageTempOfYear(int year) {
+		HashMap<String, Measurement> measures =  getAverageTemp(year, false);
+		HashMap<String, Float> output = new HashMap<>();
+
+		for(String key : measures.keySet()) {
+			output.put(key, measures.get(key).getAvg());
+		}
+
+		return output;
+	}
+
+	@Override
+	public HashMap<String, Measurement> getAverageTempOfYearPerCity(int year) {
+		return getAverageTemp(year, true);
 	}
 
 	/**

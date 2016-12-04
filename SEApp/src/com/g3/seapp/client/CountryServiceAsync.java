@@ -24,4 +24,6 @@ public interface CountryServiceAsync {
 	void getMeasurementEntrySize(HashMap<Measurement.MeasurementType, String> filters, AsyncCallback<Integer> callback);
 	void getAverageTempOfYear(int year, AsyncCallback<HashMap<String, Float>> callback);
     void getAggregation(Measurement.MeasurementType measType, Measurement.AggregationType aggType, AsyncCallback<Float> async);
+
+    void getAverageTempOfYearPerCity(int year, AsyncCallback<HashMap<String, Measurement>> async);
 }
