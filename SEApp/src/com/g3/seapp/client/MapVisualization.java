@@ -121,8 +121,8 @@ public class MapVisualization implements IVisualization, IExportable {
 			}
 		};
 
-		leftBtn = createNextButton(container, "<", "left", clickHandler);
-		rightBtn = createNextButton(container, ">", "right", clickHandler);
+		leftBtn = createNextButton("<", "left", clickHandler);
+		rightBtn = createNextButton(">", "right", clickHandler);
 
 		leftBtn.setHTML(leftBtn.getText() + "<span class='next-btn-desc'>Countries</span>");
 		rightBtn.setHTML(rightBtn.getText() + "<span class='next-btn-desc'>Cities</span>");
@@ -133,7 +133,15 @@ public class MapVisualization implements IVisualization, IExportable {
 		container.add(rightBtn);
 	}
 
-	private Button createNextButton(Panel container, String text, String positionClass, ClickHandler handler) {
+	/**
+	 * Creates a slider button
+	 *
+	 * @param text Sets the text on the button
+	 * @param positionClass Sets the class which tells the button how to position itself
+	 * @param handler A clickhandler, telling the button what to do on click
+	 * @return The created button
+	 */
+	private Button createNextButton(String text, String positionClass, ClickHandler handler) {
 		Button nextBtn = new Button();
 		nextBtn.getElement().addClassName("next-button");
 		nextBtn.getElement().addClassName(positionClass);
