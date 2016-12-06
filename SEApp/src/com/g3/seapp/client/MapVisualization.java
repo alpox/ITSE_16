@@ -258,7 +258,7 @@ public class MapVisualization implements IVisualization, IExportable {
 				for(String city : result.keySet()){
 					Measurement meas = result.get(city);
 					float avg = Math.round(meas.getAvg() * 1000f) / 1000f;
-					String tooltip = "City: " + city + "\nAverage Temperature: " + avg;
+					String tooltip = "City: " + city + "\nAverage Temperature (\u2103): " + avg;
 					cityData.addRow();
 					cityData.setValue(cityData.getNumberOfRows()-1, 0, meas.getCoords().getLat());
 					cityData.setValue(cityData.getNumberOfRows()-1, 1, meas.getCoords().getLon());
@@ -342,8 +342,7 @@ public class MapVisualization implements IVisualization, IExportable {
 		// Set options for city
 
 		countryData.addColumn(ColumnType.STRING, "Country");
-		countryData.addColumn(ColumnType.NUMBER, "Average Temperature");
-
+		countryData.addColumn(ColumnType.NUMBER, "Average Temperature (\u2103)");
 		cityData.addColumn(ColumnType.NUMBER, "Latitude");
 		cityData.addColumn(ColumnType.NUMBER, "Longitude");
 		cityData.addColumn(ColumnType.NUMBER, "Temperature");
