@@ -89,7 +89,7 @@ public class MapVisualization implements IVisualization, IExportable {
 		//Panel  for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
-		lblFooter.setText("Copyright Data source K. Meier");
+		lblFooter.setText("Copyright Data Source K. Meier");
 		footer.add(lblFooter);
 
 		container.add(footer);
