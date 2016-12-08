@@ -5,11 +5,15 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.widgetideas.client.SliderBar;
+import com.google.gwt.dom.client.Element;
 import com.googlecode.gwt.charts.client.*;
+import com.googlecode.gwt.charts.client.event.ReadyEvent;
+import com.googlecode.gwt.charts.client.event.ReadyHandler;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import com.google.gwt.core.shared.GWT;
@@ -42,12 +46,44 @@ public class MapVisualization implements IVisualization, IExportable {
 	private Button rightBtn;
 
 	private int currentYear;
+
+	Anchor countryExportLink;
+
+	private void refreshExportData() {
+		Element elem = countryChart.getElement().getElementsByTagName("svg").getItem(0);
+		elem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+		String svgData = outerHTML(elem);
+		svgData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + svgData;
+		String base64 = "data:image/svg+xml;base64,\n" + btoa(svgData);
+		countryExportLink.getElement().setAttribute("href", base64);
+	}
+
+	private Anchor createExportButton() {
+		Anchor link = new Anchor();
+		link.getElement().setClassName("export-button");
+		link.getElement().setAttribute("href-lang", "image/svg+xml");
+		link.getElement().setAttribute("download", "mapvisualization.svg");
+		link.setText("Export");
+		countryExportLink = link;
+		return link;
+	}
 	
 	@Override
 	public void export() {
 		// TODO Auto-generated method stub
-		
 	}
+
+	native String outerHTML(Element elem) /*-{
+        return elem.outerHTML;
+    }-*/;
+
+	native void consoleLog( String message) /*-{
+        console.log( "me:" + message );
+    }-*/;
+
+	native String btoa(String b64) /*-{
+        return btoa(b64);
+    }-*/;
 
 	/**
 	Returns the name respectively type of the visualization as String
@@ -83,6 +119,8 @@ public class MapVisualization implements IVisualization, IExportable {
 				currentYear = MIN_YEAR;
 
 				updateVisualization(container);
+
+				setupReadyHandler();
 			}
 		});
 
@@ -131,6 +169,16 @@ public class MapVisualization implements IVisualization, IExportable {
 
 		container.add(leftBtn);
 		container.add(rightBtn);
+		container.add(createExportButton());
+	}
+
+	private void setupReadyHandler() {
+		countryChart.addReadyHandler(new ReadyHandler() {
+			@Override
+			public void onReady(ReadyEvent readyEvent) {
+				refreshExportData();
+			}
+		});
 	}
 
 	/**
