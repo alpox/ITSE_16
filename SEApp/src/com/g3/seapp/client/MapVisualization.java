@@ -127,7 +127,7 @@ public class MapVisualization implements IVisualization, IExportable {
 		//Panel  for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
-		lblFooter.setText("Copyright Data source K. Meier");
+		lblFooter.setText("Copyright Data Source K. Meier");
 		footer.add(lblFooter);
 
 		container.add(footer);
@@ -306,7 +306,7 @@ public class MapVisualization implements IVisualization, IExportable {
 				for(String city : result.keySet()){
 					Measurement meas = result.get(city);
 					float avg = Math.round(meas.getAvg() * 1000f) / 1000f;
-					String tooltip = "City: " + city + "\nAverage Temperature: " + avg;
+					String tooltip = "City: " + city + "\nAverage Temperature (\u2103): " + avg;
 					cityData.addRow();
 					cityData.setValue(cityData.getNumberOfRows()-1, 0, meas.getCoords().getLat());
 					cityData.setValue(cityData.getNumberOfRows()-1, 1, meas.getCoords().getLon());
@@ -390,8 +390,7 @@ public class MapVisualization implements IVisualization, IExportable {
 		// Set options for city
 
 		countryData.addColumn(ColumnType.STRING, "Country");
-		countryData.addColumn(ColumnType.NUMBER, "Average Temperature");
-
+		countryData.addColumn(ColumnType.NUMBER, "Average Temperature (\u2103)");
 		cityData.addColumn(ColumnType.NUMBER, "Latitude");
 		cityData.addColumn(ColumnType.NUMBER, "Longitude");
 		cityData.addColumn(ColumnType.NUMBER, "Temperature");
