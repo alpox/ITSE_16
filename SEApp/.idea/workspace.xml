@@ -23,7 +23,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CountryServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CountryServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
@@ -46,25 +46,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CountryServiceAsync.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/CountryServiceAsync.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="27" column="89" lean-forward="false" selection-start-line="27" selection-start-column="89" selection-end-line="27" selection-end-column="89" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="72" column="6" lean-forward="true" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
+              <caret line="72" column="6" lean-forward="false" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
-                <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
+                <marker date="1481476986000" expanded="true" signature="2822:2860" ph="{...}" />
+                <marker date="1481476986000" expanded="true" signature="3104:3137" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -84,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
-              <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
               <folding>
                 <element signature="e#5805#5981#0" expanded="true" />
                 <element signature="e#5980#5981#0" expanded="true" />
@@ -94,7 +84,7 @@
                 <element signature="e#6398#6399#0" expanded="true" />
                 <element signature="e#6424#6612#0" expanded="true" />
                 <element signature="e#6611#6612#0" expanded="true" />
-                <marker date="1481463401000" expanded="true" signature="4546:4579" ph="{...}" />
+                <marker date="1481476986000" expanded="true" signature="4546:4579" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -103,8 +93,18 @@
       <file leaf-file-name="CountryServiceTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="424" column="51" lean-forward="false" selection-start-line="424" selection-start-column="51" selection-end-line="424" selection-end-column="51" />
+            <state relative-caret-position="75">
+              <caret line="20" column="49" lean-forward="false" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataManagerTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -186,9 +186,10 @@
         <option value="$PROJECT_DIR$/war/SEApp.css" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/server/PrepareExportThread.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java" />
-        <option value="$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/server/CountryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java" />
+        <option value="$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java" />
       </list>
     </option>
   </component>
@@ -838,7 +839,7 @@
       <workItem from="1480942934678" duration="488000" />
       <workItem from="1480946756053" duration="528000" />
       <workItem from="1481016163650" duration="3976000" />
-      <workItem from="1481460576156" duration="4298000" />
+      <workItem from="1481460576156" duration="4446000" />
     </task>
     <servers />
   </component>
@@ -860,7 +861,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37788000" />
+    <option name="totallyTimeSpent" value="37936000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -939,8 +940,8 @@
           <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
-            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="3104:3137" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1015,7 +1016,7 @@
             <element signature="e#6398#6399#0" expanded="true" />
             <element signature="e#6424#6612#0" expanded="true" />
             <element signature="e#6611#6612#0" expanded="true" />
-            <marker date="1481463401000" expanded="true" signature="4546:4579" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="4546:4579" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1026,8 +1027,8 @@
           <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
-            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="3104:3137" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1077,13 +1078,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/shared/Country.java" />
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/shared/CountryCollection.java" />
-    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1242,14 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/DataManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/PrepareExportThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -1261,7 +1247,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
-          <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding>
             <element signature="e#5805#5981#0" expanded="true" />
             <element signature="e#5980#5981#0" expanded="true" />
@@ -1271,16 +1257,8 @@
             <element signature="e#6398#6399#0" expanded="true" />
             <element signature="e#6424#6612#0" expanded="true" />
             <element signature="e#6611#6612#0" expanded="true" />
-            <marker date="1481463401000" expanded="true" signature="4546:4579" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="4546:4579" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="424" column="51" lean-forward="false" selection-start-line="424" selection-start-column="51" selection-end-line="424" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1295,11 +1273,11 @@
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="72" column="6" lean-forward="true" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
+          <caret line="72" column="6" lean-forward="false" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
-            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481476986000" expanded="true" signature="3104:3137" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1312,6 +1290,30 @@
             <element signature="e#10755#10756#0" expanded="true" />
             <element signature="e#10795#10796#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/server/DataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="20" column="49" lean-forward="false" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/DataManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

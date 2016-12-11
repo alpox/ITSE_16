@@ -5,10 +5,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by Elias on 24.11.16.
+ * Defines tests for the DataManager class
  */
 public class DataManagerTest {
 
+    /**
+     * Tests if the datamanager can load its data
+     */
     @Test
     public void testDataManagerCanLoadData() {
         DataManager.loadData();

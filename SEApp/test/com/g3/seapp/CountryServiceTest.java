@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.g3.seapp.shared.Measurement.MeasurementType.*;
 
+/**
+ * Defines tests for the CountryServiceImpl class
+ */
 public class CountryServiceTest {
 	
 	private final CountryService countryService = new CountryServiceImpl();
