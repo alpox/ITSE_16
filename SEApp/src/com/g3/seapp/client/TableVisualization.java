@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
+import com.google.gwt.xml.client.Element;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ import static com.g3.seapp.shared.Measurement.MeasurementType.LON;
  * @responsibilities Shows a table of weatherdata 
  *
  */
-public class TableVisualization implements IVisualization, IExportable {
+public class TableVisualization implements IVisualization {
 	// Well... we can do that because our data amount never changes :-)
 	private static final int MEASUREMENTCOUNT = 228175;
 
@@ -61,6 +62,8 @@ public class TableVisualization implements IVisualization, IExportable {
 	private ArrayList<Measurement> measurements;
 	
 	private HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
+
+	private Anchor countryExportLink;
 	
 	/**
 	 * Constructor of TableVisualization
@@ -70,6 +73,83 @@ public class TableVisualization implements IVisualization, IExportable {
 		setupColumns();
 		measurementTable.setWidth("1050px", true);
 		measurementTable.setPageSize(25);
+	}
+
+	/**
+	 * Update the link to hold the new data to export
+	 */
+	private void refreshExportData() {
+		// Create csv string
+		String data = join(new String[] {
+				"country", "city", "date", "average", "error", "longitude", "latitude"
+		}, ",") + "\n";
+
+		for(Measurement meas : measurements) {
+			data += join(new String[] {
+					meas.getCountry(),
+					meas.getCity(),
+					dateFormat.format(meas.getDate()),
+					strFromFloat(meas.getAvg()),
+					strFromFloat(meas.getError()),
+					strFromFloat(meas.getCoords().getLat()),
+					strFromFloat(meas.getCoords().getLon())
+			}, ",") + "\n";
+		}
+
+		String base64 = "data:text/csv;base64,\n" + btoa(data);
+		countryExportLink.getElement().setAttribute("href", base64);
+	}
+
+	/**
+	 * Joins an array to a string with delimiter delim
+	 *
+	 * @param strArr The array of strings to join together
+	 * @param delim The delimiter
+	 * @return A new string, joined through the given array and the delimiter
+	 */
+	private String join(String[] strArr, String delim) {
+		String result = "";
+
+		for(String str : strArr)
+			result += str + delim;
+
+		return result.substring(0, result.length()-1);
+	}
+
+	/**
+	 * Create string from float
+	 *
+	 * @param f The float to give in
+	 * @return The new string from the float
+	 */
+	private String strFromFloat(float f) {
+		float frounded = Math.round(f * 1000f) / 1000f;
+		return Float.toString(frounded);
+	}
+
+	/**
+	 * Use the javascript method for converting a string to its base64 representation.
+	 *
+	 * @param b64 The string to convert to base64
+	 * @return The base64 representation of the given string
+	 */
+	native String btoa(String b64) /*-{
+        return btoa(b64);
+    }-*/;
+
+	/**
+	 * Create a button for exporting the data
+	 *
+	 * @return The newly created button
+	 */
+	private Anchor createExportButton() {
+		Anchor link = new Anchor();
+		link.getElement().setClassName("export-button");
+		link.getElement().setAttribute("href-lang", "text/csv");
+		link.getElement().setAttribute("download", "weather-data.csv");
+		link.setText("Export");
+		countryExportLink = link;
+		return link;
 	}
 	
 	/**
@@ -104,32 +184,28 @@ public class TableVisualization implements IVisualization, IExportable {
 	    avgColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		      	float avg = Math.round(measurement.getAvg() * 1000f) / 1000f;
-		        return Float.toString(avg);
+		      	return strFromFloat(measurement.getAvg());
 		      }
 	    };
 	    
 	    errorColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		      	float err = Math.round(measurement.getError() * 1000f) / 1000f;
-		        return Float.toString(err);
+		      	return strFromFloat(measurement.getError());
 		      }
 	    };
 	    
 	    latColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		      	float lat = Math.round(measurement.getCoords().getLat() * 1000f) / 1000f;
-		        return Float.toString(lat);
+		      	return strFromFloat(measurement.getCoords().getLat());
 		      }
 	    };
 	    
 	    lonColumn = new TextColumn<Measurement>() {
 		      @Override
 		      public String getValue(Measurement measurement) {
-		      	float lon = Math.round(measurement.getCoords().getLon() * 1000f) / 1000f;
-		        return Float.toString(lon);
+		      	return strFromFloat(measurement.getCoords().getLon());
 		      }
 	    };
 
@@ -195,6 +271,8 @@ public class TableVisualization implements IVisualization, IExportable {
 					public void onSuccess(ArrayList<Measurement> result) {
 						measurements = result;
 						measurementTable.setRowData(start, measurements);
+
+						refreshExportData();
 
 						updateTableRowCount();
 					}
@@ -311,14 +389,6 @@ public class TableVisualization implements IVisualization, IExportable {
 		};
 
 		countryService.getMeasurementEntrySize(filters, callback);
-	}
-
-	/**
-	 * Exports the table data as csv.
-	 */
-	@Override
-	public void export() {
-		// TODO Implement
 	}
 	
 	/**
@@ -541,6 +611,7 @@ public class TableVisualization implements IVisualization, IExportable {
 		
 		//creats two dropdowns for choosing datatype and aggreagtion method
 		createAggregationPanel(container);
+		container.add(createExportButton());
 	}
 
 	/**

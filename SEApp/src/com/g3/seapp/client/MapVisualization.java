@@ -13,7 +13,6 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
-import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import com.google.gwt.core.shared.GWT;
@@ -28,7 +27,7 @@ import com.googlecode.gwt.charts.client.options.DisplayMode;
  * @history 14.11.2016 Version 1
  * @responsibilities Shows a map visualization of the data.
  */
-public class MapVisualization implements IVisualization, IExportable {
+public class MapVisualization implements IVisualization {
 	
 	private GeoChart countryChart;
 	private GeoChart cityChart;
@@ -47,8 +46,11 @@ public class MapVisualization implements IVisualization, IExportable {
 
 	private int currentYear;
 
-	Anchor countryExportLink;
+	private Anchor countryExportLink;
 
+	/**
+	 * Update the link to hold the new data to export
+	 */
 	private void refreshExportData() {
 		Element elem = countryChart.getElement().getElementsByTagName("svg").getItem(0);
 		elem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -58,6 +60,11 @@ public class MapVisualization implements IVisualization, IExportable {
 		countryExportLink.getElement().setAttribute("href", base64);
 	}
 
+	/**
+	 * Create a button for exporting the data
+	 *
+	 * @return The newly created button
+	 */
 	private Anchor createExportButton() {
 		Anchor link = new Anchor();
 		link.getElement().setClassName("export-button");
@@ -67,20 +74,23 @@ public class MapVisualization implements IVisualization, IExportable {
 		countryExportLink = link;
 		return link;
 	}
-	
-	@Override
-	public void export() {
-		// TODO Auto-generated method stub
-	}
 
+	/**
+	 * Gets the outer HTML of an element.
+	 *
+	 * @param elem The DOM element
+	 * @return The outer HTML of the given DOM element
+	 */
 	native String outerHTML(Element elem) /*-{
         return elem.outerHTML;
     }-*/;
 
-	native void consoleLog( String message) /*-{
-        console.log( "me:" + message );
-    }-*/;
-
+	/**
+	 * Use the javascript method for converting a string to its base64 representation.
+	 *
+	 * @param b64 The string to convert to base64
+	 * @return The base64 representation of the given string
+	 */
 	native String btoa(String b64) /*-{
         return btoa(b64);
     }-*/;
@@ -172,6 +182,10 @@ public class MapVisualization implements IVisualization, IExportable {
 		container.add(createExportButton());
 	}
 
+	/**
+	 * Sets up a ready listener to update the export button's data on
+	 * every change of the underlying svg element.
+	 */
 	private void setupReadyHandler() {
 		countryChart.addReadyHandler(new ReadyHandler() {
 			@Override
