@@ -1,0 +1,1 @@
+Task 1.1The goal of this sprint is to finish the prototype of our application. We want to implement the not so important tasks, which can facilitate the use of the whole system. We also want some features for the user, for example the possibility of exporting the data. 

@@ -605,7 +605,7 @@ public class TableVisualization implements IVisualization {
 		//Panel for the visualization of the copyright
 		HorizontalPanel footer = new HorizontalPanel();
 		Label lblFooter = new Label();
-		lblFooter.setText("Copyright Data Source K. Meier");
+		lblFooter.setText("Copyright Data Source Berkeley Earth");
 		footer.add(lblFooter);
 		container.add(footer);
 		
