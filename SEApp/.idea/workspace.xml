@@ -56,15 +56,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MapVisualization.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="87" column="4" lean-forward="false" selection-start-line="87" selection-start-column="4" selection-end-line="95" selection-end-column="9" />
+            <state relative-caret-position="210">
+              <caret line="57" column="7" lean-forward="true" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1481463401000" expanded="true" signature="2650:2688" ph="{...}" />
-                <marker date="1481463401000" expanded="true" signature="2932:2965" ph="{...}" />
+                <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
+                <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -100,7 +100,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CountryServiceTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CountryServiceTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="534">
@@ -185,10 +185,10 @@
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/CountryServiceAsync.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/shared/Measurement.java" />
         <option value="$PROJECT_DIR$/war/SEApp.css" />
-        <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/server/PrepareExportThread.java" />
         <option value="$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java" />
         <option value="$PROJECT_DIR$/test/com/g3/seapp/CountryServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java" />
       </list>
     </option>
   </component>
@@ -383,7 +383,7 @@
       <recent name="$PROJECT_DIR$/war/WEB-INF/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JUnit">
+  <component name="RunManager" selected="GWT Configuration.GWT">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -774,6 +774,7 @@
     <configuration default="false" name="GWT" type="GWT.ConfigurationType" factoryName="GWT Configuration">
       <module name="SEApp" />
       <option name="RUN_PAGE" value="SEApp.html" />
+      <option name="START_JAVASCRIPT_DEBUGGER" value="true" />
       <option name="BROWSER" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="USE_SUPER_DEV_MODE" value="true" />
       <option name="ALTERNATIVE_JRE_PATH" value="1.7" />
@@ -809,10 +810,14 @@
       <patterns />
       <method />
     </configuration>
-    <list size="3">
+    <configuration default="false" name="GWT JavaScript" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" uri="http://127.0.0.1:8888/SEApp.html">
+      <method />
+    </configuration>
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="GWT Configuration.GWT" />
       <item index="1" class="java.lang.String" itemvalue="Google App Engine Deployment.Google App Engine Deployment" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.JUnit" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.GWT JavaScript" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -833,7 +838,7 @@
       <workItem from="1480942934678" duration="488000" />
       <workItem from="1480946756053" duration="528000" />
       <workItem from="1481016163650" duration="3976000" />
-      <workItem from="1481460576156" duration="2873000" />
+      <workItem from="1481460576156" duration="3834000" />
     </task>
     <servers />
   </component>
@@ -855,7 +860,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36363000" />
+    <option name="totallyTimeSpent" value="37324000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -873,14 +878,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3148148" sideWeight="0.4611111" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31418523" sideWeight="0.4611111" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282532" sideWeight="0.44166666" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3282532" sideWeight="0.45277777" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282532" sideWeight="0.45277777" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -908,7 +913,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="60" />
+      <option name="time" value="68" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -934,8 +939,8 @@
           <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481463401000" expanded="true" signature="2650:2688" ph="{...}" />
-            <marker date="1481463401000" expanded="true" signature="2932:2965" ph="{...}" />
+            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1021,8 +1026,8 @@
           <caret line="41" column="16" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481463401000" expanded="true" signature="2650:2688" ph="{...}" />
-            <marker date="1481463401000" expanded="true" signature="2932:2965" ph="{...}" />
+            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1229,14 +1234,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/SEApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/war/GlobalLandTemperaturesByMajorCity_v1.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-40950">
@@ -1272,18 +1269,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="87" column="4" lean-forward="false" selection-start-line="87" selection-start-column="4" selection-end-line="95" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1481463401000" expanded="true" signature="2650:2688" ph="{...}" />
-            <marker date="1481463401000" expanded="true" signature="2932:2965" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/TableVisualization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1307,6 +1292,26 @@
         <state relative-caret-position="534">
           <caret line="424" column="51" lean-forward="false" selection-start-line="424" selection-start-column="51" selection-end-line="424" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/SEApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/g3/seapp/client/MapVisualization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="57" column="7" lean-forward="true" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1481465060000" expanded="true" signature="2822:2860" ph="{...}" />
+            <marker date="1481465060000" expanded="true" signature="3104:3137" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -28,6 +28,11 @@ import com.googlecode.gwt.charts.client.options.DisplayMode;
  * @responsibilities Shows a map visualization of the data.
  */
 public class MapVisualization implements IVisualization {
+
+	private enum MapType {
+		COUNTRY,
+		CITY
+	}
 	
 	private GeoChart countryChart;
 	private GeoChart cityChart;
@@ -48,11 +53,14 @@ public class MapVisualization implements IVisualization {
 
 	private Anchor countryExportLink;
 
+	private MapType currentMapType = MapType.COUNTRY;
+
 	/**
 	 * Update the link to hold the new data to export
 	 */
 	private void refreshExportData() {
-		Element elem = countryChart.getElement().getElementsByTagName("svg").getItem(0);
+		GeoChart chart = currentMapType == MapType.COUNTRY ? countryChart : cityChart;
+		Element elem = chart.getElement().getElementsByTagName("svg").getItem(0);
 		elem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 		String svgData = outerHTML(elem);
 		svgData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + svgData;
@@ -166,6 +174,8 @@ public class MapVisualization implements IVisualization {
 						rightBtn.setVisible(false);
 					}
 				}
+				currentMapType = currentMapType == MapType.COUNTRY ? MapType.CITY : MapType.COUNTRY;
+				refreshExportData();
 			}
 		};
 
