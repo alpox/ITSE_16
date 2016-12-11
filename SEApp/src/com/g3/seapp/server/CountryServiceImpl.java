@@ -306,6 +306,11 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		return avTemp;
 	}
 
+	/**
+	 * Gets the average temperature of the given year
+	 * @param year The year to get the average temperature for
+	 * @return The average temperature
+	 */
 	@Override
 	public HashMap<String, Float> getAverageTempOfYear(int year) {
 		HashMap<String, Measurement> measures =  getAverageTemp(year, false);
@@ -318,6 +323,11 @@ public class CountryServiceImpl extends RemoteServiceServlet implements CountryS
 		return output;
 	}
 
+	/**
+	 * Gets the average temperature of a city per year
+	 * @param year The year
+	 * @return The average temperature of the given year per city
+	 */
 	@Override
 	public HashMap<String, Measurement> getAverageTempOfYearPerCity(int year) {
 		return getAverageTemp(year, true);
