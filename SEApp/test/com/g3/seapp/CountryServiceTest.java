@@ -20,19 +20,28 @@ import static com.g3.seapp.shared.Measurement.MeasurementType.*;
 public class CountryServiceTest {
 	
 	private final CountryService countryService = new CountryServiceImpl();
-	
+
+	/**
+	 * Initialize the data for testing
+	 */
 	@BeforeClass
 	public static void initialize() {
 		DataManager.loadData();
 	}
 
+	/**
+	 * Tests if one can retrieve data from the service
+	 */
 	@Test
 	public void testGetsDataFromService() {
 		List<Measurement> countries = countryService.getMeasurements(0, 20, null, true, null);
 		Assert.assertTrue("Result is not null", countries != null);
 		Assert.assertTrue("Result is not empty", countries.size() > 0);
 	}
-	
+
+	/**
+	 * Tests if one can retrieve a specific datarange from the service (Indices)
+	 */
 	@Test
 	public void testGetsRangeFromService() {
 		List<Measurement> measurementRange = countryService.getMeasurements(10, 20, null, true, null);
@@ -40,6 +49,9 @@ public class CountryServiceTest {
 		Assert.assertTrue("Result has right amount", measurementRange.size() == 10);
 	}
 
+	/**
+	 * Tests if one can sort a string in ascending order
+	 */
 	@Test
 	public void testCanSortStringAscending() {
 		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, COUNTRY, false, null);
@@ -49,7 +61,10 @@ public class CountryServiceTest {
 			Assert.assertTrue(measurement.getCountry().equals("Afghanistan"));
 		}
 	}
-	
+
+	/**
+	 * Tests if one can sort a string in descending order
+	 */
 	@Test
 	public void testCanSortStringDescending() {
 		List<Measurement> measurementRange = countryService.getMeasurements(0, 10, COUNTRY, true, null);
@@ -59,7 +74,10 @@ public class CountryServiceTest {
 			Assert.assertTrue(measurement.getCountry().equals("Zimbabwe"));
 		}
 	}
-	
+
+	/**
+	 * Tests if one can sort a float in ascending order
+	 */
 	@Test
 	public void testCanSortFloatAscending() {
 		List<Measurement> first = countryService.getMeasurements(0, 1, AVG, false, null);
@@ -68,7 +86,10 @@ public class CountryServiceTest {
 		Assert.assertTrue(first.get(0).getAvg() == -26.772f);
 		Assert.assertTrue(last.get(0).getAvg() == 38.283f);
 	}
-	
+
+	/**
+	 * Tests if one can sort a float in descending order
+	 */
 	@Test
 	public void testCanSortFloatDescending() {
 		List<Measurement> first = countryService.getMeasurements(0, 1, AVG, true, null);
@@ -77,7 +98,11 @@ public class CountryServiceTest {
 		Assert.assertTrue(first.get(0).getAvg() == 38.283f);
 		Assert.assertTrue(last.get(0).getAvg() == -26.772f);
 	}
-	
+
+	/**
+	 * Tests if one can sort a date in ascending order
+	 * @throws ParseException An exception which is thrown if a date cannot be parsed
+	 */
 	@Test
 	public void testCanSortDateAscending() throws ParseException {
 		List<Measurement> first = countryService.getMeasurements(0, 1, Measurement.MeasurementType.DATE, false, null);
@@ -90,7 +115,11 @@ public class CountryServiceTest {
 		Assert.assertTrue(first.get(0).getDate().equals(firstRightDate));
 		Assert.assertTrue(last.get(0).getDate().equals(lastRightDate));
 	}
-	
+
+	/**
+	 * Tests if one can sort a date in descending order
+	 * @throws ParseException An exception which is thrown if a date cannot be parsed
+	 */
 	@Test
 	public void testCanSortDateDescending() throws ParseException {
 		List<Measurement> first = countryService.getMeasurements(0, 1, Measurement.MeasurementType.DATE, true, null);
@@ -104,6 +133,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(last.get(0).getDate().equals(lastRightDate));
 	}
 
+	/**
+	 * Tests if one can get the data size
+	 */
 	@Test
 	public void testCanGetDataSize() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -113,6 +145,9 @@ public class CountryServiceTest {
 		Assert.assertEquals(size, 3166);
 	}
 
+	/**
+	 * Tests if one can filter for a specific country
+	 */
 	@Test
 	public void testCanFilterForCountry() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -125,6 +160,9 @@ public class CountryServiceTest {
 			Assert.assertEquals(measurement.getCountry(), "France");
 	}
 
+	/**
+	 * Tests if one can filter for a specific city
+	 */
 	@Test
 	public void testCanFilterForCity() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -137,6 +175,9 @@ public class CountryServiceTest {
 			Assert.assertEquals(measurement.getCity(), "Kabul");
 	}
 
+	/**
+	 * Tests if one can filter for a specific average
+	 */
 	@Test
 	public void testCanFilterForAvg() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -149,6 +190,9 @@ public class CountryServiceTest {
 			Assert.assertTrue(Float.compare(measurement.getAvg(), 2.081f) == 0);
 	}
 
+	/**
+	 * Tests if one can filter for a specific error
+	 */
 	@Test
 	public void testCanFilterForError() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -161,6 +205,9 @@ public class CountryServiceTest {
 			Assert.assertTrue(Float.compare(measurement.getError(), 1.749f) == 0);
 	}
 
+	/**
+	 * Tests if one can filter for an error limitation
+	 */
 	@Test
 	public void testCanFilterForSmallerThanError() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -173,6 +220,9 @@ public class CountryServiceTest {
 			Assert.assertTrue(measurement.getError() <= 2.5);
 	}
 
+	/**
+	 * Tests if one can filter for a specific latitude
+	 */
 	@Test
 	public void testCanFilterForLatitude() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -185,6 +235,9 @@ public class CountryServiceTest {
 			Assert.assertTrue(Float.compare(measurement.getCoords().getLat(), 49.03f) == 0);
 	}
 
+	/**
+	 * Test if one can filter for a specific longitude
+	 */
 	@Test
 	public void testCanFilterForLongitude() {
 		HashMap<Measurement.MeasurementType, String> filters = new HashMap<>();
@@ -197,6 +250,10 @@ public class CountryServiceTest {
 			Assert.assertTrue(Float.compare(measurement.getCoords().getLon(), 2.45f) == 0);
 	}
 
+	/**
+	 * Tests if one can filter for a specific date
+	 * @throws ParseException An exception which is thrown if a date cannot be parsed
+	 */
 	@Test
 	public void testCanFilterForDate() throws ParseException {
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
@@ -210,6 +267,9 @@ public class CountryServiceTest {
 			Assert.assertTrue(measurement.getDate().compareTo(dateParser.parse("1743-11-01")) == 0);
 	}
 
+	/**
+	 * Tests if one can get possible country names
+	 */
 	@Test
 	public void testCanGetCountryNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.COUNTRY);
@@ -218,6 +278,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible city names
+	 */
 	@Test
 	public void testCanGetCityNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.CITY);
@@ -226,6 +289,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible average values
+	 */
 	@Test
 	public void testCanGetAvgNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.AVG);
@@ -234,6 +300,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible error values
+	 */
 	@Test
 	public void testCanGetErrorNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.ERROR);
@@ -242,6 +311,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible date values
+	 */
 	@Test
 	public void testCanGetDateNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.DATE);
@@ -250,6 +322,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible latitude values
+	 */
 	@Test
 	public void testCanGetLatitudeNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.LAT);
@@ -258,6 +333,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get possible longitude values
+	 */
 	@Test
 	public void testCanGetLongitudeNames() {
 		ArrayList<String> names = countryService.getNames(Measurement.MeasurementType.LON);
@@ -266,6 +344,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(names.size() > 0);
 	}
 
+	/**
+	 * Tests if one can get the temperature average per country
+	 */
 	@Test
 	public void testCanGetTemperatureAveragePerCountry() {
 		HashMap<String, Float> avTemp = countryService.getAverageTempOfYear(1833);
@@ -274,6 +355,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(!avTemp.keySet().isEmpty());
 	}
 
+	/**
+	 * Tests if one can get an aggregation over the average temperature
+	 */
 	@Test
 	public void testCanGetAvgAggregation() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.AVG);
@@ -282,6 +366,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, 18.126062f) == 0);
 	}
 
+	/**
+	 * Tests if one can get a maximum aggregation
+	 */
 	@Test
 	public void testCanGetMaxAggregation() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MAX);
@@ -290,6 +377,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, 38.283f) == 0);
 	}
 
+	/**
+	 * Tests if one can get a minimum aggregation
+	 */
 	@Test
 	public void testCanGetMinAggregation() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MIN);
@@ -298,6 +388,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, -26.772f) == 0);
 	}
 
+	/**
+	 * Tests if one can get a median aggregation
+	 */
 	@Test
 	public void testCanGetMedianAggregation() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.AVG, Measurement.AggregationType.MEDIAN);
@@ -306,6 +399,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, 20.428f) == 0);
 	}
 
+	/**
+	 * Test if one can get an error aggregation
+	 */
 	@Test
 	public void testCanGetAggregationOfError() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.ERROR, Measurement.AggregationType.MAX);
@@ -314,6 +410,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, 14.037f) == 0);
 	}
 
+	/**
+	 * Tests if one can get a latitude aggregation
+	 */
 	@Test
 	public void testCanGetAggregationOfLat() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.LAT, Measurement.AggregationType.MAX);
@@ -322,6 +421,9 @@ public class CountryServiceTest {
 		Assert.assertTrue(Float.compare(agg, 60.27f) == 0);
 	}
 
+	/**
+	 * Tests if one can get a longitude aggregation
+	 */
 	@Test
 	public void testCanGetAggregationOfLon() {
 		Float agg = countryService.getAggregation(Measurement.MeasurementType.LON, Measurement.AggregationType.MAX);
