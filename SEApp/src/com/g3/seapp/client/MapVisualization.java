@@ -2,6 +2,7 @@ package com.g3.seapp.client;
 
 import com.g3.seapp.shared.Measurement;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.widgetideas.client.SliderBar;
@@ -13,6 +14,7 @@ import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import com.google.gwt.core.shared.GWT;
@@ -50,6 +52,8 @@ public class MapVisualization implements IVisualization {
 	private Button rightBtn;
 
 	private int currentYear;
+
+	private final int updateDelay = 500;
 
 	private Anchor countryExportLink;
 
@@ -250,13 +254,23 @@ public class MapVisualization implements IVisualization {
 		slider.setStepSize(1);
 		slider.setCurrentValue(MIN_YEAR);
 
+		final Timer t = new Timer() {
+			public void run() {
+				updateVisualization(null);
+			}
+		};
+
 		slider.addChangeListener(new ChangeListener() {
 			@Override
 			public void onChange(Widget sender) {
 				int year = (int)slider.getCurrentValue();
 				yearTxt.setText(String.valueOf(year));
 				currentYear = year;
-				updateVisualization(null);
+
+				t.cancel();
+
+				// Schedule the timer to run once in 5 seconds.
+				t.schedule(updateDelay);
 			}
 		});
 
@@ -286,6 +300,10 @@ public class MapVisualization implements IVisualization {
 		hpanel.add(yearTxt);
 		container.add(hpanel);
 	}
+
+	native void consoleLog(String str) /*-{
+        return console.log(str);
+    }-*/;
 
 	/**
 	 * Updates the visualization and displays the map and the requested data
