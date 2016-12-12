@@ -269,7 +269,6 @@ public class MapVisualization implements IVisualization {
 
 				t.cancel();
 
-				// Schedule the timer to run once in 5 seconds.
 				t.schedule(updateDelay);
 			}
 		});
