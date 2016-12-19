@@ -10,6 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gwt-user"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-incubator-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Eclipse/ext_libraries/jfreechart-1.0.19/lib/gwt-incubator-2.0.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
